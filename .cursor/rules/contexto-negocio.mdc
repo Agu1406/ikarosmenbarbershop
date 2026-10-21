@@ -1,0 +1,14 @@
+---
+description: El negocio y las notas largas viven en CONTEXT.md e IGNORAR.md. No inventar datos, reseñas ni afirmaciones.
+alwaysApply: true
+---
+
+# Contexto del negocio
+
+Antes de inventar un dato, un precio, un horario o una afirmación, leer `CONTEXT.md`. Las notas de diseño, legal y arquitectura están en `IGNORAR.md`. Las reglas de Cursor las aplican; si hay conflicto, gana la ley española, luego `IGNORAR.md` y `DESIGN.md`, luego el código.
+
+- Datos de negocio: solo `src/lib/data.ts` (origen: `CONTEXT.md`).
+- Titular, NIF, email: `src/data/legal.json`.
+- Visual: `DESIGN.md` y `design/references.dna.json`.
+- No reseñas, cifras ni fotos de IA presentadas como el local.
+- Medios provisionales: `MEDIA.provisional` hasta confirmar local y permisos de imagen.

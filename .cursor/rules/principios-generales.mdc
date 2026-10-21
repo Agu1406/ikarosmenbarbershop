@@ -1,0 +1,37 @@
+---
+description: KISS, YAGNI, minimización, privilegio mínimo, auditoría, secretos, backups, mejora progresiva y URLs estables.
+alwaysApply: true
+---
+
+# Principios generales
+
+Valen en este repo y en casi cualquier proyecto. Fuente: `IGNORAR.md`.
+
+## Código
+
+- **KISS.** La solución más simple que cumple. Si un Singleton o una abstracción no ahorra trabajo, no está.
+- **YAGNI.** No construir cuentas, pagos, 3D o analítica «por si acaso». Se añade cuando hace falta, con la legalidad delante.
+- **Separación de datos y presentación.** Una fuente de verdad (`src/lib/data.ts`, un CMS, una API) y pantallas que solo leen.
+- **Fallar en voz alta.** Dato legal vacío, precio mal puesto o secreto en el repo: el build o el test fallan. No publicar en silencio (`legal.json`, `scripts/check-legal.mjs`).
+- **Composición antes que herencia.** Piezas pequeñas (botón, enlace externo, fachada del mapa), no una clase base gigante.
+- **Idempotencia.** Un mismo clic, webhook o reintento no crea dos citas, dos cobros ni dos bajas.
+
+## Datos, cuentas y ley
+
+- **Minimización.** Recoger solo lo necesario (artículo 5 del RGPD).
+- **Privilegio mínimo.** La web pública no ve facturas; el panel no ve contraseñas en claro.
+- **Auditoría, no chismorreo.** Quién dio de baja, cuándo y por qué. La D inactiva; la supresión queda por escrito.
+- **Secretos fuera del repo.** `.env` local, variables en el alojamiento, nunca tokens en git.
+- **Copias y restauración.** Un backup no sirve si no se ha restaurado nunca.
+
+## Producto e interfaz
+
+- **Mejora progresiva.** Sin JavaScript se lee, se reserva y se ve el aviso legal. El movimiento es extra.
+- **Accesibilidad de base.** Contraste, teclado, un `h1`, textos de enlace claros.
+- **Estados reales.** Vacío, error, carga y «no hay fotos aún» se diseñan.
+- **URLs estables.** `/privacidad` y `/aviso-legal` no se cambian a la ligera; si se mueven, redirección.
+
+## Qué no meter por defecto
+
+- CQRS, microservicios, event sourcing o DDD completo.
+- Singleton para todo: solo donde hace falta **una** instancia.

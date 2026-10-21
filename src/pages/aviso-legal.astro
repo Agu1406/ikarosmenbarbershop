@@ -1,0 +1,96 @@
+---
+import Legal from "../layouts/Legal.astro";
+import Pending from "../components/Pending.astro";
+import { ADDRESS, CONTACT, LEGAL, SITE } from "../lib/data";
+---
+
+<Legal
+  title="Aviso legal"
+  description="Datos identificativos del titular de la web de Ikaro Men's Barber y condiciones de uso."
+  updated="octubre de 2026"
+>
+  <h2>1. Titular del sitio web</h2>
+  <p>
+    En cumplimiento del artículo 10 de la Ley 34/2002, de Servicios de la Sociedad de la
+    Información y de Comercio Electrónico (LSSI-CE), se informa de que este sitio web pertenece a:
+  </p>
+  <ul>
+    <li>Titular: <Pending value={LEGAL.titular} label="razón social o nombre" /></li>
+    <li>NIF/CIF: <Pending value={LEGAL.nif} label="NIF o CIF" /></li>
+    <li>Nombre comercial: {SITE.name}</li>
+    <li>Domicilio: {ADDRESS.full}</li>
+    <li>Teléfono: <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a></li>
+    <li>
+      Correo electrónico:
+      {
+        LEGAL.email ? (
+          <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>
+        ) : (
+          <Pending value={null} label="email" />
+        )
+      }
+    </li>
+    {
+      LEGAL.registroMercantil && (
+        <li>Datos registrales: {LEGAL.registroMercantil}</li>
+      )
+    }
+  </ul>
+
+  <h2>2. Objeto</h2>
+  <p>
+    Esta web ofrece información sobre los servicios, precios, horario y ubicación de la barbería,
+    y enlaces para reservar cita a través de Booksy, escribir por WhatsApp o llamar por teléfono.
+    No se pueden contratar ni pagar servicios directamente en este sitio.
+  </p>
+
+  <h2>3. Condiciones de uso</h2>
+  <p>
+    El acceso a la web es gratuito. Quien la utiliza se compromete a hacerlo de forma lícita y
+    sin dañar el sitio ni a terceros.
+  </p>
+
+  <h2>4. Precios e información</h2>
+  <p>
+    Los precios se muestran en euros con IVA incluido. Los servicios indicados como «desde» o
+    «consultar» se concretan en el local antes de realizarlos. Aunque revisamos la información con
+    regularidad, puede haber diferencias puntuales con el local; en ese caso prevalece lo acordado
+    en la barbería.
+  </p>
+
+  <h2>5. Reservas y cancelaciones</h2>
+  <p>
+    Las reservas se gestionan en Booksy, un servicio de un tercero con sus propias condiciones. Las
+    condiciones de cancelación son las que Booksy muestra al reservar.
+  </p>
+
+  <h2>6. Propiedad intelectual</h2>
+  <p>
+    Los textos, fotografías, logotipos y el diseño de esta web son de {SITE.name} o se usan con
+    autorización. No se pueden reproducir ni distribuir sin permiso. Las tipografías Cormorant
+    Garamond y Manrope se distribuyen con licencia SIL Open Font License. Las reseñas citadas
+    pertenecen a sus autores y proceden de las fichas públicas de Google y Booksy.
+  </p>
+
+  <h2>7. Enlaces externos</h2>
+  <p>
+    La web enlaza a servicios de terceros (Booksy, WhatsApp, Google Maps, YouTube). No nos
+    responsabilizamos de su contenido ni de sus políticas.
+  </p>
+
+  <h2>8. Responsabilidad</h2>
+  <p>
+    Hacemos lo posible por que la web esté disponible y sin errores, pero no podemos garantizar
+    que no haya interrupciones puntuales.
+  </p>
+
+  <h2>9. Legislación y jurisdicción</h2>
+  <p>
+    Este aviso se rige por la legislación española. Si eres consumidor, puedes acudir a los
+    juzgados de tu domicilio. También puedes usar la plataforma europea de resolución de litigios
+    en línea:
+    <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener noreferrer"
+      >ec.europa.eu/consumers/odr<span class="sr-only"> (se abre en nueva pestaña)</span></a
+    >.
+  </p>
+</Legal>

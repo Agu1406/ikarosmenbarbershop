@@ -1,0 +1,35 @@
+---
+description: Referencias visuales, skills de diseño/movimiento y herramientas. Design DNA primero; no copiar colores ni efectos de terceros.
+alwaysApply: true
+---
+
+# Inspiración, skills y herramientas
+
+Fuente: `IGNORAR.md`. Inspiran estructura y movimiento. No copiar código, fotos ni paleta de terceros. Este repo: paleta propia, Design DNA sin dimensión de efectos (`design/references.dna.json`).
+
+## Webs
+
+- [lenis.dev](https://lenis.dev) — scroll suave.
+- [basement.studio](https://basement.studio) — landing interactiva.
+- [shadergradient.co](https://shadergradient.co) — fondos 3D animados.
+- [unicorn.studio](https://unicorn.studio) — sitios de inspiración.
+
+Lenis, GSAP o Three.js no se añaden salvo que se pida. El movimiento actual es el de `DESIGN.md` (nivel medio, reduced-motion).
+
+## Skills (repos públicos, sin pago)
+
+Las skills no son prompts: se instalan una vez. Empieza por Design DNA. Se apilan: Design DNA marca dirección, GSAP y Motion Design el movimiento, Three.js la profundidad, Genjutsu el pase final.
+
+1. Three.js (`CloudAl-X/threejs-skills`) — escenas 3D, cámara, GLTF, luces, partículas.
+2. GSAP (`greensock/gsap-skills` / `GreenSock/gsap-skills`) — timeline, ScrollTrigger, texto, React.
+3. Design DNA (`zanwei/design-dna`) — tokens de un sitio de referencia (color, tipo, layout, espacio). En Ikaro: extraer, **descartar colores y efectos**, aplicar el resto.
+4. Motion Design (`lottiefiles/motion-design-skill` / `LottieFiles/motion-design-skill`) — Lottie, SVG, keyframes, JSON o dotlottie.
+5. Genjutsu (`AThevon/genjutsu` / `Athevon/genjutsu`) — dirección creativa y pulido.
+
+## Cinco herramientas para que parezca de 10.000 €
+
+- Taste Skill.
+- web-design-guidelines.
+- awasome-design-md
+- Image to code (¿GitHub?)
+- Playwright (Microsoft): pruebas E2E, axe y capturas (`tests/`, `npx playwright test`).

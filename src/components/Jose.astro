@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import { JOSE, PHOTO_ALT } from "../lib/data";
+import { getPhoto } from "../lib/photos";
+
+const photo = getPhoto("jose");
+const hasVideo = Boolean(JOSE.youtubeId);
+---
+
+<section class="section on-charcoal" id="trayectoria" aria-labelledby="jose-title">
+  <div class="wrap">
+    <div class="split reverse">
+      <div>
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">{JOSE.eyebrow}</p>
+          <h2 id="jose-title" class="display">{JOSE.title}</h2>
+        </div>
+        <div class="prose" data-reveal>
+          {JOSE.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+        <ul class="highlights">
+          {JOSE.highlights.map((h) => <li>{h}</li>)}
+        </ul>
+      </div>
+
+      {
+        hasVideo ? (
+          <div data-video={JOSE.youtubeId}>
+            <button type="button" class="video-facade" data-video-play>
+              <span>
+                <strong>Ver la trayectoria de José</strong>
+                <span>Al reproducir, el vídeo se carga desde YouTube (youtube-nocookie.com).</span>
+              </span>
+            </button>
+          </div>
+        ) : (
+          photo && (
+            <Image
+              class="photo photo-tall"
+              src={photo}
+              alt={PHOTO_ALT.jose}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 56rem) 40vw, 100vw"
+              loading="lazy"
+            />
+          )
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-video]").forEach((box) => {
+    const id = box.dataset.video;
+    const button = box.querySelector<HTMLButtonElement>("[data-video-play]");
+    if (!id || !button) return;
+
+    button.addEventListener("click", () => {
+      const iframe = document.createElement("iframe");
+      iframe.className = "embed";
+      iframe.title = "Vídeo sobre la trayectoria de José Sotelo";
+      iframe.src = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0`;
+      iframe.allow = "autoplay; encrypted-media; picture-in-picture";
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = "strict-origin-when-cross-origin";
+      box.replaceChildren(iframe);
+      iframe.focus();
+    });
+  });
+</script>

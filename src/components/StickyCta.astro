@@ -1,0 +1,23 @@
+---
+import { CONTACT } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+---
+
+<div class="sticky-cta" data-sticky-cta>
+  <ExtLink href={CONTACT.booksy} class="btn btn-primary">Reservar</ExtLink>
+  <ExtLink href={CONTACT.whatsapp} class="btn">WhatsApp</ExtLink>
+</div>
+
+<script>
+  const bar = document.querySelector<HTMLElement>("[data-sticky-cta]");
+  const hero = document.querySelector("#inicio");
+
+  if (bar && hero) {
+    document.body.classList.add("has-sticky");
+    // Visible solo cuando el hero ya no está en pantalla
+    const observer = new IntersectionObserver(([entry]) => {
+      bar.dataset.visible = String(!entry.isIntersecting);
+    });
+    observer.observe(hero);
+  }
+</script>

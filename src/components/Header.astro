@@ -1,0 +1,90 @@
+---
+import { CONTACT, NAV, SITE } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+---
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label={`${SITE.name}, inicio`}>
+      Ikaro <span>Men’s Barber</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Principal">
+      {NAV.map((item) => <a href={`/${item.href}`}>{item.label}</a>)}
+    </nav>
+
+    <div class="header-actions">
+      <ExtLink href={CONTACT.booksy} class="btn btn-primary">Reservar</ExtLink>
+      <button
+        type="button"
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="nav-mobile"
+        data-menu-toggle>Menú</button
+      >
+    </div>
+  </div>
+
+  <nav id="nav-mobile" class="nav-mobile" aria-label="Principal" hidden data-menu>
+    <ul>
+      {NAV.map((item) => <li><a href={`/${item.href}`}>{item.label}</a></li>)}
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.querySelector<HTMLElement>("[data-menu]");
+
+  function setOpen(open: boolean) {
+    if (!toggle || !menu) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    menu.hidden = !open;
+  }
+
+  toggle?.addEventListener("click", () =>
+    setOpen(toggle.getAttribute("aria-expanded") !== "true"),
+  );
+  menu?.addEventListener("click", (e) => {
+    if ((e.target as HTMLElement).closest("a")) setOpen(false);
+  });
+  // Scroll-spy: marca con aria-current el enlace de la sección que cruza el 40% de la pantalla
+  const links = [...document.querySelectorAll<HTMLAnchorElement>('nav a[href^="/#"]')];
+  const sections = new Map<string, HTMLElement>();
+  for (const a of links) {
+    const id = a.getAttribute("href")!.slice(2);
+    const el = document.getElementById(id);
+    if (el) sections.set(id, el);
+  }
+
+  function mark(id: string | null) {
+    for (const a of links) {
+      if (a.getAttribute("href") === `/#${id}`) a.setAttribute("aria-current", "true");
+      else a.removeAttribute("aria-current");
+    }
+  }
+
+  if (sections.size > 0 && "IntersectionObserver" in window) {
+    const visible = new Set<string>();
+    const order = [...sections.keys()];
+    const spy = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        }
+        // Si hay varias, gana la primera según el orden de la página
+        mark(order.find((id) => visible.has(id)) ?? null);
+      },
+      { rootMargin: "-40% 0px -59% 0px" },
+    );
+    sections.forEach((el) => spy.observe(el));
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") {
+      setOpen(false);
+      toggle.focus();
+    }
+  });
+</script>

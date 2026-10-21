@@ -1,0 +1,54 @@
+---
+description: SOLID, DRY, Singleton y CRUD. Delete inactiva; solo suprime si no hay base para conservar, y si la hay avisa del plazo.
+alwaysApply: true
+---
+
+# Arquitectura y datos
+
+Aplicar siempre **SOLID**, **DRY**, **Singleton** (solo donde haga falta una instancia compartida) y **CRUD**.
+
+## SOLID
+
+- **S**: una responsabilidad por módulo, componente o función.
+- **O**: ampliar con código nuevo, no reescribiendo lo que ya cumple.
+- **L**: una implementación sustituye a su contrato sin romper a quien la usa.
+- **I**: interfaces o tipos estrechos; no mezclar reservas, legal y analítica en el mismo contrato.
+- **D**: depender de datos y contratos (`src/lib/data.ts`, APIs), no de detalles internos.
+
+## DRY
+
+No duplicar precios, horarios, contacto, copy legal ni lógica de negocio. Una sola fuente de verdad. Extraer solo cuando haya repetición real.
+
+## Singleton
+
+Usar una sola instancia compartida para clientes, configuración o estado global (mapa, vídeo, menú). No convertir un Singleton en un almacén de todo el programa.
+
+## CRUD y la D
+
+- **C / R / U**: crear, leer y actualizar con normalidad.
+- **D (Delete)**: inactivar. No borrar a ciegas.
+
+Flujo de una baja o de una petición de supresión:
+
+1. Inactivar siempre (`active: false`, `deactivatedAt`). La cuenta o el dato deja de usarse.
+2. ¿Hay base legal para conservar? (`RETENTION` en `src/lib/data.ts`, privacidad, RGPD / LOPDGDD, LSSI-CE, fiscal o mercantil).
+   - **No**: suprimir o anonimizar de forma irreversible.
+   - **Sí**: conservar solo lo cubierto por esa base y **avisar** qué se guarda, por qué y hasta cuándo (el plazo de `RETENTION`).
+3. Al cumplir el plazo: suprimir o anonimizar.
+
+```ts
+// MAL: borrar sin mirar si hay base
+await db.accounts.delete({ id });
+
+// BIEN: baja + decidir conservación o supresión
+await db.accounts.update({ id, active: false, deactivatedAt: new Date() });
+if (!hasLegalBasis(record)) {
+  await purgeOrAnonymize(record);
+} else {
+  notifyRetention(record, RETENTION); // qué, por qué, hasta cuándo
+}
+```
+
+Los plazos viven en `RETENTION` (`src/lib/data.ts`) y se muestran en `/privacidad`. No duplicarlos. En duda: no borrar; inactivar y señalar el choque.
+
+Fuente: `IGNORAR.md` (SOLID, DRY, Singleton, CRUD).

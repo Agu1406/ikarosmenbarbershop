@@ -1,0 +1,29 @@
+---
+description: Lista legal para no acabar en un juicio. Privacidad, cookies, accesibilidad, datos de empresa y RGPD.
+alwaysApply: true
+---
+
+# Para que la app no te lleve a un juicio
+
+Fuente: `IGNORAR.md`. En España mandan RGPD, LOPDGDD y LSSI-CE. Si un punto choca con esa ley, gana la ley.
+
+1. Política de privacidad.
+2. Términos de servicio.
+3. Política de reembolsos (si hay cobros; si no, no inventar una).
+4. Política de cookies.
+5. Banner de consentimiento de cookies (solo si hay cookies no esenciales; esta web no las usa, no hay banner).
+6. Revisar los consentimientos de los formularios.
+7. No recoger datos innecesarios.
+8. Auditar los SDK de terceros.
+9. Quitar patrones oscuros.
+10. Quitar tarifas ocultas.
+11. Quitar reseñas falsas.
+12. Quitar afirmaciones sin respaldo (campeón, notas, IVA, accesos: verificar o no publicar).
+13. Accesibilidad: todo el texto.
+14. Corregir el contraste de color.
+15. Navegación por teclado.
+16. Añadir los datos de la empresa (`src/data/legal.json`: titular, NIF, email).
+17. Consentimiento de edad para datos de menores.
+18. Enlace para darse de baja en los correos.
+19. Licenciar las fuentes e imágenes que se usen.
+20. Formulario de solicitud y de borrado de datos. La D de CRUD inactiva; solo se suprime si no hay base para conservar, y si la hay se avisa del plazo (`RETENTION`, `/privacidad`).

@@ -1,0 +1,105 @@
+---
+import "../styles/global.css";
+import manropeLatin from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url";
+import cormorantLatin from "@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-normal.woff2?url";
+import { ADDRESS, CONTACT, HOURS, SITE } from "../lib/data";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** URL absoluta de la imagen para compartir (Open Graph). */
+  ogImage?: string;
+  /** Añade datos estructurados BarberShop (solo en la home). */
+  jsonLd?: boolean;
+  noindex?: boolean;
+}
+
+const {
+  title = `${SITE.name} | Barbería en Las Rozas de Madrid`,
+  description = SITE.description,
+  ogImage,
+  jsonLd = false,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const pad = (n: number) => String(n).padStart(2, "0");
+const openingHoursSpecification = Object.entries(HOURS).flatMap(([day, slots]) =>
+  slots.map(([h1, m1, h2, m2]) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: DAYS[Number(day)],
+    opens: `${pad(h1)}:${pad(m1)}`,
+    closes: `${pad(h2)}:${pad(m2)}`,
+  })),
+);
+
+// Sin aggregateRating: Google no admite valoraciones propias en LocalBusiness
+// y las cifras viven en fichas de terceros.
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "BarberShop",
+  name: SITE.name,
+  url: Astro.site?.href,
+  description: SITE.description,
+  telephone: CONTACT.phoneE164,
+  image: ogImage,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: ADDRESS.street,
+    postalCode: ADDRESS.postalCode,
+    addressLocality: ADDRESS.city,
+    addressRegion: ADDRESS.region,
+    addressCountry: ADDRESS.country,
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: ADDRESS.lat,
+    longitude: ADDRESS.lng,
+  },
+  openingHoursSpecification,
+  sameAs: [CONTACT.booksy],
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#182c48" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={manropeLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={cormorantLatin} as="font" type="font/woff2" crossorigin />
+    {noindex && <meta name="robots" content="noindex" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta property="og:title" content={SITE.name} />
+    <meta property="og:description" content={SITE.claim} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido</a>
+    <Header />
+    <main id="contenido-principal" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <slot name="after" />
+    <script>
+      import "../scripts/reveal";
+    </script>
+  </body>
+</html>
