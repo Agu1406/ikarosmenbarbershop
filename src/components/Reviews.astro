@@ -1,0 +1,50 @@
+---
+import { CONTACT, RATINGS, REVIEWS } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+
+const sourceUrl = { Google: CONTACT.googleReviews, Booksy: CONTACT.booksy };
+---
+
+<section class="section" id="opiniones" aria-labelledby="opiniones-title">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Opiniones</p>
+      <h2 id="opiniones-title" class="display">Lo que dicen los clientes</h2>
+      <p class="lead">
+        Reseñas publicadas por clientes en Google y Booksy, tal como las escribieron.
+      </p>
+    </div>
+
+    <div class="reviews">
+      {
+        REVIEWS.map((r) => (
+          <figure class="review" data-reveal>
+            <blockquote>
+              <p>{r.text}</p>
+            </blockquote>
+            <figcaption>
+              <strong>{r.author}</strong>
+              <span class="muted">
+                {r.service ? `${r.service} · ` : ""}
+                <ExtLink href={sourceUrl[r.source]}>Reseña en {r.source}</ExtLink>
+              </span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+
+    <p class="muted reviews-foot">
+      {
+        RATINGS.map((r, i) => (
+          <>
+            {i > 0 && " · "}
+            <ExtLink href={r.url}>
+              Ver las {r.count} opiniones en {r.source} ({r.score})
+            </ExtLink>
+          </>
+        ))
+      }
+    </p>
+  </div>
+</section>

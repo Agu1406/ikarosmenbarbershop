@@ -1,0 +1,44 @@
+---
+import { ADDRESS, CONTACT, LEGAL, SITE } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <p class="brand">Ikaro <span>Men’s Barber</span></p>
+        <p class="muted">{SITE.tagline}</p>
+        <address class="muted">
+          {ADDRESS.street}<br />
+          {ADDRESS.postalCode} {ADDRESS.city}
+        </address>
+      </div>
+
+      <div>
+        <h2>Contacto</h2>
+        <ul class="footer-links">
+          <li><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a></li>
+          <li><ExtLink href={CONTACT.whatsapp}>WhatsApp</ExtLink></li>
+          <li><ExtLink href={CONTACT.booksy}>Reservar en Booksy</ExtLink></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2>Información legal</h2>
+        <ul class="footer-links">
+          <li><a href="/aviso-legal">Aviso legal</a></li>
+          <li><a href="/privacidad">Política de privacidad</a></li>
+          <li><a href="/cookies">Política de cookies</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="footer-legal muted">
+      © {year}
+      {LEGAL.titular ?? SITE.name}{LEGAL.nif ? `, NIF ${LEGAL.nif}` : ""}. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>

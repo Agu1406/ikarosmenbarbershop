@@ -1,0 +1,35 @@
+---
+import { getImage } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import TrustStrip from "../components/TrustStrip.astro";
+import Services from "../components/Services.astro";
+import About from "../components/About.astro";
+import Gallery from "../components/Gallery.astro";
+import Jose from "../components/Jose.astro";
+import Reviews from "../components/Reviews.astro";
+import Faq from "../components/Faq.astro";
+import Contact from "../components/Contact.astro";
+import StickyCta from "../components/StickyCta.astro";
+import { getPhoto } from "../lib/photos";
+
+// Imagen para compartir: la foto del hero si existe (1200x630).
+const hero = getPhoto("hero");
+const og = hero
+  ? await getImage({ src: hero, width: 1200, height: 630, format: "jpg", fit: "cover" })
+  : undefined;
+const ogImage = og ? new URL(og.src, Astro.site).href : undefined;
+---
+
+<Base ogImage={ogImage} jsonLd>
+  <Hero />
+  <TrustStrip />
+  <Services />
+  <About />
+  <Gallery />
+  <Jose />
+  <Reviews />
+  <Faq />
+  <Contact />
+  <StickyCta slot="after" />
+</Base>

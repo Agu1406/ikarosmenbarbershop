@@ -1,0 +1,95 @@
+---
+import { Image } from "astro:assets";
+import posterProvisional from "../assets/media/hero-poster.webp";
+import { CONTACT, MEDIA, PHOTO_ALT, SITE } from "../lib/data";
+import { getPhoto } from "../lib/photos";
+import ExtLink from "./ExtLink.astro";
+import Icon from "./Icon.astro";
+
+const realPhoto = getPhoto("hero");
+// Con foto real no se usa el vídeo provisional.
+const video = realPhoto ? null : MEDIA.heroVideo;
+const image = realPhoto ?? posterProvisional;
+const decorative = !realPhoto;
+
+if (MEDIA.provisional && !realPhoto) {
+  console.warn(
+    "AVISO: el hero usa medios provisionales (MEDIA.provisional en data.ts). Confirmar local y permisos de imagen antes de publicar.",
+  );
+}
+---
+
+<section class="hero" id="inicio" aria-labelledby="hero-title">
+  <div class="hero-media" aria-hidden={decorative ? "true" : undefined}>
+    <Image
+      src={image}
+      alt={decorative ? "" : PHOTO_ALT.hero}
+      widths={[640, 1024, 1600, 2400]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    {
+      video && (
+        <video
+          class="hero-video"
+          muted
+          loop
+          playsinline
+          preload="none"
+          tabindex="-1"
+          data-src={video}
+        />
+      )
+    }
+  </div>
+  <div class="hero-scrim"></div>
+
+  <div class="wrap">
+    <div class="hero-content">
+      <p class="eyebrow">Las Rozas de Madrid</p>
+      <h1 id="hero-title" class="display">
+        <span class="line">Ikaro</span>
+        <span class="line">Men<span class="apos">’</span>s Barber</span>
+      </h1>
+      <hr class="rule rule-grow" />
+      <p class="lead">{SITE.claim}</p>
+      <div class="hero-ctas">
+        <ExtLink href={CONTACT.booksy} class="btn btn-primary"
+          >Reservar cita <Icon name="arrow-up-right" size={18} class="btn-icon" /></ExtLink
+        >
+        <ExtLink href={CONTACT.whatsapp} class="btn">Escribir por WhatsApp</ExtLink>
+      </div>
+      <p class="open-status" data-open-status aria-live="off"></p>
+    </div>
+  </div>
+
+  {
+    video && (
+      <button type="button" class="media-toggle" data-video-toggle hidden aria-pressed="false">
+        <span data-video-toggle-label>Pausar vídeo de fondo</span>
+      </button>
+    )
+  }
+</section>
+
+<script>
+  import { getOpenStatus } from "../lib/hours";
+
+  // Estado abierto / cerrado
+  const status = document.querySelector<HTMLElement>("[data-open-status]");
+  function updateStatus() {
+    if (!status) return;
+    const { open, label } = getOpenStatus();
+    status.dataset.open = String(open);
+    if (status.textContent !== label) status.textContent = label;
+  }
+  updateStatus();
+  setInterval(updateStatus, 60_000);
+
+  // Vídeo de fondo (con botón de pausa; respeta reduced-motion y Save-Data)
+  import { initBackgroundVideo } from "../scripts/video";
+
+  const hero = document.querySelector<HTMLElement>("#inicio");
+  if (hero) initBackgroundVideo(hero, { lazy: false, frameWhenReduced: false });
+</script>

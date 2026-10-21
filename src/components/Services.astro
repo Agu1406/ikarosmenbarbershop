@@ -1,0 +1,53 @@
+---
+import { CONTACT, SERVICE_GROUPS } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+import Icon from "./Icon.astro";
+---
+
+<section class="section on-cream" id="servicios" aria-labelledby="servicios-title">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Carta de servicios</p>
+      <h2 id="servicios-title" class="display">Servicios y precios</h2>
+      <p class="lead">
+        Precios con IVA incluido. Reserva el que quieras en Booksy y elige hora.
+      </p>
+    </div>
+
+    <div class="menu-groups">
+      {
+        SERVICE_GROUPS.map((group) => (
+          <section class="menu-group" aria-label={group.title} data-reveal>
+            <h3>
+              <Icon name={group.icon} size={26} class="group-icon" />
+              {group.title}
+            </h3>
+            <ul>
+              {group.items.map((item) => (
+                <li class="menu-item">
+                  <div class="menu-row">
+                    <p class="menu-name">{item.name}</p>
+                    <span class="menu-leader" aria-hidden="true" />
+                    <p class="menu-price">{item.price}</p>
+                  </div>
+                  <p class="menu-meta muted">
+                    {item.duration}
+                    {item.note ? ` · ${item.note}` : ""}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <div class="menu-foot">
+      <p class="muted">
+        Los servicios marcados con «desde» o «consultar» se concretan en el local antes de empezar.
+        Las condiciones de cancelación son las que indica Booksy al reservar.
+      </p>
+      <ExtLink href={CONTACT.booksy} class="btn btn-primary">Reservar cita</ExtLink>
+    </div>
+  </div>
+</section>

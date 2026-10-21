@@ -1,0 +1,87 @@
+---
+/**
+ * Preguntas frecuentes. Todas las respuestas salen de src/lib/data.ts para que
+ * precios, horario y contacto no puedan quedar desincronizados.
+ */
+import { ADDRESS, AMENITIES, CONTACT, HOURS_DISPLAY, SERVICE_GROUPS } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+
+const services = SERVICE_GROUPS.flatMap((group) => group.items);
+function service(name: string) {
+  const found = services.find((item) => item.name === name);
+  if (!found) throw new Error(`FAQ: servicio no encontrado en data.ts: ${name}`);
+  return found;
+}
+
+const corte = service("Lavar, cortar y peinar");
+const joven = service("Corte joven hasta 21 años");
+const nino = service("Corte de niño hasta 7 años");
+const veterano = service("Corte veterano desde 65 años");
+const corteBarba = service("Lavar, cortar y arreglo de barba");
+const afeitado = service("Afeitado tradicional");
+
+const hasParking = AMENITIES.includes("Plaza de aparcamiento");
+const hasCards = AMENITIES.includes("Tarjetas de crédito");
+---
+
+<section class="section on-charcoal" id="preguntas" aria-labelledby="preguntas-title">
+  <div class="wrap faq-layout">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Preguntas frecuentes</p>
+      <h2 id="preguntas-title" class="display">Lo que suelen preguntarnos</h2>
+    </div>
+
+    <div class="faq" data-reveal>
+      <details>
+        <summary>¿Cuánto cuesta un corte de pelo?</summary>
+        <p>
+          El corte con lavado y peinado cuesta {corte.price}. Hay precio reducido para jóvenes hasta
+          21 años ({joven.price}), niños hasta 7 años ({nino.price}) y veteranos desde 65 años
+          ({veterano.price}). Tienes la carta completa en <a href="#servicios">Servicios y precios</a>.
+        </p>
+      </details>
+      <details>
+        <summary>¿Cómo reservo cita?</summary>
+        <p>
+          Lo más cómodo es <ExtLink href={CONTACT.booksy}>reservar en Booksy</ExtLink>: eliges el
+          servicio y la hora. También puedes <ExtLink href={CONTACT.whatsapp}>escribir por WhatsApp</ExtLink>
+          o llamar al <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>.
+        </p>
+      </details>
+      <details>
+        <summary>¿Cuál es el horario?</summary>
+        <p>
+          {HOURS_DISPLAY.map((h, i) => (
+            <>
+              {i > 0 ? ". " : ""}
+              {h.days}: {h.hours}
+            </>
+          ))}.
+        </p>
+      </details>
+      <details>
+        <summary>¿Cuánto dura el corte con barba?</summary>
+        <p>
+          «{corteBarba.name}» son {corteBarba.duration} y cuesta {corteBarba.price}. El afeitado
+          tradicional dura {afeitado.duration} ({afeitado.price}).
+        </p>
+      </details>
+      <details>
+        <summary>¿Dónde estáis y se puede aparcar?</summary>
+        <p>
+          Estamos en {ADDRESS.street}, {ADDRESS.postalCode} {ADDRESS.city}.
+          {hasParking ? " El local cuenta con plaza de aparcamiento." : ""}
+          <ExtLink href={ADDRESS.mapsLink}>Ver en Google Maps</ExtLink>.
+        </p>
+      </details>
+      {
+        hasCards && (
+          <details>
+            <summary>¿Puedo pagar con tarjeta?</summary>
+            <p>Sí, se aceptan tarjetas de crédito.</p>
+          </details>
+        )
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+import { getGallery } from "../lib/photos";
+
+const photos = getGallery();
+---
+
+{
+  photos.length > 0 && (
+    <section class="section on-charcoal" id="trabajos" aria-labelledby="trabajos-title">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Trabajos</p>
+          <h2 id="trabajos-title" class="display">Cortes y barbas del local</h2>
+        </div>
+        <ul class="gallery">
+          {photos.map((img, i) => (
+            <li>
+              <Image
+                class="photo photo-tall"
+                src={img}
+                alt={`Trabajo realizado en Ikaro Men's Barber, foto ${i + 1}`}
+                widths={[400, 700, 1000]}
+                sizes="(min-width: 56rem) 25vw, 50vw"
+                loading="lazy"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

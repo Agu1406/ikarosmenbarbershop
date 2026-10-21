@@ -1,0 +1,80 @@
+---
+import { ADDRESS, CONTACT, HOURS_DISPLAY } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+---
+
+<section class="section" id="contacto" aria-labelledby="contacto-title">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Visítanos</p>
+      <h2 id="contacto-title" class="display">Contacto y horario</h2>
+      <p class="lead">
+        Estamos en Las Rozas. Reserva online o escríbenos y te respondemos.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <div class="contact-block">
+          <h3>Dirección</h3>
+          <address>
+            {ADDRESS.street}<br />
+            {ADDRESS.postalCode} {ADDRESS.city}, {ADDRESS.region}
+          </address>
+          <p>
+            <ExtLink href={ADDRESS.mapsLink} class="link-arrow">Abrir en Google Maps</ExtLink>
+          </p>
+        </div>
+
+        <div class="contact-block">
+          <h3>Horario</h3>
+          <dl class="hours">
+            {
+              HOURS_DISPLAY.map((h) => (
+                <div>
+                  <dt>{h.days}</dt>
+                  <dd>{h.hours}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+
+        <div class="contact-block">
+          <h3>Reserva y contacto</h3>
+          <div class="cta-row">
+            <ExtLink href={CONTACT.booksy} class="btn btn-primary">Reservar en Booksy</ExtLink>
+            <ExtLink href={CONTACT.whatsapp} class="btn">WhatsApp</ExtLink>
+            <a href={CONTACT.phoneHref} class="btn">Llamar al {CONTACT.phoneDisplay}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="map" data-map={ADDRESS.mapsEmbed}>
+        <div class="map-facade">
+          <h3>Mapa</h3>
+          <p class="muted">
+            Para no enviar datos a Google sin que lo decidas, el mapa no se carga hasta que lo pidas.
+            Al cargarlo, Google puede instalar cookies (consulta la <a href="/cookies">política de cookies</a>).
+          </p>
+          <button type="button" class="btn" data-map-load>Cargar mapa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const box = document.querySelector<HTMLElement>("[data-map]");
+  const button = box?.querySelector<HTMLButtonElement>("[data-map-load]");
+
+  button?.addEventListener("click", () => {
+    if (!box?.dataset.map) return;
+    const iframe = document.createElement("iframe");
+    iframe.src = box.dataset.map;
+    iframe.title = "Mapa con la ubicación de Ikaro Men's Barber en Las Rozas de Madrid";
+    iframe.loading = "lazy";
+    iframe.referrerPolicy = "no-referrer-when-downgrade";
+    box.replaceChildren(iframe);
+  });
+</script>

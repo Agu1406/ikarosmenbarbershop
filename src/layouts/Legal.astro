@@ -1,0 +1,22 @@
+---
+import Base from "./Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  updated: string;
+}
+const { title, description, updated } = Astro.props;
+---
+
+<Base title={`${title} | Ikaro Men's Barber`} description={description}>
+  <div class="legal">
+    <div class="wrap">
+      <article class="prose">
+        <h1 class="display">{title}</h1>
+        <p class="muted">Última actualización: {updated}</p>
+        <slot />
+      </article>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,173 @@
+{
+  "meta": {
+    "name": "Barberias de referencia (composite)",
+    "description": "Perfil de diseno compuesto a partir de cuatro webs de barberia. Se usa para estructura, tipografia, escala, espaciado y composicion. NO se usan sus colores ni sus efectos: Ikaro mantiene su paleta (azul tinta + latón).",
+    "source_references": [
+      "https://premiumbarbershop.com",
+      "https://www.heritagebarbershop.com",
+      "https://www.barberandco.us",
+      "https://louivver.com/barberia/"
+    ],
+    "created_at": "2026-10-08",
+    "method": "Capturas con Playwright (1440x900 y 390x844), estilos CSS computados del DOM y medicion de color con measure-colors.mjs (design-dna). No se copia codigo ni imagenes de terceros."
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "monochromatic oscuro con un acento calido",
+      "primary": { "hex": "#060503", "role": "fondo dominante (medido en Barber & Co, 69%)" },
+      "secondary": { "hex": "#2f281f", "role": "superficies secundarias" },
+      "accent": { "hex": "#c89b58", "role": "CTA y filetes (Barber & Co); #d29b3b en Heritage" },
+      "neutral": {
+        "scale": ["#fafbfa", "#b1b0b0", "#635c4e", "#2f281f", "#060503"],
+        "usage": "texto claro sobre fondo casi negro; el crema solo en Premium y Heritage para bloques de lectura"
+      },
+      "semantic": { "success": "n/a", "warning": "n/a", "error": "n/a", "info": "n/a" },
+      "surface": { "background": "#060503", "card": "#2f281f", "elevated": "#2f281f" },
+      "contrast_strategy": "alto contraste, texto claro sobre fondo casi negro; foto oscura bajo el titular",
+      "measured_palette": {
+        "premiumbarbershop.com": ["#070605 65%", "#f6f6f6 16%", "#8b6853 5%"],
+        "heritagebarbershop.com": ["#241b15 33%", "#fefffe 25%", "#d29b3b 1%"],
+        "barberandco.us": ["#060503 69%", "#fafbfa 4%", "#c89b58 2%"],
+        "louivver.com": ["#282522 25%", "#b1b0b0 23%", "#f6f6f4 1%"]
+      },
+      "adopted_for_ikaro": false,
+      "note": "Tres de las cuatro son negro casi puro con dorado. Ikaro usa #182c48 con #c5a059, que se distingue mejor y es su identidad."
+    },
+    "typography": {
+      "type_scale": {
+        "display": { "size": "88-90px (5.5rem)", "weight": "500-700", "line_height": "0.9-1.2", "tracking": "normal" },
+        "heading_1": { "size": "88-90px", "weight": "500-700", "line_height": "0.9-1.2", "tracking": "normal" },
+        "heading_2": { "size": "48-63px", "weight": "500-700", "line_height": "1.0-1.2", "tracking": "normal" },
+        "heading_3": { "size": "32-45px", "weight": "500", "line_height": "1.0", "tracking": "normal" },
+        "body": { "size": "16-18px", "weight": "400-500", "line_height": "1.5", "tracking": "0 a 0.4px" },
+        "body_small": { "size": "15px", "weight": "400", "line_height": "1.6", "tracking": "0.4px" },
+        "caption": { "size": "14px", "weight": "600", "line_height": "1.4", "tracking": "2-3px" },
+        "overline": { "size": "14-20px", "weight": "600-700", "line_height": "1.5", "tracking": "2-3px, mayusculas" }
+      },
+      "font_families": {
+        "heading": "Teko (Premium), GT America Compressed (Barber & Co): condensadas, mayusculas, peso alto. Heritage: Raleway. Louivver: serif fina de alto contraste",
+        "body": "Red Hat Display, Bitter, Raleway, Montserrat",
+        "mono": "n/a"
+      },
+      "font_style_notes": "Contraste fuerte entre titular enorme y cuerpo pequeno. Titulares casi siempre en mayusculas. La distancia h1/cuerpo es de unas 5x."
+    },
+    "spacing": {
+      "base_unit": "6px (108px = 18 x 6)",
+      "scale": ["18px", "63px", "90px", "108px"],
+      "content_density": "spacious",
+      "section_rhythm": "Barber & Co: 108px arriba y abajo en cada seccion; Premium: bloques de 450-780px de alto con mucho aire interior"
+    },
+    "layout": {
+      "grid_system": "bloques alternos imagen/texto 50/50; tarjetas de servicio en 3 o 4 columnas",
+      "max_content_width": "1200-1320px",
+      "columns": "12",
+      "gutter": "24-32px",
+      "breakpoints": ["768px", "1024px"],
+      "alignment_tendency": "mixed: hero centrado o asimetrico, secciones alternas"
+    },
+    "shape": {
+      "border_radius": { "small": "0px", "medium": "3px", "large": "20px", "pill": "100px (Barber & Co, Louivver)" },
+      "border_usage": "marcos finos dorados en fotos (Premium) y contorno 1-2px en botones secundarios",
+      "divider_style": "filete fino de 1px, con ornamento de tijeras en Premium"
+    },
+    "elevation": {
+      "shadow_style": "none",
+      "levels": { "low": "none", "medium": "none", "high": "none" },
+      "depth_cues": "capas de foto sobre fondo oscuro, marcos"
+    },
+    "iconography": {
+      "style": "lineal",
+      "stroke_weight": "regular",
+      "size_scale": ["16px", "24px"],
+      "preferred_set": "flecha diagonal en CTA, iconos simples en listas de ventajas"
+    },
+    "motion": {
+      "easing": "ease-out",
+      "duration_scale": { "micro": "150ms", "normal": "300ms", "macro": "600ms" },
+      "entrance_pattern": "fade/slide al hacer scroll",
+      "exit_pattern": "none",
+      "philosophy": "minimal functional"
+    },
+    "components": {
+      "button_style": "CTA principal grande con flecha diagonal (Premium: contorno cuadrado; Barber & Co: pildora rellena). Secundario en contorno",
+      "input_style": "n/a",
+      "card_style": "servicios populares en tarjetas con foto + precio + 'Learn more'",
+      "navigation_pattern": "logo a la izquierda, 3 a 5 enlaces, CTA a la derecha; CTA flotante abajo",
+      "modal_style": "n/a",
+      "list_style": "lista de precios con nombre y precio en linea",
+      "component_notes": "CTA repetido tras cada bloque; resenas con numero de valoraciones; FAQ con la pregunta del precio (Barber & Co)"
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": ["masculino", "premium", "tradicional", "seguro"],
+      "visual_metaphor": "barberia clasica de lujo",
+      "era_influence": "clasico americano, años 20 a 50, con tipografia contemporanea",
+      "genre": "luxury barbershop landing",
+      "personality_traits": ["seguro", "directo", "artesanal"],
+      "adjectives": ["oscuro", "dorado", "fotografico", "contundente"]
+    },
+    "visual_language": {
+      "complexity": "moderate",
+      "ornamentation": "subtle accents (marcos, tijeras, filetes)",
+      "whitespace_usage": "generoso entre bloques",
+      "visual_weight_distribution": "la fotografia pesa mas que el texto",
+      "focal_strategy": "single hero element: foto de barberos reales trabajando",
+      "contrast_level": "high",
+      "texture_usage": "papel/grano en bloques claros (Premium)"
+    },
+    "composition": {
+      "hierarchy_method": "scale contrast",
+      "balance_type": "asymmetric",
+      "flow_direction": "vertical, bloques alternos izquierda/derecha",
+      "grouping_strategy": "un bloque = una idea + un CTA",
+      "negative_space_role": "dar peso al titular y a la foto"
+    },
+    "imagery": {
+      "photo_treatment": "fotos reales del local y de los barberos, oscurecidas para dar legibilidad al titular",
+      "illustration_style": "ornamentos graficos pequeños",
+      "graphic_elements": "marcos dorados, escudo/logotipo",
+      "pattern_usage": "ninguno",
+      "image_shape": "rectangular, algunas con marco"
+    },
+    "interaction_feel": {
+      "feedback_style": "cambio de color o desplazamiento de la flecha",
+      "hover_behavior": "sutil",
+      "transition_personality": "fade-subtle",
+      "loading_style": "n/a",
+      "microinteraction_density": "low"
+    },
+    "brand_voice_in_ui": {
+      "tone": "seguro, orgulloso del oficio",
+      "formality": "casual-premium",
+      "cta_style": "direct imperative",
+      "empty_state_approach": "n/a",
+      "error_tone": "n/a"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "subtle-accent",
+      "performance_tier": "lightweight",
+      "fallback_strategy": "disable effects",
+      "primary_technology": "CSS only"
+    },
+    "composite_notes": "Ninguna de las cuatro usa canvas ni WebGL (medido: 0 canvas, 0 video en el DOM). Su impacto viene de la fotografia real, no de efectos. Dimension DESCARTADA para Ikaro: se mantiene el movimiento medio ya definido en DESIGN.md."
+  },
+  "applied_to_ikaro": {
+    "adopted": [
+      "Hero: la imagen sangra contra el borde derecho a altura completa (Premium)",
+      "CTA principal con flecha diagonal (Premium, Barber & Co)",
+      "Titulares de seccion mas grandes: de 3,75rem a 4,5rem maximo (contraste de escala)",
+      "Filete antes del sobretitulo de seccion (ornamento minimo)",
+      "Seccion de preguntas frecuentes con respuestas sacadas de data.ts (Barber & Co)"
+    ],
+    "rejected": [
+      "Paleta negro y dorado: es la de casi todos, no la de Ikaro",
+      "Titulares condensados en mayusculas: cambiarian la identidad serif de la marca",
+      "Cupon de descuento y lista de correo: no hay oferta real y la lista exige RGPD",
+      "Varias sedes y tarjetas de fotos: Ikaro tiene un local y aun no tiene fotos propias"
+    ],
+    "blocked_by_assets": "El mayor salto (hero con foto real a sangre y fotos de barberos) depende de fotos propias. Hasta tenerlas, el hero usa el video provisional."
+  }
+}

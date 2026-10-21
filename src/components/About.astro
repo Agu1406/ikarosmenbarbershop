@@ -1,0 +1,92 @@
+---
+import { Image } from "astro:assets";
+import { ABOUT, AMENITIES, MEDIA, PHOTO_ALT, TEAM } from "../lib/data";
+import { getPhoto } from "../lib/photos";
+
+const photo = getPhoto("about");
+// La foto real tiene prioridad sobre el vídeo provisional.
+const video = photo ? null : MEDIA.aboutVideo;
+---
+
+<section class="section" id="sobre-nosotros" aria-labelledby="about-title">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">{ABOUT.eyebrow}</p>
+          <h2 id="about-title" class="display">{ABOUT.title}</h2>
+        </div>
+        <div class="prose" data-reveal>
+          {ABOUT.paragraphs.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+
+      <div class="stack">
+        {
+          photo && (
+            <Image
+              class="photo photo-tall"
+              src={photo}
+              alt={PHOTO_ALT.about}
+              widths={[480, 800, 1200]}
+              sizes="(min-width: 56rem) 40vw, 100vw"
+              loading="lazy"
+            />
+          )
+        }
+        {
+          video && (
+            <div class="bg-video" data-about-video>
+              <video
+                class="hero-video"
+                muted
+                loop
+                playsinline
+                preload="none"
+                tabindex="-1"
+                aria-hidden="true"
+                data-src={video}
+              />
+              <button
+                type="button"
+                class="media-toggle media-toggle--inline"
+                data-video-toggle
+                hidden
+                aria-pressed="true"
+              >
+                <span data-video-toggle-label>Reproducir vídeo de fondo</span>
+              </button>
+            </div>
+          )
+        }
+        <div class="facts" data-reveal>
+          <div>
+            <h3>Equipo</h3>
+            <ul>
+              {
+                TEAM.map((m) => (
+                  <li>
+                    <strong>{m.name}</strong> <span class="role">· {m.role}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+          <div>
+            <h3>En el local</h3>
+            <ul class="amenities">
+              {AMENITIES.map((a) => <li>{a}</li>)}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initBackgroundVideo } from "../scripts/video";
+
+  const box = document.querySelector<HTMLElement>("[data-about-video]");
+  if (box) initBackgroundVideo(box, { lazy: true, frameWhenReduced: true });
+</script>

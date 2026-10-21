@@ -1,0 +1,61 @@
+---
+description: Prohibido lo que hace que la web parezca plantilla o slop de IA. Paleta, tipografía y movimiento de este repo mandan.
+alwaysApply: true
+---
+
+# No parece hecho con IA
+
+No usar estos patrones. Fuente: `IGNORAR.md`. La paleta, las fuentes y el movimiento permitidos están en `DESIGN.md`.
+
+Excepción de este repo: el único degradado permitido es el scrim de legibilidad del hero en móvil.
+
+1. Degradado de morado a azul.
+2. Texto del hero con degradado.
+3. Emojis en los titulares.
+4. La fuente Inter en todas partes.
+5. Tarjetas con borde de color.
+6. Tarjetas con glassmorphism.
+7. Modo oscuro de bajo contraste.
+8. Tres cajas con icono en fila.
+9. Badge encima del titular.
+10. Iconos Lucide en todas partes (aquí: Phosphor inline en el build, 4 iconos de grupo).
+11. shadcn/UI sin tocar.
+12. Fade-in al hacer scroll (aquí solo el reveal medio ya definido, con reduced-motion).
+13. Botones que se desvanecen al pasar el cursor.
+14. Espaciado inconsistente (solo la escala `--s1` a `--s8`).
+15. Guiones largos (em dash) en todas partes.
+16. Copy genérico de palabras de moda.
+17. Acentos en serif cursiva.
+18. Haz de luz que sigue al cursor.
+19. Space Grotesk + Instrument Serif (aquí: Cormorant Garamond + Manrope).
+20. Grano sobre un degradado.
+21. Degradados duros.
+22. Iconos Lucide.
+23. Fondo blanco puro.
+24. Coloreado arcoíris.
+25. Sombras proyectadas.
+26. Tres tarjetas de características en fila.
+27. Emojis.
+28. Liquid glass.
+29. Guiones largos (em dash).
+30. Inter / Geist / Space Grotesk.
+31. Franja de color a la izquierda.
+32. Testimonios falsos.
+33. Rejillas bento.
+34. Ventana de terminal.
+35. «No es X, es Y».
+36. Viñetas con check.
+37. Tres tarifas.
+38. Sin demos reales del producto.
+39. Esquinas blandas (radio 2 px).
+40. Morado y negro (paleta: tinta + latón + crema).
+41. Sin skeleton loaders (si hay carga asíncrona, estado de carga real).
+42. Orbes radiales.
+43. Rejillas de puntos.
+44. Iconos de destello.
+45. Flechas animadas (la flecha del CTA no es un destello decorativo).
+46. Sin términos de servicio.
+47. Sin política de privacidad.
+48. Animaciones al pasar el cursor (solo las ya definidas: subrayado, precio, flecha 2 px).
+49. Colores neón.
+50. Colores pastel básicos.

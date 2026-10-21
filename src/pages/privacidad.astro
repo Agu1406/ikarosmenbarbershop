@@ -1,0 +1,134 @@
+---
+import Legal from "../layouts/Legal.astro";
+import Pending from "../components/Pending.astro";
+import { ADDRESS, LEGAL, RETENTION } from "../lib/data";
+---
+
+<Legal
+  title="Política de privacidad"
+  description="Cómo trata los datos personales la web de Ikaro Men's Barber."
+  updated="octubre de 2026"
+>
+  <h2>1. Responsable</h2>
+  <ul>
+    <li>Responsable: <Pending value={LEGAL.titular} label="razón social o nombre" /></li>
+    <li>NIF/CIF: <Pending value={LEGAL.nif} label="NIF o CIF" /></li>
+    <li>Dirección: {ADDRESS.full}</li>
+    <li>
+      Correo electrónico:
+      {
+        LEGAL.email ? (
+          <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>
+        ) : (
+          <Pending value={null} label="email" />
+        )
+      }
+    </li>
+  </ul>
+
+  <h2>2. Qué datos recogemos en esta web</h2>
+  <p>
+    Ninguno de forma directa. Esta web no tiene formularios, registro de usuarios, comentarios ni
+    boletín. No usamos cookies de analítica ni de publicidad, y no hacemos perfiles.
+  </p>
+  <p>
+    Como cualquier servidor web, el servicio de alojamiento registra de forma técnica y temporal
+    datos de la conexión (dirección IP, fecha y hora, página solicitada y navegador) para que la
+    web funcione y esté protegida frente a ataques. La base jurídica es el interés legítimo en la
+    seguridad del servicio (art. 6.1.f RGPD).
+  </p>
+
+  <h2>3. Cuando te pones en contacto con nosotros</h2>
+  <p>
+    Si nos escribes por WhatsApp, llamas por teléfono o reservas en Booksy, los datos que facilites
+    (nombre, teléfono, servicio y hora) se usan solo para atender tu consulta o gestionar tu cita.
+    La base jurídica es la ejecución de la cita que solicitas o tus medidas precontractuales
+    (art. 6.1.b RGPD). No los cedemos a terceros salvo obligación legal.
+  </p>
+
+  <h2>4. Baja, conservación y supresión</h2>
+  <p>
+    Una solicitud de baja o de borrado inactiva la cuenta o el dato: deja de usarse. No se borra
+    del histórico automáticamente.
+  </p>
+  <p>
+    Si pides la supresión (artículo 17 del RGPD), comprobamos si hay una base legal para conservar
+    esos datos. Si no la hay, los borramos o los anonimizamos de forma irreversible. Si la hay,
+    te avisamos qué se conserva, por qué y hasta cuándo:
+  </p>
+  <ul>
+    {
+      RETENTION.map((item) => (
+        <li>
+          <strong>{item.data}:</strong>
+          {item.years
+            ? ` ${item.years} años desde ${item.after}`
+            : ` ${item.after}`}
+          {", "}
+          {item.basis}.
+        </li>
+      ))
+    }
+  </ul>
+  <p>
+    Al cumplir el plazo, se suprimen o se anonimizan. Conservamos solo lo cubierto por esa base,
+    no el resto.
+  </p>
+
+  <h2>5. Servicios de terceros</h2>
+  <p>
+    Estos servicios tienen su propia política de privacidad y tratan tus datos bajo su
+    responsabilidad:
+  </p>
+  <ul>
+    <li>
+      <strong>Booksy</strong> (reservas): se abre en su propia web o aplicación al pulsar «Reservar».
+    </li>
+    <li>
+      <strong>WhatsApp</strong> (Meta): se abre al pulsar el botón de WhatsApp.
+    </li>
+    <li>
+      <strong>Google Maps</strong>: el mapa solo se carga cuando pulsas «Cargar mapa». Hasta
+      entonces no se envía ningún dato a Google.
+    </li>
+    <li>
+      <strong>YouTube</strong> (modo sin cookies, <code>youtube-nocookie.com</code>): si se publica
+      un vídeo, solo se carga cuando pulsas reproducir.
+    </li>
+    <li>
+      <strong>Cloudflare</strong> (alojamiento y red de distribución): procesa las conexiones
+      técnicas descritas en el apartado 2.
+    </li>
+  </ul>
+
+  <h2>6. Tus derechos</h2>
+  <p>
+    Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y
+    portabilidad escribiendo a
+    {
+      LEGAL.email ? (
+        <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>
+      ) : (
+        <Pending value={null} label="email" />
+      )
+    }
+    indicando el derecho que quieres ejercer y un modo de identificarte. Responderemos en el plazo
+    máximo de un mes. Si crees que no hemos tratado bien tus datos, puedes reclamar ante la Agencia
+    Española de Protección de Datos
+    (<a href="https://www.aepd.es" target="_blank" rel="noopener noreferrer"
+      >www.aepd.es<span class="sr-only"> (se abre en nueva pestaña)</span></a
+    >).
+  </p>
+
+  <h2>7. Menores</h2>
+  <p>
+    La web no recoge datos de menores. Las citas de menores las gestiona el padre, la madre o el
+    tutor legal.
+  </p>
+
+  <h2>8. Cambios</h2>
+  <p>
+    Si en el futuro añadimos algo que trate datos (por ejemplo, un formulario o analítica),
+    actualizaremos esta política antes de activarlo.
+  </p>
+</Legal>

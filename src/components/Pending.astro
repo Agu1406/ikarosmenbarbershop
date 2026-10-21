@@ -1,0 +1,9 @@
+---
+interface Props {
+  value: string | null | undefined;
+  label: string;
+}
+const { value, label } = Astro.props;
+---
+
+{value ? value : <span class="pending">[{label}: pendiente de completar]</span>}

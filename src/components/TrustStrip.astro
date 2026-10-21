@@ -1,0 +1,30 @@
+---
+import { ADDRESS, RATINGS } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+---
+
+<section class="trust" aria-label="Valoraciones y ubicación">
+  <div class="wrap">
+    <ul>
+      {
+        RATINGS.map((r) => (
+          <li>
+            <ExtLink href={r.url}>
+              <span class="trust-score">{r.score}</span>
+              <span class="trust-label">
+                en {r.source}, {r.count} opiniones
+              </span>
+            </ExtLink>
+          </li>
+        ))
+      }
+      <li>
+        <p>
+          <span class="trust-label">
+            {ADDRESS.street}, {ADDRESS.city}
+          </span>
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
