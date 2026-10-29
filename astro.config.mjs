@@ -2,7 +2,7 @@ import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 
 // Dominio definitivo: cambiar SITE_URL en Cloudflare Pages (o aquí) cuando se compre.
-const site = process.env.SITE_URL ?? "https://ikaromensbarber.es";
+const site = process.env.SITE_URL ?? "https://ikaromenbarbershop.es";
 
 export default defineConfig({
   site,

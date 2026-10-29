@@ -3,7 +3,8 @@
  * Preguntas frecuentes. Todas las respuestas salen de src/lib/data.ts para que
  * precios, horario y contacto no puedan quedar desincronizados.
  */
-import { ADDRESS, AMENITIES, CONTACT, HOURS_DISPLAY, SERVICE_GROUPS } from "../lib/data";
+import { ADDRESS, AMENITIES, CONTACT, HOURS_DISPLAY, SERVICE_GROUPS, STMNT } from "../lib/data";
+import BookButton from "./BookButton.astro";
 import ExtLink from "./ExtLink.astro";
 
 const services = SERVICE_GROUPS.flatMap((group) => group.items);
@@ -35,16 +36,16 @@ const hasCards = AMENITIES.includes("Tarjetas de crédito");
       <details>
         <summary>¿Cuánto cuesta un corte de pelo?</summary>
         <p>
-          El corte con lavado y peinado cuesta {corte.price}. Hay precio reducido para jóvenes hasta
-          21 años ({joven.price}), niños hasta 7 años ({nino.price}) y veteranos desde 65 años
-          ({veterano.price}). Tienes la carta completa en <a href="#servicios">Servicios y precios</a>.
+          El corte con lavado y peinado cuesta {corte.price}. Jóvenes hasta 21 años, {joven.price}.
+          Niños hasta 7 años, {nino.price}. A partir de 65 años, {veterano.price}. La carta
+          completa está en <a href="#servicios">Servicios y precios</a>.
         </p>
       </details>
       <details>
         <summary>¿Cómo reservo cita?</summary>
         <p>
-          Lo más cómodo es <ExtLink href={CONTACT.booksy}>reservar en Booksy</ExtLink>: eliges el
-          servicio y la hora. También puedes <ExtLink href={CONTACT.whatsapp}>escribir por WhatsApp</ExtLink>
+          <BookButton>Reserva en Booksy</BookButton>, eliges el servicio y la hora. También
+          puedes <ExtLink href={CONTACT.whatsapp}>escribir por WhatsApp</ExtLink>
           o llamar al <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>.
         </p>
       </details>
@@ -62,15 +63,15 @@ const hasCards = AMENITIES.includes("Tarjetas de crédito");
       <details>
         <summary>¿Cuánto dura el corte con barba?</summary>
         <p>
-          «{corteBarba.name}» son {corteBarba.duration} y cuesta {corteBarba.price}. El afeitado
-          tradicional dura {afeitado.duration} ({afeitado.price}).
+          «{corteBarba.name}» dura {corteBarba.duration} y cuesta {corteBarba.price}. El afeitado
+          tradicional dura {afeitado.duration} y cuesta {afeitado.price}.
         </p>
       </details>
       <details>
         <summary>¿Dónde estáis y se puede aparcar?</summary>
         <p>
           Estamos en {ADDRESS.street}, {ADDRESS.postalCode} {ADDRESS.city}.
-          {hasParking ? " El local cuenta con plaza de aparcamiento." : ""}
+          {hasParking ? " Hay plaza de aparcamiento." : ""}
           <ExtLink href={ADDRESS.mapsLink}>Ver en Google Maps</ExtLink>.
         </p>
       </details>
@@ -78,10 +79,18 @@ const hasCards = AMENITIES.includes("Tarjetas de crédito");
         hasCards && (
           <details>
             <summary>¿Puedo pagar con tarjeta?</summary>
-            <p>Sí, se aceptan tarjetas de crédito.</p>
+            <p>Sí. Se puede pagar con tarjeta.</p>
           </details>
         )
       }
+      <details>
+        <summary>¿Vendéis productos?</summary>
+        <p>
+          Sí. En el local hay afeitado, champú, barba y peinado {STMNT.brand}. Precios y modo de
+          uso están en <a href="/#productos">Productos {STMNT.brand}</a>. Si quieres que te
+          apartemos uno, <ExtLink href={CONTACT.whatsapp}>escribe por WhatsApp</ExtLink>.
+        </p>
+      </details>
     </div>
   </div>
 </section>

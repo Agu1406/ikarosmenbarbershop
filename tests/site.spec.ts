@@ -48,6 +48,16 @@ test.describe("privacidad", () => {
     await expect(page.locator("iframe")).toHaveCount(1);
     await expect(page.locator("iframe")).toHaveAttribute("src", /maps\.google\.com/);
   });
+
+  test("el calendario de Booksy solo se abre al pulsar Reservar", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("#reserva")).toHaveCount(0);
+    await page.getByRole("link", { name: "Reservar" }).first().click();
+    const frame = page.locator("#reserva iframe");
+    await expect(frame).toHaveAttribute("src", /booksy\.com\/widget\/index\.html\?id=169010/);
+    await page.getByRole("button", { name: "Cerrar" }).click();
+    await expect(page.locator("#reserva")).not.toBeVisible();
+  });
 });
 
 test.describe("contenido", () => {
@@ -55,7 +65,7 @@ test.describe("contenido", () => {
     await page.goto("/");
     await expect(page.locator("html")).toHaveAttribute("lang", "es");
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
-    for (const id of ["servicios", "sobre-nosotros", "trayectoria", "opiniones", "contacto"]) {
+    for (const id of ["servicios", "productos", "sobre-nosotros", "trayectoria", "opiniones", "contacto"]) {
       await expect(page.locator(`#${id}`)).toBeAttached();
     }
     const booksy = page.locator('a[href*="booksy.com"]').first();

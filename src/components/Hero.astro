@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import posterProvisional from "../assets/media/hero-poster.webp";
 import { CONTACT, MEDIA, PHOTO_ALT, SITE } from "../lib/data";
 import { getPhoto } from "../lib/photos";
+import BookButton from "./BookButton.astro";
 import ExtLink from "./ExtLink.astro";
 import Icon from "./Icon.astro";
 
@@ -55,8 +56,8 @@ if (MEDIA.provisional && !realPhoto) {
       <hr class="rule rule-grow" />
       <p class="lead">{SITE.claim}</p>
       <div class="hero-ctas">
-        <ExtLink href={CONTACT.booksy} class="btn btn-primary"
-          >Reservar cita <Icon name="arrow-up-right" size={18} class="btn-icon" /></ExtLink
+        <BookButton class="btn btn-primary"
+          >Reservar cita <Icon name="arrow-up-right" size={18} class="btn-icon" /></BookButton
         >
         <ExtLink href={CONTACT.whatsapp} class="btn">Escribir por WhatsApp</ExtLink>
       </div>

@@ -45,4 +45,24 @@ test.describe("maquetación y preguntas frecuentes", () => {
     const text = await page.locator("#preguntas").innerText();
     expect(text).not.toContain("\u2014");
   });
+
+  test("la carta STMNT está en la home y coincide un precio", async ({ page }) => {
+    await page.goto("/");
+    const section = page.locator("#productos");
+    await expect(section.getByRole("heading", { level: 2 })).toContainText("STMNT");
+    const row = section.locator(".menu-item", { hasText: "Pasta mate" }).first();
+    await expect(row.locator(".menu-price")).toHaveText("31,99 €");
+    await expect(section.locator("img").first()).toHaveAttribute("alt", /rutina de afeitado/);
+    await expect(section.locator("img[alt*='Textura mate']").first()).toBeAttached();
+    const alts = await section.locator("img").evaluateAll((imgs) => imgs.map((img) => img.getAttribute("alt") ?? ""));
+    for (const alt of alts) {
+      expect(alt).not.toMatch(/shop now|make your statement|pioneers|redefined|discover the range/i);
+    }
+    await expect(page.locator('a[href="/#productos"]').first()).toBeAttached();
+  });
+
+  test("el PIM de STMNT no se sirve en público", async ({ request }) => {
+    const res = await request.get("/PIM%20-%20Descirpciones%20y%20PVPR%20STMNT.xlsx");
+    expect(res.status()).toBeGreaterThanOrEqual(400);
+  });
 });

@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+
+interface Props {
+  wide: ImageMetadata;
+  tall: ImageMetadata;
+  alt: string;
+  caption: string;
+  class?: string;
+}
+
+const { wide, tall, alt, caption, class: className } = Astro.props;
+---
+
+<figure class:list={["product-shot", className]} data-reveal>
+  <Image
+    class="photo product-banner product-banner--tall"
+    src={tall}
+    alt={alt}
+    widths={[480, 720]}
+    sizes="100vw"
+    loading="lazy"
+  />
+  <Image
+    class="photo product-banner product-banner--wide"
+    src={wide}
+    alt={alt}
+    widths={[640, 980, 1245]}
+    sizes="(min-width: 56rem) 70rem, 100vw"
+    loading="lazy"
+  />
+  <figcaption class="muted">{caption}</figcaption>
+</figure>

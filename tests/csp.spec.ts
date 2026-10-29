@@ -36,6 +36,8 @@ test("la web funciona con la CSP de producción", async ({ page }, testInfo) => 
   // El mapa (frame-src de Google) se carga al pedirlo.
   await page.getByRole("button", { name: "Cargar mapa" }).click();
   await expect(page.locator("iframe")).toHaveCount(1);
+  await page.getByRole("link", { name: "Reservar" }).first().click();
+  await expect(page.locator("#reserva iframe")).toHaveAttribute("src", /booksy\.com/);
 
   expect(violations).toEqual([]);
 });

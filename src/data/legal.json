@@ -1,7 +1,7 @@
 {
   "_nota": "Datos del titular para el aviso legal (LSSI art. 10). Mientras algún valor sea null, el build en Cloudflare Pages falla a propósito (scripts/check-legal.mjs).",
-  "titular": null,
-  "nif": null,
-  "email": null,
+  "titular": "José Carlos Sotelo Jiménez",
+  "nif": "50190083N",
+  "email": "sotelojimenezzz@gmail.com",
   "registroMercantil": null
 }

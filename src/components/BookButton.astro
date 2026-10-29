@@ -1,0 +1,13 @@
+---
+import { CONTACT } from "../lib/data";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a href={CONTACT.booksy} class={className} data-booksy target="_blank" rel="noopener noreferrer"
+  ><slot /><span class="sr-only"> (se abre en nueva pestaña)</span></a
+>

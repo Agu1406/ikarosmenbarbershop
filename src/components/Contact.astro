@@ -1,5 +1,6 @@
 ---
 import { ADDRESS, CONTACT, HOURS_DISPLAY } from "../lib/data";
+import BookButton from "./BookButton.astro";
 import ExtLink from "./ExtLink.astro";
 ---
 
@@ -9,7 +10,7 @@ import ExtLink from "./ExtLink.astro";
       <p class="eyebrow">Visítanos</p>
       <h2 id="contacto-title" class="display">Contacto y horario</h2>
       <p class="lead">
-        Estamos en Las Rozas. Reserva online o escríbenos y te respondemos.
+        Estamos en Las Rozas. Reserva, escribe o llama.
       </p>
     </div>
 
@@ -43,7 +44,7 @@ import ExtLink from "./ExtLink.astro";
         <div class="contact-block">
           <h3>Reserva y contacto</h3>
           <div class="cta-row">
-            <ExtLink href={CONTACT.booksy} class="btn btn-primary">Reservar en Booksy</ExtLink>
+            <BookButton class="btn btn-primary">Reservar en Booksy</BookButton>
             <ExtLink href={CONTACT.whatsapp} class="btn">WhatsApp</ExtLink>
             <a href={CONTACT.phoneHref} class="btn">Llamar al {CONTACT.phoneDisplay}</a>
           </div>
@@ -54,7 +55,7 @@ import ExtLink from "./ExtLink.astro";
         <div class="map-facade">
           <h3>Mapa</h3>
           <p class="muted">
-            Para no enviar datos a Google sin que lo decidas, el mapa no se carga hasta que lo pidas.
+            El mapa se carga solo si lo pides, para no enviar datos a Google sin tu permiso.
             Al cargarlo, Google puede instalar cookies (consulta la <a href="/cookies">política de cookies</a>).
           </p>
           <button type="button" class="btn" data-map-load>Cargar mapa</button>
