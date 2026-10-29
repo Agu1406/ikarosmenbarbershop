@@ -1,10 +1,11 @@
 ---
 import { CONTACT } from "../lib/data";
+import BookButton from "./BookButton.astro";
 import ExtLink from "./ExtLink.astro";
 ---
 
 <div class="sticky-cta" data-sticky-cta>
-  <ExtLink href={CONTACT.booksy} class="btn btn-primary">Reservar</ExtLink>
+  <BookButton class="btn btn-primary">Reservar</BookButton>
   <ExtLink href={CONTACT.whatsapp} class="btn">WhatsApp</ExtLink>
 </div>
 

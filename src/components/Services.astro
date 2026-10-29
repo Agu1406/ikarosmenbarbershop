@@ -1,6 +1,6 @@
 ---
-import { CONTACT, SERVICE_GROUPS } from "../lib/data";
-import ExtLink from "./ExtLink.astro";
+import { SERVICE_GROUPS } from "../lib/data";
+import BookButton from "./BookButton.astro";
 import Icon from "./Icon.astro";
 ---
 
@@ -10,7 +10,7 @@ import Icon from "./Icon.astro";
       <p class="eyebrow">Carta de servicios</p>
       <h2 id="servicios-title" class="display">Servicios y precios</h2>
       <p class="lead">
-        Precios con IVA incluido. Reserva el que quieras en Booksy y elige hora.
+        Los precios llevan el IVA incluido. Reserva en Booksy y elige la hora.
       </p>
     </div>
 
@@ -44,10 +44,11 @@ import Icon from "./Icon.astro";
 
     <div class="menu-foot">
       <p class="muted">
-        Los servicios marcados con «desde» o «consultar» se concretan en el local antes de empezar.
-        Las condiciones de cancelación son las que indica Booksy al reservar.
+        Si pone «desde» o «consultar», el precio se cierra en el local antes de empezar.
+        La cancelación es la que indica Booksy al reservar.
+        También hay <a href="/#productos">productos STMNT</a> para casa, a la venta en la barbería.
       </p>
-      <ExtLink href={CONTACT.booksy} class="btn btn-primary">Reservar cita</ExtLink>
+      <BookButton class="btn btn-primary">Reservar cita</BookButton>
     </div>
   </div>
 </section>

@@ -31,6 +31,7 @@ Ritmo de fondos: hero azul, carta en crema, barbería azul, José y opiniones en
 - Hero con el nombre de la marca dominando. Móvil: medio a sangre. Escritorio: texto a la izquierda y la imagen o vídeo a la derecha, a altura completa y pegado al borde (ancho máximo 44vw para no ampliar demasiado un vídeo de 526x702).
 - CTA principal con flecha diagonal. Titulares de sección de hasta 4,5rem. Filete de 2,5rem antes del sobretítulo.
 - Preguntas frecuentes (`Faq.astro`): las respuestas salen de `data.ts`, no se escriben precios a mano.
+- Productos STMNT: carta en `#productos` (venta solo en el local). Datos en `src/data/stmnt.json` (se regenera con `node scripts/import-stmnt.mjs`). Cada grupo lleva la foto de campaña que le corresponde, a ancho de sección. Las caras son de la campaña de STMNT, no del equipo de Ikaro. El inglés de campaña se sustituye con `node scripts/stmnt-banners.mjs` (versión ancha y versión alta para móvil, para que el texto no se encoja). Paleta de Ikaro, no la de STMNT.
 - Sin tarjetas en el primer viewport. Sin tres cajas con icono en fila.
 - Servicios como carta: nombre, línea de puntos, precio, duración. Un icono Phosphor por grupo (4), en línea desde el build, nunca desde una API.
 - Opiniones como citas con filete superior, no como tarjetas.
@@ -76,6 +77,7 @@ Dejar las fotos reales en `src/assets/photos/` con estos nombres (jpg, png o web
 | `about` | Sección La barbería | Vertical 4:5 |
 | `jose` | Sección José | Vertical 4:5 |
 | `trabajo-1`, `trabajo-2`... | Galería | Cualquiera, mínimo 1200 px |
+| `src/assets/stmnt/*.jpg` | Carta STMNT | Banners de campaña de la marca (autorizados). Las caras no son el equipo |
 
 ## Copy
 

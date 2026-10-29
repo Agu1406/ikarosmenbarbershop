@@ -1,5 +1,6 @@
 ---
 import { ADDRESS, CONTACT, LEGAL, SITE } from "../lib/data";
+import BookButton from "./BookButton.astro";
 import ExtLink from "./ExtLink.astro";
 
 const year = new Date().getFullYear();
@@ -15,6 +16,7 @@ const year = new Date().getFullYear();
           {ADDRESS.street}<br />
           {ADDRESS.postalCode} {ADDRESS.city}
         </address>
+        <p><a href="/#productos">Productos STMNT</a></p>
       </div>
 
       <div>
@@ -22,7 +24,7 @@ const year = new Date().getFullYear();
         <ul class="footer-links">
           <li><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a></li>
           <li><ExtLink href={CONTACT.whatsapp}>WhatsApp</ExtLink></li>
-          <li><ExtLink href={CONTACT.booksy}>Reservar en Booksy</ExtLink></li>
+          <li><BookButton>Reservar en Booksy</BookButton></li>
         </ul>
       </div>
 

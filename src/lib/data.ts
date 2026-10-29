@@ -3,6 +3,7 @@
  * Cualquier cambio de precios, horario o contacto se hace solo aquí.
  */
 import legal from "../data/legal.json";
+import stmntCatalog from "../data/stmnt.json";
 
 export const SITE = {
   name: "Ikaro Men's Barber",
@@ -11,7 +12,7 @@ export const SITE = {
   description:
     "Barbería de caballeros en Calle Severo Ochoa 8, Las Rozas. Cortes, barba y afeitado tradicional. Reserva online en Booksy.",
   locale: "es_ES",
-  claim: "Cortes con carácter, barba cuidada al detalle y el trato de siempre.",
+  claim: "Cortes, barba y el trato de siempre.",
 } as const;
 
 export const CONTACT = {
@@ -21,6 +22,9 @@ export const CONTACT = {
   whatsapp: "https://wa.me/34697270434",
   booksy:
     "https://booksy.com/es-es/169010_ikaro-men-s-barber_barberia_39013_las-rozas-de-madrid",
+  /** Calendario de la ficha 169010. Se carga al pulsar Reservar, no al abrir la web. */
+  booksyWidget:
+    "https://booksy.com/widget/index.html?id=169010&lang=es&country=es&mode=dialog&theme=default",
   googleReviews:
     "https://www.google.com/maps/search/?api=1&query=Ikaro+Men%27s+Barber+Calle+Severo+Ochoa+8+Las+Rozas",
 } as const;
@@ -149,7 +153,7 @@ export const SERVICE_GROUPS: readonly ServiceGroup[] = [
         name: "Tinte",
         price: "desde 20 €",
         duration: "20 min",
-        note: "Coloración de caballeros, natural y sin amoniaco, para disimular las canas.",
+        note: "Tinte de caballero, natural y sin amoniaco, para disimular las canas.",
       },
       { name: "Tinte de barba", price: "15 €", duration: "20 min" },
       { name: "Mechas", price: "Consultar", duration: "1 h 15 min" },
@@ -212,10 +216,10 @@ export const REVIEWS: readonly Review[] = [
 
 export const ABOUT = {
   eyebrow: "La barbería",
-  title: "Estilo, precisión y el trato de casa",
+  title: "Cortes, barba y buen trato",
   paragraphs: [
-    `En ${SITE.name} cuidamos la peluquería de caballeros: cortes clásicos y actuales, barbería de oficio y productos pensados para el día a día.`,
-    "José Sotelo y su equipo te escuchan, cuidan cada detalle y te dejan salir con un resultado limpio, natural y a tu medida, desde el primer corte hasta el afeitado tradicional.",
+    "Cortes clásicos y de ahora, arreglo de barba y productos STMNT para el día a día.",
+    "José Sotelo y el equipo escuchan lo que buscas y lo trabajan con calma, del corte al afeitado.",
   ],
 } as const;
 
@@ -224,9 +228,9 @@ export const JOSE = {
   title: "José Sotelo, campeón del mundo",
   // VERIFICAR: conseguir la fuente del título (año, campeonato, federación) y citarla aquí.
   paragraphs: [
-    "José empezó joven en la barbería y, con apenas 18 años, se proclamó campeón del mundo representando a España en corte de pelo y barba.",
-    "Esa exigencia se nota en cada cita: escucha, detalle y un resultado a tu medida.",
-    "Hoy, en Las Rozas, él y su equipo cuidan el estilo de caballeros con el mismo criterio: técnica, trato cercano y ningún atajo.",
+    "José empezó joven en la barbería. Con 18 años se proclamó campeón del mundo, representando a España en corte de pelo y barba.",
+    "En la cita se nota. Escucha, cuida el detalle y deja el resultado a tu medida.",
+    "Hoy, en Las Rozas, él y el equipo siguen con ese mismo criterio.",
   ],
   highlights: ["Campeón del mundo", "Representando a España", "Desde los 18 años"],
   /**
@@ -258,6 +262,16 @@ export const PHOTO_ALT = {
   hero: "Interior de Ikaro Men's Barber en Las Rozas de Madrid",
   about: "Sillones y puestos de trabajo de Ikaro Men's Barber",
   jose: "José Sotelo, fundador de Ikaro Men's Barber",
+  stmntGama: "Gama STMNT de champú, barba y peinado. Foto de la marca.",
+  stmntAfeitado:
+    "La rutina de afeitado. Gel y loción aftershave STMNT. Foto de campaña. La persona no trabaja en Ikaro.",
+  stmntRetrato:
+    "Cuidado de cada día. Productos STMNT. Foto de campaña. La persona no trabaja en Ikaro.",
+  stmntJulius:
+    "Peinado STMNT, de mate a brillo. Foto de campaña. La persona no trabaja en Ikaro.",
+  stmntPasta: "Textura mate. Pasta mate STMNT, foto de producto de la marca.",
+  stmntColeccion:
+    "Toda la gama STMNT en la barbería. Foto de campaña. Quienes salen no trabajan en Ikaro.",
 } as const;
 
 export const LEGAL = legal;
@@ -294,8 +308,13 @@ export const RETENTION = [
   },
 ] as const;
 
+/** Catálogo STMNT en el local. Precios: PVPR + 30 %, acabados en ,99 (scripts/import-stmnt.mjs). No es tienda online. */
+export const STMNT = stmntCatalog;
+export const PRODUCT_GROUPS = STMNT.groups;
+
 export const NAV = [
   { href: "#servicios", label: "Servicios" },
+  { href: "#productos", label: "Productos" },
   { href: "#sobre-nosotros", label: "La barbería" },
   { href: "#trayectoria", label: "José" },
   { href: "#opiniones", label: "Opiniones" },

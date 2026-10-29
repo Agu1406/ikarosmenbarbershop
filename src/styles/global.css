@@ -304,7 +304,9 @@ h3 {
 
 .nav-desktop {
   display: none;
-  gap: var(--s5);
+  gap: var(--s4);
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .nav-desktop a {
   display: inline-flex;
@@ -388,6 +390,11 @@ h3 {
   .menu-toggle,
   .nav-mobile {
     display: none;
+  }
+}
+@media (min-width: 70rem) {
+  .nav-desktop {
+    gap: var(--s5);
   }
 }
 
@@ -779,6 +786,90 @@ h3 {
 .menu-foot p {
   max-width: 36rem;
   font-size: 0.9375rem;
+}
+
+.on-charcoal .menu-group h3 {
+  border-bottom-color: var(--cream);
+}
+.on-charcoal .group-icon {
+  color: var(--brass);
+}
+.on-charcoal .menu-item {
+  border-bottom-color: var(--line);
+}
+.on-charcoal .menu-leader {
+  border-bottom-color: var(--brass);
+}
+.on-charcoal .menu-item:hover .menu-price {
+  color: var(--brass-bright);
+}
+
+.product-shot {
+  margin: 0;
+  display: grid;
+  gap: var(--s2);
+}
+.menu-group .product-shot {
+  margin-block: var(--s4);
+}
+.product-catalog {
+  display: grid;
+  gap: var(--s7);
+  margin-top: var(--s7);
+}
+.product-block {
+  display: grid;
+  gap: var(--s4);
+}
+.product-close {
+  margin-top: var(--s7);
+}
+@media (min-width: 56rem) {
+  .product-catalog .menu-group ul {
+    columns: 2;
+    column-gap: var(--s7);
+  }
+  .product-catalog .menu-item {
+    break-inside: avoid;
+  }
+}
+.product-shot figcaption {
+  font-size: 0.8125rem;
+}
+/* El banner lleva texto: se muestra entero, sin el recorte 3/2 de .photo-wide. */
+.product-banner {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  aspect-ratio: auto;
+}
+.product-banner--wide {
+  display: none;
+}
+@media (min-width: 56rem) {
+  .product-banner--tall {
+    display: none;
+  }
+  .product-banner--wide {
+    display: block;
+  }
+}
+.product-more {
+  margin-top: var(--s2);
+}
+.product-more summary {
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.product-more p {
+  max-width: 38rem;
+  margin-top: var(--s2);
+  font-size: 0.9375rem;
+  color: var(--cream-muted);
 }
 
 /* ---------- La barbería ---------- */
@@ -1213,4 +1304,50 @@ body.has-sticky {
   background: var(--brass);
   color: var(--ink-soft);
   font-weight: 700;
+}
+
+/* Calendario de Booksy: solo existe después de pulsar Reservar. */
+.booksy-dialog {
+  width: min(48rem, calc(100vw - 2 * var(--gutter)));
+  height: min(44rem, calc(100dvh - 2 * var(--gutter)));
+  max-width: calc(100vw - 1rem);
+  max-height: calc(100dvh - 1rem);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--ink);
+}
+.booksy-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+.booksy-dialog::backdrop {
+  background: rgb(24 44 72 / 0.72);
+}
+.booksy-dialog-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s3);
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--line);
+}
+.booksy-dialog-bar p {
+  margin: 0;
+  font-weight: 700;
+}
+.booksy-dialog .btn {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: transparent;
+}
+.booksy-dialog .btn:hover {
+  background: rgb(24 44 72 / 0.08);
+}
+.booksy-dialog iframe {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  border: 0;
 }

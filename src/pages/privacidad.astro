@@ -48,13 +48,12 @@ import { ADDRESS, LEGAL, RETENTION } from "../lib/data";
 
   <h2>4. Baja, conservación y supresión</h2>
   <p>
-    Una solicitud de baja o de borrado inactiva la cuenta o el dato: deja de usarse. No se borra
-    del histórico automáticamente.
+    Si pides la baja, el dato deja de usarse. No se borra del archivo en ese momento.
   </p>
   <p>
-    Si pides la supresión (artículo 17 del RGPD), comprobamos si hay una base legal para conservar
-    esos datos. Si no la hay, los borramos o los anonimizamos de forma irreversible. Si la hay,
-    te avisamos qué se conserva, por qué y hasta cuándo:
+    Si pides que los borremos (artículo 17 del RGPD), miramos si la ley obliga a guardarlos. Si no,
+    los borramos o los dejamos de forma que no se te pueda identificar. Si hay que conservarlos,
+    te decimos qué guardamos, por qué y hasta cuándo:
   </p>
   <ul>
     {
@@ -82,7 +81,9 @@ import { ADDRESS, LEGAL, RETENTION } from "../lib/data";
   </p>
   <ul>
     <li>
-      <strong>Booksy</strong> (reservas): se abre en su propia web o aplicación al pulsar «Reservar».
+      <strong>Booksy</strong> (reservas): al pulsar «Reservar» se abre su calendario en esta página.
+      Hasta ese momento no se carga. Ahí escribes los datos de la cita y pueden instalarse sus
+      cookies.
     </li>
     <li>
       <strong>WhatsApp</strong> (Meta): se abre al pulsar el botón de WhatsApp.

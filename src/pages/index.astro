@@ -9,6 +9,7 @@ import Gallery from "../components/Gallery.astro";
 import Jose from "../components/Jose.astro";
 import Reviews from "../components/Reviews.astro";
 import Faq from "../components/Faq.astro";
+import Products from "../components/Products.astro";
 import Contact from "../components/Contact.astro";
 import StickyCta from "../components/StickyCta.astro";
 import { getPhoto } from "../lib/photos";
@@ -25,6 +26,7 @@ const ogImage = og ? new URL(og.src, Astro.site).href : undefined;
   <Hero />
   <TrustStrip />
   <Services />
+  <Products />
   <About />
   <Gallery />
   <Jose />

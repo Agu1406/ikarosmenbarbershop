@@ -1,0 +1,132 @@
+---
+import gama from "../assets/stmnt/gama-cuidado.jpg";
+import gamaMovil from "../assets/stmnt/gama-cuidado-movil.jpg";
+import afeitado from "../assets/stmnt/afeitado.jpg";
+import afeitadoMovil from "../assets/stmnt/afeitado-movil.jpg";
+import retrato from "../assets/stmnt/retrato.jpg";
+import retratoMovil from "../assets/stmnt/retrato-movil.jpg";
+import julius from "../assets/stmnt/julius.jpg";
+import juliusMovil from "../assets/stmnt/julius-movil.jpg";
+import pastaMate from "../assets/stmnt/pasta-mate.jpg";
+import pastaMateMovil from "../assets/stmnt/pasta-mate-movil.jpg";
+import coleccion from "../assets/stmnt/coleccion.jpg";
+import coleccionMovil from "../assets/stmnt/coleccion-movil.jpg";
+import { ADDRESS, CONTACT, PHOTO_ALT, STMNT } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+import Icon from "./Icon.astro";
+import ProductShot from "./ProductShot.astro";
+
+const campana = `Foto de campaña de ${STMNT.brand} (Henkel).`;
+const persona = `${campana} La persona no trabaja en Ikaro.`;
+const lead: Record<string, { wide: ImageMetadata; tall: ImageMetadata; alt: string; caption: string }> = {
+  afeitado: {
+    wide: afeitado,
+    tall: afeitadoMovil,
+    alt: PHOTO_ALT.stmntAfeitado,
+    caption: persona,
+  },
+  limpieza: {
+    wide: retrato,
+    tall: retratoMovil,
+    alt: PHOTO_ALT.stmntRetrato,
+    caption: persona,
+  },
+  barba: {
+    wide: gama,
+    tall: gamaMovil,
+    alt: PHOTO_ALT.stmntGama,
+    caption: campana,
+  },
+  peinado: {
+    wide: julius,
+    tall: juliusMovil,
+    alt: PHOTO_ALT.stmntJulius,
+    caption: persona,
+  },
+};
+---
+
+<section class="section on-charcoal" id="productos" aria-labelledby="productos-title">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">En el local</p>
+      <h2 id="productos-title" class="display">Productos {STMNT.brand}</h2>
+      <p class="lead">
+        Champú, barba y peinado STMNT, a la venta en la barbería. Los precios llevan el IVA
+        incluido.
+      </p>
+    </div>
+    <div class="cta-row" data-reveal>
+      <ExtLink href={CONTACT.whatsapp} class="btn btn-primary">Consultar por WhatsApp</ExtLink>
+      <a href="/#contacto" class="btn">Dirección y horario</a>
+    </div>
+
+    <div class="product-catalog">
+      {
+        STMNT.groups.map((group) => {
+          const photo = lead[group.id];
+          const pastaAt =
+            group.id === "peinado" ? group.items.findIndex((item) => item.name === "Pasta mate") : -1;
+          const head = pastaAt > 0 ? group.items.slice(0, pastaAt) : group.items;
+          const tail = pastaAt > 0 ? group.items.slice(pastaAt) : [];
+          const list = (items: typeof group.items) =>
+            items.map((item) => (
+              <li class="menu-item">
+                <div class="menu-row">
+                  <p class="menu-name">{item.name}</p>
+                  <span class="menu-leader" aria-hidden="true" />
+                  <p class="menu-price">{item.price}</p>
+                </div>
+                <p class="menu-meta muted">{item.size}</p>
+                <details class="product-more">
+                  <summary>Uso y precauciones</summary>
+                  <p>{item.summary}</p>
+                  {item.use ? <p>{item.use}</p> : null}
+                  {item.warning ? <p>{item.warning}</p> : null}
+                  <p>Resumen del fabricante. La información completa está en el envase.</p>
+                </details>
+              </li>
+            ));
+          return (
+            <div class="product-block">
+              {photo ? (
+                <ProductShot wide={photo.wide} tall={photo.tall} alt={photo.alt} caption={photo.caption} />
+              ) : null}
+              <section class="menu-group" aria-label={group.title} data-reveal>
+                <h3>
+                  <Icon name={group.icon} size={26} class="group-icon" />
+                  {group.title}
+                </h3>
+                <ul>{list(head)}</ul>
+                {tail.length > 0 ? (
+                  <ProductShot
+                    wide={pastaMate}
+                    tall={pastaMateMovil}
+                    alt={PHOTO_ALT.stmntPasta}
+                    caption={campana}
+                  />
+                ) : null}
+                {tail.length > 0 ? <ul>{list(tail)}</ul> : null}
+              </section>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <ProductShot
+      class="product-close"
+      wide={coleccion}
+      tall={coleccionMovil}
+      alt={PHOTO_ALT.stmntColeccion}
+      caption={`${campana} Quienes salen en la foto no trabajan en Ikaro.`}
+    />
+
+    <div class="menu-foot">
+      <p class="muted">
+        {ADDRESS.street}, {ADDRESS.city}. Si quieres uno, pregunta en el sillón o por WhatsApp.
+        Se paga en la barbería.
+      </p>
+    </div>
+  </div>
+</section>

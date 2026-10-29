@@ -113,13 +113,17 @@ test.describe("navegación", () => {
   test("scroll-spy marca con aria-current la sección visible", async ({ page }) => {
     await page.goto("/");
     await page.locator("#servicios").scrollIntoViewIfNeeded();
-    await page.evaluate(() => document.getElementById("servicios")!.scrollIntoView());
+    await page.evaluate(() =>
+      document.getElementById("servicios")!.scrollIntoView({ behavior: "instant" }),
+    );
     await expect(page.locator('nav a[aria-current="true"]').first()).toHaveAttribute(
       "href",
       "/#servicios",
     );
 
-    await page.evaluate(() => document.getElementById("contacto")!.scrollIntoView());
+    await page.evaluate(() =>
+      document.getElementById("contacto")!.scrollIntoView({ behavior: "instant" }),
+    );
     await expect(page.locator('nav a[aria-current="true"]').first()).toHaveAttribute(
       "href",
       "/#contacto",
@@ -130,7 +134,7 @@ test.describe("navegación", () => {
     page,
   }) => {
     await page.goto("/");
-    const icons = page.locator(".menu-group h3 svg");
+    const icons = page.locator("#servicios .menu-group h3 svg");
     await expect(icons).toHaveCount(4);
     await expect(icons.first()).toHaveAttribute("aria-hidden", "true");
   });
