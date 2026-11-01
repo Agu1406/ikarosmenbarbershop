@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import gama from "../assets/stmnt/gama-cuidado.jpg";
 import gamaMovil from "../assets/stmnt/gama-cuidado-movil.jpg";
 import afeitado from "../assets/stmnt/afeitado.jpg";
@@ -15,6 +16,18 @@ import { ADDRESS, CONTACT, PHOTO_ALT, STMNT } from "../lib/data";
 import ExtLink from "./ExtLink.astro";
 import Icon from "./Icon.astro";
 import ProductShot from "./ProductShot.astro";
+
+const envases = import.meta.glob<{ default: ImageMetadata }>("../assets/stmnt/envases/*.jpg", {
+  eager: true,
+});
+const envasePorId = new Map(
+  Object.entries(envases).flatMap(([path, file]) => {
+    const id = path.match(/(\d{13})/)?.[1];
+    return id ? [[id, file.default] as const] : [];
+  }),
+);
+// El PIM del gel trae un GTIN y el packshot otro. Es el mismo bote de 150 ml.
+const envaseAlias: Record<string, string> = { "4067971180687": "4067971180700" };
 
 const campana = `Foto de campaña de ${STMNT.brand} (Henkel).`;
 const persona = `${campana} La persona no trabaja en Ikaro.`;
@@ -70,23 +83,40 @@ const lead: Record<string, { wide: ImageMetadata; tall: ImageMetadata; alt: stri
           const head = pastaAt > 0 ? group.items.slice(0, pastaAt) : group.items;
           const tail = pastaAt > 0 ? group.items.slice(pastaAt) : [];
           const list = (items: typeof group.items) =>
-            items.map((item) => (
-              <li class="menu-item">
-                <div class="menu-row">
-                  <p class="menu-name">{item.name}</p>
-                  <span class="menu-leader" aria-hidden="true" />
-                  <p class="menu-price">{item.price}</p>
-                </div>
-                <p class="menu-meta muted">{item.size}</p>
-                <details class="product-more">
-                  <summary>Uso y precauciones</summary>
-                  <p>{item.summary}</p>
-                  {item.use ? <p>{item.use}</p> : null}
-                  {item.warning ? <p>{item.warning}</p> : null}
-                  <p>Resumen del fabricante. La información completa está en el envase.</p>
-                </details>
-              </li>
-            ));
+            items.map((item) => {
+              const envase = envasePorId.get(envaseAlias[item.id] ?? item.id);
+              return (
+                <li class="menu-item">
+                  <div class="menu-product">
+                    {envase ? (
+                      <Image
+                        class="packshot"
+                        src={envase}
+                        alt={`Envase de ${item.name} STMNT, ${item.size}`}
+                        widths={[96, 160]}
+                        sizes="4.75rem"
+                        loading="lazy"
+                      />
+                    ) : null}
+                    <div>
+                      <div class="menu-row">
+                        <p class="menu-name">{item.name}</p>
+                        <span class="menu-leader" aria-hidden="true" />
+                        <p class="menu-price">{item.price}</p>
+                      </div>
+                      <p class="menu-meta muted">{item.size}</p>
+                      <details class="product-more">
+                        <summary>Uso y precauciones</summary>
+                        <p>{item.summary}</p>
+                        {item.use ? <p>{item.use}</p> : null}
+                        {item.warning ? <p>{item.warning}</p> : null}
+                        <p>Resumen del fabricante. La información completa está en el envase.</p>
+                      </details>
+                    </div>
+                  </div>
+                </li>
+              );
+            });
           return (
             <div class="product-block">
               {photo ? (

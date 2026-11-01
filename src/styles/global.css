@@ -817,6 +817,19 @@ h3 {
   gap: var(--s7);
   margin-top: var(--s7);
 }
+.menu-product {
+  display: grid;
+  grid-template-columns: 4.75rem minmax(0, 1fr);
+  gap: var(--s3);
+  align-items: start;
+}
+.packshot {
+  width: 4.75rem;
+  height: 4.75rem;
+  object-fit: contain;
+  background: var(--cream);
+  border-radius: var(--radius);
+}
 .product-block {
   display: grid;
   gap: var(--s4);
