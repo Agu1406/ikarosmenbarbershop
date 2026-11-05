@@ -25,7 +25,7 @@ export const CONTACT = {
   booksyWidget:
     "https://booksy.com/widget/index.html?id=169010&lang=es&country=es&mode=dialog&theme=default",
   googleReviews:
-    "https://www.google.com/maps/search/?api=1&query=Ikaro+Men%27s+Barber+Calle+Severo+Ochoa+8+Las+Rozas",
+    "https://www.google.com/maps/place/Ikaro+Men%C2%B4s+Barber/@40.520925,-3.8960034,17z/data=!4m6!3m5!1s0xd4183ed954f6ae7:0xc3fd11034264503a!8m2!3d40.520925!4d-3.8960034!16s%2Fg%2F11y_d8rbcc?hl=es",
 } as const;
 
 export const ADDRESS = {
@@ -34,13 +34,15 @@ export const ADDRESS = {
   city: "Las Rozas de Madrid",
   region: "Madrid",
   country: "ES",
-  lat: 40.5213568,
-  lng: -3.8969313,
+  /** Pin de la ficha de Google (Plus Code G4C3+9H). */
+  lat: 40.520925,
+  lng: -3.8960034,
+  plusCode: "G4C3+9H",
   full: "Calle Severo Ochoa, 8, Loc 6, 28232 Las Rozas de Madrid, Madrid",
   mapsLink:
-    "https://www.google.com/maps/search/?api=1&query=40.5213568,-3.8969313",
+    "https://www.google.com/maps/place/Ikaro+Men%C2%B4s+Barber/@40.520925,-3.8960034,17z/data=!4m6!3m5!1s0xd4183ed954f6ae7:0xc3fd11034264503a!8m2!3d40.520925!4d-3.8960034!16s%2Fg%2F11y_d8rbcc?hl=es",
   mapsEmbed:
-    "https://maps.google.com/maps?q=40.5213568,-3.8969313&ll=40.5213568,-3.8969313&z=18&hl=es&output=embed",
+    "https://maps.google.com/maps?q=40.520925,-3.8960034&ll=40.520925,-3.8960034&z=18&hl=es&output=embed",
   /** Recorrido 3D del local. Se abre en otra pestaña. No se incrusta. */
   tourLink: "https://app.flow4d.ai/shared/8wnDhVUGFIP",
 } as const;

@@ -68,10 +68,11 @@ Fuentes principales: `lib/data.ts`, `lib/hours.ts`, `lib/cookies.ts`, `lib/a11y.
 | Calle | Calle Severo Ochoa, 8, Loc 6 |
 | Ciudad | 28232 Las Rozas de Madrid, Madrid |
 | Dirección completa | Calle Severo Ochoa, 8, Loc 6, 28232 Las Rozas de Madrid, Madrid |
-| Latitud | 40.5213568 |
-| Longitud | -3.8969313 |
-| Google Maps (enlace) | `https://www.google.com/maps/search/?api=1&query=40.5213568,-3.8969313` |
-| Google Maps (embed) | `https://maps.google.com/maps?q=40.5213568,-3.8969313&ll=40.5213568,-3.8969313&z=18&hl=es&output=embed` |
+| Latitud | 40.520925 |
+| Longitud | -3.8960034 |
+| Plus Code | G4C3+9H Las Rozas de Madrid |
+| Google Maps (enlace) | `https://www.google.com/maps/place/Ikaro+Men%C2%B4s+Barber/@40.520925,-3.8960034,17z/data=!4m6!3m5!1s0xd4183ed954f6ae7:0xc3fd11034264503a!8m2!3d40.520925!4d-3.8960034!16s%2Fg%2F11y_d8rbcc?hl=es` |
+| Google Maps (embed) | `https://maps.google.com/maps?q=40.520925,-3.8960034&ll=40.520925,-3.8960034&z=18&hl=es&output=embed` |
 
 ---
 
@@ -322,12 +323,11 @@ Reglas de marca / hechos estrictos: `.cursorrules`
 | Dirección completa | Calle Severo Ochoa, 8, Loc 6, 28232 Las Rozas de Madrid, Madrid |
 | Calle / local | Calle Severo Ochoa, 8, Loc 6 |
 | Ciudad / CP | 28232 Las Rozas de Madrid, Madrid |
-| Coordenadas | Lat `40.5213568` · Lng `-3.8969313` |
-| Teléfono (mostrar) | 697 27 04 34 |
-| Teléfono (E.164) | +34 697 27 04 34 |
-| Llamar | `tel:+34697270434` |
-| WhatsApp | https://wa.me/34697270434 |
-| Google Maps (enlace) | https://www.google.com/maps/search/?api=1&query=40.5213568,-3.8969313 |
+| Coordenadas | Lat `40.520925` · Lng `-3.8960034` (Plus Code G4C3+9H) |
+| Teléfono (mostrar) | 915 15 28 44 |
+| Teléfono (E.164) | +34 915 15 28 44 |
+| Llamar | `tel:+34915152844` |
+| Google Maps (enlace) | https://www.google.com/maps/place/Ikaro+Men%C2%B4s+Barber/@40.520925,-3.8960034,17z/data=!4m6!3m5!1s0xd4183ed954f6ae7:0xc3fd11034264503a!8m2!3d40.520925!4d-3.8960034!16s%2Fg%2F11y_d8rbcc?hl=es |
 | Mapa embed | Google Maps embed centrado en esas coords, zoom 18 |
 
 ---
@@ -338,7 +338,7 @@ Reglas de marca / hechos estrictos: `.cursorrules`
 |---|---|
 | Booksy (reservas) | https://booksy.com/es-es/169010_ikaro-men-s-barber_barberia_39013_las-rozas-de-madrid |
 | Booksy ID | `169010` |
-| Google reseñas (búsqueda) | https://www.google.com/maps/search/?api=1&query=Ikaro+Men%27s+Barber+Calle+Severo+Ochoa+8+Las+Rozas |
+| Google reseñas (ficha) | https://www.google.com/maps/place/Ikaro+Men%C2%B4s+Barber/@40.520925,-3.8960034,17z/data=!4m6!3m5!1s0xd4183ed954f6ae7:0xc3fd11034264503a!8m2!3d40.520925!4d-3.8960034!16s%2Fg%2F11y_d8rbcc?hl=es |
 
 ### Valoraciones usadas en la web
 | Fuente | Nota | Nº reseñas |
@@ -582,10 +582,11 @@ Fuentes principales: `lib/data.ts`, `lib/hours.ts`, `lib/cookies.ts`, `lib/a11y.
 | Calle | Calle Severo Ochoa, 8, Loc 6 |
 | Ciudad | 28232 Las Rozas de Madrid, Madrid |
 | Dirección completa | Calle Severo Ochoa, 8, Loc 6, 28232 Las Rozas de Madrid, Madrid |
-| Latitud | 40.5213568 |
-| Longitud | -3.8969313 |
-| Google Maps (enlace) | `https://www.google.com/maps/search/?api=1&query=40.5213568,-3.8969313` |
-| Google Maps (embed) | `https://maps.google.com/maps?q=40.5213568,-3.8969313&ll=40.5213568,-3.8969313&z=18&hl=es&output=embed` |
+| Latitud | 40.520925 |
+| Longitud | -3.8960034 |
+| Plus Code | G4C3+9H Las Rozas de Madrid |
+| Google Maps (enlace) | `https://www.google.com/maps/place/Ikaro+Men%C2%B4s+Barber/@40.520925,-3.8960034,17z/data=!4m6!3m5!1s0xd4183ed954f6ae7:0xc3fd11034264503a!8m2!3d40.520925!4d-3.8960034!16s%2Fg%2F11y_d8rbcc?hl=es` |
+| Google Maps (embed) | `https://maps.google.com/maps?q=40.520925,-3.8960034&ll=40.520925,-3.8960034&z=18&hl=es&output=embed` |
 
 ---
 
