@@ -310,7 +310,7 @@ export const RETENTION = [
   },
 ] as const;
 
-/** Catálogo STMNT en el local. Precios: PVPR + 30 %, acabados en ,99 (scripts/import-stmnt.mjs). No es tienda online. */
+/** Catálogo STMNT en el local. Precios: PVPR del Excel tal cual (scripts/import-stmnt.mjs). No es tienda online. */
 export const STMNT = stmntCatalog;
 export const PRODUCT_GROUPS = STMNT.groups;
 
