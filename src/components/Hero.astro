@@ -4,7 +4,6 @@ import posterProvisional from "../assets/media/hero-poster.webp";
 import { CONTACT, MEDIA, PHOTO_ALT, SITE } from "../lib/data";
 import { getPhoto } from "../lib/photos";
 import BookButton from "./BookButton.astro";
-import ExtLink from "./ExtLink.astro";
 import Icon from "./Icon.astro";
 
 const realPhoto = getPhoto("hero");
@@ -59,7 +58,7 @@ if (MEDIA.provisional && !realPhoto) {
         <BookButton class="btn btn-primary"
           >Reservar cita <Icon name="arrow-up-right" size={18} class="btn-icon" /></BookButton
         >
-        <ExtLink href={CONTACT.whatsapp} class="btn">Escribir por WhatsApp</ExtLink>
+        <a href={CONTACT.phoneHref} class="btn">Llamar</a>
       </div>
       <p class="open-status" data-open-status aria-live="off"></p>
     </div>

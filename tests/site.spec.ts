@@ -71,7 +71,7 @@ test.describe("contenido", () => {
     const booksy = page.locator('a[href*="booksy.com"]').first();
     await expect(booksy).toHaveAttribute("target", "_blank");
     await expect(booksy).toHaveAttribute("rel", /noopener/);
-    await expect(page.locator('a[href^="tel:+34697270434"]').first()).toBeAttached();
+    await expect(page.locator('a[href^="tel:+34915152844"]').first()).toBeAttached();
   });
 
   test("no hay guiones largos en el texto visible", async ({ page }) => {
