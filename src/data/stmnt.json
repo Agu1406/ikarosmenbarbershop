@@ -1,7 +1,7 @@
 {
   "brand": "STMNT",
   "manufacturer": "Henkel AG & Co. KGaA",
-  "source": "PIM STMNT, PVPR 09.2026, más 30 % y redondeo al alza a ,99",
+  "source": "PIM STMNT, PVPR 09.2026 tal cual",
   "groups": [
     {
       "id": "afeitado",
@@ -12,8 +12,8 @@
           "id": "4067971122519",
           "name": "Gel de afeitado",
           "size": "150 ml",
-          "price": "21,99 €",
-          "summary": "Gel para afeitar y para marcar contornos.",
+          "price": "16,90 €",
+          "summary": "El imprescindible más versátil que hay detrás de los mejores afeitados",
           "use": "Afeitado y contornos: Aplicar una cantidad suficiente en las palmas de las manos y extenderla sobre la zona a afeitar. Preafeitado: Aplicar una cantidad suficiente en las palmas de las manos y extenderla sobre la zona a afeitar. Usar una toalla caliente para permitir que penetre mejor.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con estos. Manténgase fuera del alcance de los niños."
         },
@@ -21,8 +21,8 @@
           "id": "4067971122434",
           "name": "Loción aftershave",
           "size": "100 ml",
-          "price": "21,99 €",
-          "summary": "Loción para después del afeitado, en rostro y cuello.",
+          "price": "16,90 €",
+          "summary": "El acabado definitivo que todo afeitado necesita",
           "use": "Aplicar a diario en rostro y cuello o después del afeitado. Masajear hasta que se absorba.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con estos. Manténgase fuera del alcance de los niños."
         }
@@ -37,8 +37,8 @@
           "id": "4045787948691",
           "name": "Champú hidro",
           "size": "300 ml",
-          "price": "25,99 €",
-          "summary": "Champú suave para el día a día.",
+          "price": "19,60 €",
+          "summary": "Tu champú de uso diario, pero más suave",
           "use": "Masajear sobre cabello mojado para crear espuma. Enjuagar bien. Repetir si es necesario. Puede usarse a diario. Usar junto al Sérum de STMNT para unos resultados mejorados.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -46,8 +46,8 @@
           "id": "4045787948974",
           "name": "Sérum",
           "size": "150 ml",
-          "price": "25,99 €",
-          "summary": "Sérum para el cuero cabelludo y la barba. No se aclara.",
+          "price": "19,60 €",
+          "summary": "Tu inyección diaria de cuidado",
           "use": "En el cuero cabelludo y cabello: Aplicar sobre cabello y cuero cabelludo lavados con champú y secados con toalla. Masajear en el cuero cabelludo antes de secar con secador. No enjuagar. En la barba: Vaporizar una cantidad adecuada en las palmas de las manos y aplicar sobre la barba humedecida. No enjuagar. Usar después del CHAMPÚ HIDRO de STMNT para unos resultados mejorados.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -55,8 +55,8 @@
           "id": "4045787575385",
           "name": "Champú todo en uno",
           "size": "300 ml",
-          "price": "25,99 €",
-          "summary": "Champú para lavar cabello y cuerpo.",
+          "price": "19,60 €",
+          "summary": "Tu champú de uso diario para \"lavar todo\"",
           "use": "Aplicar sobre cabello y cuerpo mojados y formar espuma. Enjuagar bien con agua tibia.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con estos. Manténgase fuera del alcance de los niños."
         },
@@ -64,17 +64,17 @@
           "id": "4045787575347",
           "name": "Champú",
           "size": "300 ml",
-          "price": "25,99 €",
-          "summary": "Champú de uso diario.",
+          "price": "19,60 €",
+          "summary": "Tu champú para uso diario, solo que un poco más potente",
           "use": "Aplicar sobre cabello mojado para formar espuma. Enjuagar bien. Repetir si es necesario. Puede usarse a diario.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
         {
           "id": "4067971134659",
-          "name": "Pastilla de cabello y cuerpo",
+          "name": "Hair & body cleansing bar",
           "size": "125 g",
-          "price": "17,99 €",
-          "summary": "Pastilla para lavar cabello y cuerpo.",
+          "price": "13,10 €",
+          "summary": "Una elección sólida para la eficacia limpiadora",
           "use": "Aplicar entre las manos húmedas para crear espuma. Aplicar donde sea necesario. Aclarar abundantemente. Repetir si es necesario.",
           "warning": "Evitar el contacto con los ojos. Aclarar inmediatamente si el producto entra en contacto con ellos. Mantener fuera del alcance de los niños."
         },
@@ -82,8 +82,8 @@
           "id": "4045787575262",
           "name": "Acondicionador",
           "size": "275 ml",
-          "price": "25,99 €",
-          "summary": "Acondicionador para dejar el cabello suave.",
+          "price": "19,60 €",
+          "summary": "Para un acabado suave",
           "use": "Masajear sobre cabello recién lavado y húmedo. Enjuagar bien. Para unos mejores resultados usar después del Champú de STMNT. Puede usarse a diario.",
           "warning": ""
         }
@@ -98,8 +98,8 @@
           "id": "4045787575422",
           "name": "Aceite de barba",
           "size": "50 ml",
-          "price": "30,99 €",
-          "summary": "Aceite para cuidar la barba.",
+          "price": "23,50 €",
+          "summary": "Tu barba, simplemente más espectacular",
           "use": "Aplicar unas gotas en las palmas de las manos. Distribuir de manera uniforme por la barba. Puede usarse a diario.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         }
@@ -114,8 +114,8 @@
           "id": "4045787948936",
           "name": "Spray de definición",
           "size": "200 ml",
-          "price": "31,99 €",
-          "summary": "Spray para definir el peinado.",
+          "price": "24,20 €",
+          "summary": "Tu imprescindible para una textura definida.",
           "use": "Vaporizar sobre cabello húmedo antes de secar con secador para dar volumen o dejar secar al aire para una textura definida.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -123,8 +123,8 @@
           "id": "4045787575101",
           "name": "Polvo en spray",
           "size": "4 g",
-          "price": "31,99 €",
-          "summary": "Polvo en spray para dar textura.",
+          "price": "24,20 €",
+          "summary": "Tu arma secreta para una textura irregular",
           "use": "Agitar antes de usar. Vaporizar sobre raíces y/o medios secos, trabajar el producto y estrujar el cabello con las manos para texturizar.",
           "warning": "Manténgase fuera del alcance de los niños. Evitar todo contacto con los ojos. No inhalar."
         },
@@ -132,8 +132,8 @@
           "id": "4045787574821",
           "name": "Cera en polvo acabado semimate",
           "size": "15 g",
-          "price": "31,99 €",
-          "summary": "Cera en polvo con acabado semimate.",
+          "price": "24,20 €",
+          "summary": "Transforma tu estilo",
           "use": "Aplícalo sobre el cabello seco como si fuera polvo. Aplícalo con las manos para transformarlo. Estiliza como una cera. También se puede transformar frotando entre las manos antes de aplicar.",
           "warning": "Mantener fuera del alcance de los niños. Evitar el contacto con los ojos. No inhalar"
         },
@@ -141,8 +141,8 @@
           "id": "4067971070049",
           "name": "Pomada fibrosa",
           "size": "100 ml",
-          "price": "31,99 €",
-          "summary": "Pomada para peinados con textura.",
+          "price": "24,20 €",
+          "summary": "Tu entrada vip para la textura despeinada",
           "use": "Aplicar una pequeña cantidad sobre cabello seco y darle forma. Puede reactivarse con agua.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -150,8 +150,8 @@
           "id": "4067971180663",
           "name": "Crema de rizos",
           "size": "150 ml",
-          "price": "26,99 €",
-          "summary": "Crema para definir los rizos.",
+          "price": "20,30 €",
+          "summary": "Para una definición de los rizos legendaria.",
           "use": "Aplicar sobre cabello húmedo y definir las ondas y rizos. Dejar secar al aire para una gran definición o aplicar una cantidad suficiente sobre el cabello húmedo y secar con secador usando los dedos o un peine para una textura más sutil.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -159,8 +159,8 @@
           "id": "4067971070100",
           "name": "Pasta mate",
           "size": "100 ml",
-          "price": "31,99 €",
-          "summary": "Pasta de peinado con acabado mate.",
+          "price": "24,20 €",
+          "summary": "Para un efecto súper mate",
           "use": "Aplicar una pequeña cantidad sobre cabello seco y dar la forma o aplicar sobre cabello húmedo antes de secar el cabello con secador o al aire. ¿Deseas que sea menos mate? Mézclala con la Pasta de Brillo STMNT.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -168,8 +168,8 @@
           "id": "4067971070162",
           "name": "Pasta de brillo",
           "size": "100 ml",
-          "price": "31,99 €",
-          "summary": "Pasta de peinado con un brillo suave.",
+          "price": "24,20 €",
+          "summary": "Para conseguir un brillo sutil",
           "use": "Aplicar una pequeña cantidad sobre cabello seco y dar forma o aplicar sobre cabello húmedo antes de secar el cabello con secador o al aire. ¿Deseas menos brillo? Mézclala con la Pasta Mate STMNT.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -177,8 +177,8 @@
           "id": "4067971121734",
           "name": "Laca",
           "size": "150 ml",
-          "price": "31,99 €",
-          "summary": "Laca para fijar el peinado.",
+          "price": "24,20 €",
+          "summary": "Tu estilo está a salvo con ella",
           "use": "Vaporizar sobre cabello seco a una distancia de 20-30cm. Puede distribuirse por capas para una fijación adicional y opciones de acabado versátiles.",
           "warning": "Peligro. Aerosol extremadamente inflamable. Recipiente a presión: Puede reventar si se calienta. Mantener alejado del calor, de superficies calientes, de chispas, de llamas abiertas y de cualquier otra fuente de ignición. No fumar. No pulverizar sobre una llama abierta u otra fuente de ignición. No perforar ni quemar, incluso después de su uso. Proteger de la luz solar. No exponer a una temperatura superior a 50ºC. Mantener fuera del alcance de los niños. Úsese en lugares bien ventilados. Úsese con pulverizaciones cortas. No vaporizar hacia los ojos. Deposítelo en el sistema de reciclaje de envases únicamente cuando esté totalmente vacío. Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -186,8 +186,8 @@
           "id": "4067971069982",
           "name": "Arcilla seca",
           "size": "100 ml",
-          "price": "31,99 €",
-          "summary": "Arcilla de peinado con acabado mate.",
+          "price": "24,20 €",
+          "summary": "Eleva el cabello con un impacto mate adicional",
           "use": "Calentar una pizca entre las palmas de las manos y frotarlas hasta conseguir una textura flexible. Aplicar sobre cabello seco o húmedo.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -195,8 +195,8 @@
           "id": "4067971180687",
           "name": "Gel",
           "size": "150 ml",
-          "price": "26,99 €",
-          "summary": "Gel de peinado.",
+          "price": "20,30 €",
+          "summary": "Un clásico con un giro lleno de personalidad.",
           "use": "Aplicar una cantidad suficiente en las palmas de las manos y distribuir sobre cabello húmedo o seco. Peinar el cabello dándole forma para crear un look elegante o usar los dedos para un look texturizado.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -204,8 +204,8 @@
           "id": "4045787575309",
           "name": "Spray de peinado",
           "size": "200 ml",
-          "price": "31,99 €",
-          "summary": "Spray para preparar y peinar.",
+          "price": "24,20 €",
+          "summary": "Tu ayudante de preparación y estilo polivalente",
           "use": "Vaporizar de manera uniforme sobre cabello mojado antes de secar con secador o dejar secar al aire. Crea una base ideal para seguir fijando.",
           "warning": "Evitar todo contacto con los ojos. Enjuagar inmediatamente si el producto entra en contacto con éstos. Manténgase fuera del alcance de los niños."
         },
@@ -213,8 +213,8 @@
           "id": "4067971069920",
           "name": "Pomada clásica",
           "size": "100 ml",
-          "price": "31,99 €",
-          "summary": "Pomada clásica de peinado.",
+          "price": "24,20 €",
+          "summary": "Por algo es un clásico",
           "use": "Frotar una pequeña cantidad entre las palmas de las manos. Luego, aplicar de manera uniforme sobre cabello húmedo o seco. Puede reactivarse con agua.",
           "warning": ""
         }

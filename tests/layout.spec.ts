@@ -51,7 +51,7 @@ test.describe("maquetación y preguntas frecuentes", () => {
     const section = page.locator("#productos");
     await expect(section.getByRole("heading", { level: 2 })).toContainText("STMNT");
     const row = section.locator(".menu-item", { hasText: "Pasta mate" }).first();
-    await expect(row.locator(".menu-price")).toHaveText("31,99 €");
+    await expect(row.locator(".menu-price")).toHaveText("24,20 €");
     await expect(section.locator("img").first()).toHaveAttribute("alt", /rutina de afeitado/);
     await expect(section.locator("img[alt*='Textura mate']").first()).toBeAttached();
     const alts = await section.locator("img").evaluateAll((imgs) => imgs.map((img) => img.getAttribute("alt") ?? ""));

@@ -97,14 +97,10 @@ function plain(text) {
     .trim();
 }
 
-// Precio de venta en el local: PVPR + 30 %, y siempre hacia arriba hasta acabar en ,99.
-const MARKUP = 1.3;
-
+// Precio de venta: el PVPR del Excel, sin recargo ni redondeo a ,99.
 function euro(raw) {
-  const pvprCents = Math.round(Number(raw) * 100);
-  if (!Number.isFinite(pvprCents)) throw new Error(`PVPR no numérico: ${raw}`);
-  const raised = Math.round(pvprCents * MARKUP);
-  const cents = raised % 100 === 99 ? raised : raised + (99 - (raised % 100));
+  const cents = Math.round(Number(raw) * 100);
+  if (!Number.isFinite(cents)) throw new Error(`PVPR no numérico: ${raw}`);
   const n = (cents / 100).toFixed(2).replace(".", ",");
   return `${n} €`;
 }
@@ -161,7 +157,7 @@ for (const row of rows) {
 const catalog = {
   brand: "STMNT",
   manufacturer: "Henkel AG & Co. KGaA",
-  source: "PIM STMNT, PVPR 09.2026, más 30 % y redondeo al alza a ,99",
+  source: "PIM STMNT, PVPR 09.2026 tal cual",
   groups: GROUP_ORDER.map((g) => ({
     id: g.id,
     title: g.title,
