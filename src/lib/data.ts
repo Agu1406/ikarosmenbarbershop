@@ -42,6 +42,8 @@ export const ADDRESS = {
     "https://www.google.com/maps/search/?api=1&query=40.5213568,-3.8969313",
   mapsEmbed:
     "https://maps.google.com/maps?q=40.5213568,-3.8969313&ll=40.5213568,-3.8969313&z=18&hl=es&output=embed",
+  /** Recorrido 3D del local. Se abre en otra pestaña. No se incrusta. */
+  tourLink: "https://app.flow4d.ai/shared/8wnDhVUGFIP",
 } as const;
 
 /**
