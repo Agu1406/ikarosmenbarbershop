@@ -65,7 +65,7 @@ test.describe("contenido", () => {
     await page.goto("/");
     await expect(page.locator("html")).toHaveAttribute("lang", "es");
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
-    for (const id of ["servicios", "productos", "sobre-nosotros", "trayectoria", "opiniones", "contacto"]) {
+    for (const id of ["servicios", "recorrido", "productos", "sobre-nosotros", "trayectoria", "opiniones", "contacto"]) {
       await expect(page.locator(`#${id}`)).toBeAttached();
     }
     const booksy = page.locator('a[href*="booksy.com"]').first();

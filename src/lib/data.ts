@@ -315,6 +315,7 @@ export const PRODUCT_GROUPS = STMNT.groups;
 
 export const NAV = [
   { href: "#servicios", label: "Servicios" },
+  { href: "#recorrido", label: "Recorrido 3D" },
   { href: "#productos", label: "Productos" },
   { href: "#sobre-nosotros", label: "La barbería" },
   { href: "#trayectoria", label: "José" },

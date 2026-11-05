@@ -1,0 +1,23 @@
+---
+import { ADDRESS } from "../lib/data";
+import ExtLink from "./ExtLink.astro";
+import Icon from "./Icon.astro";
+---
+
+<section class="section on-charcoal" id="recorrido" aria-labelledby="recorrido-title">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">El local</p>
+      <h2 id="recorrido-title" class="display">Recorrido en 3D</h2>
+      <p class="lead">
+        Entra al escaneo de la barbería y mueve la vista como si estuvieras dentro. Se abre en otra
+        pestaña.
+      </p>
+      <p>
+        <ExtLink href={ADDRESS.tourLink} class="btn btn-primary"
+          >Recorrer el local <Icon name="arrow-up-right" size={18} class="btn-icon" /></ExtLink
+        >
+      </p>
+    </div>
+  </div>
+</section>
