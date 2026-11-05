@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import Hero from "../components/Hero.astro";
 import TrustStrip from "../components/TrustStrip.astro";
 import Services from "../components/Services.astro";
+import Tour from "../components/Tour.astro";
 import About from "../components/About.astro";
 import Gallery from "../components/Gallery.astro";
 import Jose from "../components/Jose.astro";
@@ -26,6 +27,7 @@ const ogImage = og ? new URL(og.src, Astro.site).href : undefined;
   <Hero />
   <TrustStrip />
   <Services />
+  <Tour />
   <Products />
   <About />
   <Gallery />
