@@ -8,6 +8,12 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<a href={CONTACT.booksy} class={className} data-booksy target="_blank" rel="noopener noreferrer"
-  ><slot /><span class="sr-only"> (se abre en nueva pestaña)</span></a
+<a
+  href={CONTACT.booksy}
+  class={className}
+  data-booksy
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-haspopup="dialog"
+  ><slot /><span class="sr-only"> (abre el calendario de reservas)</span></a
 >

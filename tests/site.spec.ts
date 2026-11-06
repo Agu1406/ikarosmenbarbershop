@@ -45,18 +45,25 @@ test.describe("privacidad", () => {
     await page.goto("/");
     await expect(page.locator("iframe")).toHaveCount(0);
     await page.getByRole("button", { name: "Cargar mapa" }).click();
-    await expect(page.locator("iframe")).toHaveCount(1);
-    await expect(page.locator("iframe")).toHaveAttribute("src", /maps\.google\.com/);
+    const map = page.locator("[data-map] iframe");
+    await expect(map).toHaveCount(1);
+    await expect(map).toHaveAttribute("src", /maps\.google\.com/);
+    await expect(map).toBeFocused();
   });
 
   test("el calendario de Booksy solo se abre al pulsar Reservar", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator("#reserva")).toHaveCount(0);
-    await page.getByRole("link", { name: "Reservar" }).first().click();
+    const reservar = page.getByRole("link", { name: /Reservar/ }).first();
+    await reservar.click();
+    const dialog = page.getByRole("dialog", { name: "Reservar cita" });
+    await expect(dialog).toBeVisible();
     const frame = page.locator("#reserva iframe");
     await expect(frame).toHaveAttribute("src", /booksy\.com\/widget\/index\.html\?id=169010/);
+    await expect(page.getByRole("button", { name: "Cerrar" })).toBeFocused();
     await page.getByRole("button", { name: "Cerrar" }).click();
-    await expect(page.locator("#reserva")).not.toBeVisible();
+    await expect(dialog).not.toBeVisible();
+    await expect(reservar).toBeFocused();
   });
 });
 
@@ -163,9 +170,20 @@ test.describe("teclado", () => {
     await toggle.focus();
     await page.keyboard.press("Enter");
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
-    await expect(page.getByRole("navigation", { name: "Principal" }).last()).toBeVisible();
+    const mobileNav = page.getByRole("navigation", { name: "Principal" }).last();
+    await expect(mobileNav).toBeVisible();
+    await expect(mobileNav.getByRole("link").first()).toBeFocused();
     await page.keyboard.press("Escape");
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
     await expect(toggle).toBeFocused();
+  });
+
+  test("con el hero a la vista la barra sticky no es tabulable", async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "movil", "Solo móvil");
+    await page.goto("/");
+    await page.locator("#inicio").scrollIntoViewIfNeeded();
+    const sticky = page.locator("[data-sticky-cta]");
+    await expect(sticky).not.toHaveAttribute("data-visible", "true");
+    await expect(sticky).toHaveAttribute("inert", "");
   });
 });

@@ -78,10 +78,15 @@ if (MEDIA.provisional && !realPhoto) {
 
   // Estado abierto / cerrado
   const status = document.querySelector<HTMLElement>("[data-open-status]");
+  let liveReady = false;
   function updateStatus() {
     if (!status) return;
     const { open, label } = getOpenStatus();
     status.dataset.open = String(open);
+    if (!liveReady) {
+      status.setAttribute("aria-live", "polite");
+      liveReady = true;
+    }
     if (status.textContent !== label) status.textContent = label;
   }
   updateStatus();
