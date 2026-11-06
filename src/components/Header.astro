@@ -36,18 +36,31 @@ import BookButton from "./BookButton.astro";
   const toggle = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
   const menu = document.querySelector<HTMLElement>("[data-menu]");
 
+  function isOpen() {
+    return toggle?.getAttribute("aria-expanded") === "true";
+  }
+
+  function trapTargets(): HTMLElement[] {
+    if (!toggle || !menu || menu.hidden) return [];
+    return [toggle, ...menu.querySelectorAll<HTMLElement>("a")];
+  }
+
   function setOpen(open: boolean) {
     if (!toggle || !menu) return;
     toggle.setAttribute("aria-expanded", String(open));
     menu.hidden = !open;
+    if (open) {
+      menu.querySelector<HTMLElement>("a")?.focus();
+    } else {
+      toggle.focus();
+    }
   }
 
-  toggle?.addEventListener("click", () =>
-    setOpen(toggle.getAttribute("aria-expanded") !== "true"),
-  );
+  toggle?.addEventListener("click", () => setOpen(!isOpen()));
   menu?.addEventListener("click", (e) => {
     if ((e.target as HTMLElement).closest("a")) setOpen(false);
   });
+
   // Scroll-spy: marca con aria-current el enlace de la sección que cruza el 40% de la pantalla
   const links = [...document.querySelectorAll<HTMLAnchorElement>('nav a[href^="/#"]')];
   const sections = new Map<string, HTMLElement>();
@@ -82,9 +95,24 @@ import BookButton from "./BookButton.astro";
   }
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") {
+    if (!toggle || !menu) return;
+
+    if (e.key === "Escape" && isOpen()) {
       setOpen(false);
-      toggle.focus();
+      return;
+    }
+
+    if (e.key !== "Tab" || !isOpen()) return;
+    const items = trapTargets();
+    if (items.length === 0) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
     }
   });
 </script>

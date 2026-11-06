@@ -77,7 +77,9 @@ import ExtLink from "./ExtLink.astro";
     iframe.src = box.dataset.map;
     iframe.title = "Mapa con la ubicación de Ikaro Men's Barber en Las Rozas de Madrid";
     iframe.loading = "lazy";
+    iframe.tabIndex = 0;
     iframe.referrerPolicy = "no-referrer-when-downgrade";
     box.replaceChildren(iframe);
+    iframe.focus();
   });
 </script>
