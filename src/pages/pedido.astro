@@ -1,0 +1,75 @@
+---
+import Base from "../layouts/Base.astro";
+import { LEGAL } from "../lib/data";
+---
+
+<Base
+  title="Pedido | Ikaro Men's Barber"
+  description="Resumen del pedido de productos STMNT enviado a Madrid."
+>
+  <section class="section">
+    <div class="wrap prose">
+      <h1 class="display">Pedido</h1>
+      <p id="pedido-estado">Estamos comprobando el pago.</p>
+      <div id="pedido-detalle"></div>
+      <p><a href="/productos">Volver a los productos</a></p>
+      <noscript>
+        <p>
+          Si el pago ha terminado, el local ya puede verlo en Stripe. Si quieres el resumen por
+          correo, escribe a <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>.
+        </p>
+      </noscript>
+    </div>
+  </section>
+</Base>
+
+<script>
+  const estado = document.querySelector<HTMLElement>("#pedido-estado");
+  const detalle = document.querySelector<HTMLElement>("#pedido-detalle");
+  const id = new URLSearchParams(location.search).get("session_id");
+
+  function linea(texto: string) {
+    const p = document.createElement("p");
+    p.textContent = texto;
+    detalle?.append(p);
+  }
+
+  async function cargar() {
+    if (!estado || !detalle) return;
+    if (!id) {
+      estado.textContent = "No hay un pago que mostrar.";
+      return;
+    }
+    try {
+      const respuesta = await fetch(`/api/pedido?session_id=${encodeURIComponent(id)}`);
+      const datos = (await respuesta.json()) as {
+        pagado?: boolean;
+        total?: string;
+        lineas?: { nombre: string; cantidad: number; importe: string }[];
+        nombre?: string;
+        direccion?: string;
+        cp?: string;
+        ciudad?: string;
+        error?: string;
+      };
+      if (!respuesta.ok || datos.error) {
+        estado.textContent = datos.error ?? "No se ha podido leer el pedido.";
+        return;
+      }
+      if (!datos.pagado) {
+        estado.textContent = "El pago no se ha completado.";
+        return;
+      }
+      estado.textContent =
+        "Pago recibido. El local prepara el pedido y lo entrega al mensajero en el horario de apertura.";
+      for (const item of datos.lineas ?? []) linea(`${item.cantidad} × ${item.nombre}. ${item.importe}`);
+      if (datos.total) linea(`Total ${datos.total}`);
+      if (datos.nombre) linea(datos.nombre);
+      if (datos.direccion) linea(`${datos.direccion}, ${datos.cp ?? ""} ${datos.ciudad ?? "Madrid"}`.trim());
+    } catch {
+      estado.textContent = "No se ha podido leer el pedido.";
+    }
+  }
+
+  void cargar();
+</script>

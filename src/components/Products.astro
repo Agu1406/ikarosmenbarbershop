@@ -12,8 +12,7 @@ import pastaMate from "../assets/stmnt/pasta-mate.jpg";
 import pastaMateMovil from "../assets/stmnt/pasta-mate-movil.jpg";
 import coleccion from "../assets/stmnt/coleccion.jpg";
 import coleccionMovil from "../assets/stmnt/coleccion-movil.jpg";
-import { ADDRESS, CONTACT, PHOTO_ALT, STMNT } from "../lib/data";
-import ExtLink from "./ExtLink.astro";
+import { CONTACT, PHOTO_ALT, STMNT } from "../lib/data";
 import Icon from "./Icon.astro";
 import ProductShot from "./ProductShot.astro";
 
@@ -57,21 +56,26 @@ const lead: Record<string, { wide: ImageMetadata; tall: ImageMetadata; alt: stri
     caption: persona,
   },
 };
+interface Props {
+  heading?: "h1" | "h2";
+}
+const { heading = "h2" } = Astro.props;
+const Title = heading;
 ---
 
 <section class="section on-charcoal" id="productos" aria-labelledby="productos-title">
   <div class="wrap">
     <div class="section-head" data-reveal>
-      <p class="eyebrow">En el local</p>
-      <h2 id="productos-title" class="display">Productos {STMNT.brand}</h2>
+      <p class="eyebrow">En el local y en Madrid</p>
+      <Title id="productos-title" class="display">Productos {STMNT.brand}</Title>
       <p class="lead">
-        Champú, barba y peinado STMNT, a la venta en la barbería. Los precios llevan el IVA
-        incluido.
+        Champú, barba y peinado STMNT. Se compran en la barbería o se envían a la ciudad de Madrid.
+        Los precios llevan el IVA incluido.
       </p>
     </div>
     <div class="cta-row" data-reveal>
-      <ExtLink href={CONTACT.whatsapp} class="btn btn-primary">Consultar por WhatsApp</ExtLink>
-      <a href="/#contacto" class="btn">Dirección y horario</a>
+      <a href="/cesta" class="btn btn-primary">Ver la cesta</a>
+      <a href={CONTACT.phoneHref} class="btn">Llamar</a>
     </div>
 
     <div class="product-catalog">
@@ -105,6 +109,9 @@ const lead: Record<string, { wide: ImageMetadata; tall: ImageMetadata; alt: stri
                         <p class="menu-price">{item.price}</p>
                       </div>
                       <p class="menu-meta muted">{item.size}</p>
+                      <button type="button" class="btn anadir" data-anadir={item.id}>
+                        <span data-anadir-texto>Añadir</span><span class="sr-only"> {item.name}</span>
+                      </button>
                       <details class="product-more">
                         <summary>Uso y precauciones</summary>
                         <p>{item.summary}</p>
@@ -152,11 +159,5 @@ const lead: Record<string, { wide: ImageMetadata; tall: ImageMetadata; alt: stri
       caption={`${campana} Quienes salen en la foto no trabajan en Ikaro.`}
     />
 
-    <div class="menu-foot">
-      <p class="muted">
-        {ADDRESS.street}, {ADDRESS.city}. Si quieres uno, pregunta en el sillón o por WhatsApp.
-        Se paga en la barbería.
-      </p>
-    </div>
   </div>
 </section>

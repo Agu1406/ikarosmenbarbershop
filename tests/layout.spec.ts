@@ -46,10 +46,10 @@ test.describe("maquetación y preguntas frecuentes", () => {
     expect(text).not.toContain("\u2014");
   });
 
-  test("la carta STMNT está en la home y coincide un precio", async ({ page }) => {
-    await page.goto("/");
+  test("la carta STMNT está en /productos y coincide un precio", async ({ page }) => {
+    await page.goto("/productos");
     const section = page.locator("#productos");
-    await expect(section.getByRole("heading", { level: 2 })).toContainText("STMNT");
+    await expect(section.getByRole("heading", { level: 1 })).toContainText("STMNT");
     const row = section.locator(".menu-item", { hasText: "Pasta mate" }).first();
     await expect(row.locator(".menu-price")).toHaveText("24,20 €");
     await expect(section.locator("img").first()).toHaveAttribute("alt", /rutina de afeitado/);
@@ -58,7 +58,34 @@ test.describe("maquetación y preguntas frecuentes", () => {
     for (const alt of alts) {
       expect(alt).not.toMatch(/shop now|make your statement|pioneers|redefined|discover the range/i);
     }
-    await expect(page.locator('a[href="/#productos"]').first()).toBeAttached();
+    await expect(page.getByRole("button", { name: /^Añadir/ }).first()).toBeVisible();
+    await expect(page.locator('input[name^="qty_"]')).toHaveCount(0);
+  });
+
+  test("la cesta muestra el envío de Madrid antes de pagar", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("#cesta")).toHaveCount(0);
+    await expect(page.getByRole("link", { name: "Ver productos" })).toBeVisible();
+    await page.goto("/productos");
+    expect(await page.evaluate(() => sessionStorage.length)).toBe(0);
+    await page.getByRole("button", { name: /^Añadir/ }).first().click();
+    await expect(page.locator("[data-cesta-cuenta]").first()).toHaveText("1");
+    await expect(page.locator("a.cesta-link")).toHaveAttribute("aria-label", "Cesta, 1 productos");
+    await page.goto("/cesta");
+    const form = page.locator("#cesta");
+    await expect(form).toHaveAttribute("action", "/api/checkout");
+    await expect(form).toContainText("5,99 €");
+    await expect(form).toContainText("16,90 €");
+    await expect(form.getByRole("button", { name: "Pagar con Bizum o tarjeta" })).toBeVisible();
+    await expect(page.locator('script[src*="stripe"]')).toHaveCount(0);
+    await page.goto("/pago-cancelado");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Pago no completado");
+    await page.goto("/cesta");
+    await expect(page.locator("#cesta")).toBeVisible();
+    await page.goto("/devoluciones");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("Devoluciones");
+    await expect(page.locator("body")).toContainText("14 días");
+    await expect(page.locator("body")).toContainText("precinto");
   });
 
   test("el PIM de STMNT no se sirve en público", async ({ request }) => {

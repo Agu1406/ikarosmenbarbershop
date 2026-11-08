@@ -1,0 +1,18 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../lib/data";
+---
+
+<Base
+  title={`Pago no completado | ${SITE.name}`}
+  description="El pago no se ha completado. La cesta sigue disponible."
+>
+  <section class="section">
+    <div class="wrap prose">
+      <h1 class="display">Pago no completado</h1>
+      <p>No se ha cobrado nada. Los productos siguen en la cesta.</p>
+      <p><a class="btn btn-primary" href="/cesta">Volver a la cesta</a></p>
+      <p><a href="/productos">Seguir viendo productos</a></p>
+    </div>
+  </section>
+</Base>

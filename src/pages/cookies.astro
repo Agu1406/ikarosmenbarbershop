@@ -9,8 +9,9 @@ import Legal from "../layouts/Legal.astro";
 >
   <h2>1. Qué usamos</h2>
   <p>
-    Esta web no instala cookies propias ni de analítica, publicidad o redes al abrirla. Tampoco
-    guarda datos en el navegador (ni cookies ni <code>localStorage</code>). Por eso no hay banner.
+    Esta web no instala cookies propias ni de analítica, publicidad o redes al abrirla. La cesta
+    usa <code>sessionStorage</code> de esta pestaña para el producto y la cantidad, y solo después
+    de pulsar Añadir. No es una cookie ni usa <code>localStorage</code>. Por eso no hay banner.
     El artículo 22.2 de la LSSI-CE pide consentimiento solo para las cookies que no hacen falta
     para que la página funcione.
   </p>
@@ -75,7 +76,13 @@ import Legal from "../layouts/Legal.astro";
   </div>
   <p>
     «Recorrer el local» abre el escaneo en Flow4D en otra pestaña.
-    Si no pulsas Reservar, Booksy no se carga.
+    Si no pulsas Reservar, Booksy no se carga. Al pulsar «Pagar» sales de esta web y entras en la
+    página de Stripe (checkout.stripe.com). Allí pueden instalarse sus cookies para cobrar con
+    tarjeta o Bizum. En nuestra página no se carga el script de Stripe. Si no pagas, Stripe no
+    interviene.
+    <a href="https://stripe.com/es/privacy" target="_blank" rel="noopener noreferrer"
+      >Privacidad de Stripe<span class="sr-only"> (se abre en nueva pestaña)</span></a
+    >.
   </p>
 
   <h2>3. Cómo controlarlas</h2>

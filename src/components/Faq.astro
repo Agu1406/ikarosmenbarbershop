@@ -78,16 +78,17 @@ const hasCards = AMENITIES.includes("Tarjetas de crédito");
         hasCards && (
           <details>
             <summary>¿Puedo pagar con tarjeta?</summary>
-            <p>Sí. Se puede pagar con tarjeta.</p>
+            <p>Sí. En la barbería se puede pagar con tarjeta. El envío a Madrid, en la web, se paga con tarjeta o Bizum.</p>
           </details>
         )
       }
       <details>
         <summary>¿Vendéis productos?</summary>
         <p>
-          Sí. En el local hay afeitado, champú, barba y peinado {STMNT.brand}. Precios y modo de
-          uso están en <a href="/#productos">Productos {STMNT.brand}</a>. Si quieres que te
-          apartemos uno, llama al <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>.
+          Sí. En el local hay afeitado, champú, barba y peinado {STMNT.brand}. También se envían a
+          la ciudad de Madrid desde <a href="/productos">Productos {STMNT.brand}</a>. El precio y
+          el envío se ven antes de pagar. Si prefieres que te lo apartemos,
+          llama al <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>.
         </p>
       </details>
     </div>

@@ -1,0 +1,70 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { ADDRESS, CONTACT, LEGAL, SITE } from "../lib/data";
+import { euro, ENVIO_MADRID_CENTIMOS } from "../lib/shop";
+---
+
+<Legal
+  title="Devoluciones y desistimiento"
+  description="Cómo devolver un producto STMNT comprado en la web de Ikaro Men's Barber y cuándo cabe el desistimiento."
+  updated="noviembre de 2026"
+>
+  <h2>1. Quién vende</h2>
+  <p>
+    Los productos STMNT que se pagan en esta web los vende {LEGAL.titular}, NIF {LEGAL.nif}, en {ADDRESS.full}. Teléfono <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>. Correo <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>. El nombre comercial es {SITE.name}.
+  </p>
+
+  <h2>2. Precio, IVA y envío</h2>
+  <p>
+    Los precios del catálogo son en euros e incluyen el IVA. Son los mismos que en la barbería. El
+    envío a la ciudad de Madrid es una tarifa única de {euro(ENVIO_MADRID_CENTIMOS)} y se muestra
+    antes de pagar. Fuera de la ciudad de Madrid no se cobra, porque de momento no hay reparto.
+  </p>
+
+  <h2>3. Entrega</h2>
+  <p>
+    El pedido se prepara en la barbería. Un mensajero lo recoge allí y lo lleva a la dirección de
+    Madrid que hayas indicado. La recogida se hace en el horario de apertura. Si pagas con el local
+    cerrado, el mensajero se pide en la siguiente apertura. No hay entrega de noche.
+  </p>
+  <p>
+    Si no hay stock, no se envía el producto y se devuelve el dinero cobrado, envío incluido, por
+    el mismo medio de pago.
+  </p>
+
+  <h2>4. Desistimiento de 14 días</h2>
+  <p>
+    Si compras a distancia, puedes desistir en 14 días naturales desde que recibes el producto, sin
+    dar una razón. El plazo cuenta desde la entrega. Para ejercerlo, escribe a <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a> antes de que acabe. Puedes usar este texto:
+  </p>
+  <p>
+    A la atención de {LEGAL.titular}, {ADDRESS.full}, {LEGAL.email}. Comunico que desisto del
+    contrato de venta de este pedido. Número o fecha del pedido. Nombre. Dirección. Fecha de hoy.
+  </p>
+  <p>
+    Te devolvemos el precio del producto y el envío estándar que pagaste, por el mismo medio, en
+    un máximo de 14 días desde tu aviso. Podemos esperar a recibir el producto o una prueba de que
+    lo has enviado. El coste de mandarlo de vuelta lo pagas tú.
+  </p>
+
+  <h2>5. Cosméticos precintados</h2>
+  <p>
+    No cabe el desistimiento si el producto iba precintado por higiene y has abierto el precinto
+    después de recibirlo. Es la excepción del artículo 103.c del texto refundido de la Ley General
+    para la Defensa de los Consumidores y Usuarios. Esta condición se muestra en la cesta, antes
+    de pagar.
+  </p>
+
+  <h2>6. Producto defectuoso</h2>
+  <p>
+    Si el producto llega roto o defectuoso, se aplica la garantía legal. Escríbenos al mismo
+    correo. En ese caso el coste de la devolución lo asumimos nosotros y te devolvemos el dinero,
+    o te enviamos otro igual si queda stock.
+  </p>
+
+  <h2>7. Compras en el local</h2>
+  <p>
+    Lo que se paga en la barbería, sin envío, no es una venta a distancia. El desistimiento de 14
+    días de esta página no se aplica a esa compra. Si hay un defecto, la garantía legal sí.
+  </p>
+</Legal>

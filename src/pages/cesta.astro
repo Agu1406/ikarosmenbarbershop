@@ -1,0 +1,295 @@
+---
+import { getImage } from "astro:assets";
+import Base from "../layouts/Base.astro";
+import { ADDRESS, CONTACT, LEGAL, SITE } from "../lib/data";
+import { CANTIDAD_MAX, ENVIO_MADRID_CENTIMOS, euro, eurosACentimos, productosCatalogo } from "../lib/shop";
+
+const envases = import.meta.glob<{ default: ImageMetadata }>("../assets/stmnt/envases/*.jpg", {
+  eager: true,
+});
+const envasePorId = new Map(
+  Object.entries(envases).flatMap(([path, file]) => {
+    const id = path.match(/(\d{13})/)?.[1];
+    return id ? [[id, file.default] as const] : [];
+  }),
+);
+// El PIM del gel trae un GTIN y el packshot otro. Es el mismo bote de 150 ml.
+const envaseAlias: Record<string, string> = { "4067971180687": "4067971180700" };
+
+const catalogo = await Promise.all(
+  productosCatalogo().map(async (item) => {
+    const foto = envasePorId.get(envaseAlias[item.id] ?? item.id);
+    const imagen = foto
+      ? await getImage({ src: foto, width: 160, height: 160, format: "jpg", fit: "contain" })
+      : undefined;
+    return {
+      id: item.id,
+      name: item.name,
+      size: item.size,
+      cents: eurosACentimos(item.price),
+      img: imagen?.src ?? "",
+    };
+  }),
+);
+---
+
+<Base
+  title={`Cesta | ${SITE.name}`}
+  description="Confirma los productos STMNT, el envío a Madrid y el pago con Bizum o tarjeta."
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h1 class="display">Cesta</h1>
+        <p class="lead">Revisa los productos y los datos de entrega antes de pagar.</p>
+      </div>
+
+      <p id="cesta-vacia" hidden>
+        La cesta está vacía. <a href="/productos">Ver productos</a>
+      </p>
+
+      <form id="cesta" method="post" action="/api/checkout" hidden>
+        <ul class="cesta-lineas" id="cesta-lineas"></ul>
+        <fieldset class="checkout">
+          <legend>Envío y pago</legend>
+          <p>
+            El envío en la ciudad de Madrid cuesta {euro(ENVIO_MADRID_CENTIMOS)}. Se ve aquí, antes
+            de pagar. Fuera de Madrid, de momento no se reparte. El mensajero lo recoge en la
+            barbería en el horario de apertura. También puedes comprarlos en {ADDRESS.street}.
+          </p>
+          <p id="cesta-total"></p>
+          <div class="checkout-grid">
+            <label>
+              Nombre
+              <input name="nombre" type="text" autocomplete="name" required maxlength="80" />
+            </label>
+            <label>
+              Correo
+              <input name="email" type="email" autocomplete="email" required maxlength="80" />
+            </label>
+            <label>
+              Teléfono
+              <input name="telefono" type="tel" autocomplete="tel" required inputmode="tel" />
+            </label>
+            <label>
+              Calle y número
+              <input name="direccion" type="text" autocomplete="street-address" required maxlength="120" />
+            </label>
+            <label>
+              Código postal
+              <input
+                name="cp"
+                type="text"
+                inputmode="numeric"
+                autocomplete="postal-code"
+                required
+                maxlength="5"
+                pattern="[0-9]{5}"
+              />
+            </label>
+            <label>
+              Ciudad
+              <input name="ciudad" type="text" value="Madrid" readonly />
+            </label>
+          </div>
+          <p>
+            Tienes 14 días para desistir. Si abres el precinto de un cosmético, no se puede devolver
+            por higiene. Si no hay stock, te devolvemos el dinero. El detalle está en <a href="/devoluciones">Devoluciones</a>.
+          </p>
+          <label class="check">
+            <input type="checkbox" name="acepto" value="si" required />
+            <span>Acepto las condiciones de compra y desistimiento.</span>
+          </label>
+          <p class="form-error" id="cesta-error" role="alert" hidden></p>
+          <button class="btn btn-primary" type="submit">Pagar con Bizum o tarjeta</button>
+        </fieldset>
+      </form>
+
+      <noscript>
+        <p>
+          Para ver la cesta hace falta JavaScript. También puedes
+          <a href={CONTACT.phoneHref}>llamar al {CONTACT.phoneDisplay}</a>
+          o a <a href={`mailto:${LEGAL.email}`}>{LEGAL.email}</a>.
+        </p>
+      </noscript>
+    </div>
+  </section>
+  <script type="application/json" id="catalogo-cesta" is:inline set:html={JSON.stringify({ envio: ENVIO_MADRID_CENTIMOS, max: CANTIDAD_MAX, items: catalogo })}></script>
+</Base>
+
+<script>
+  import { guardarCesta, leerCesta } from "../scripts/cesta";
+
+  const nodo = document.querySelector<HTMLScriptElement>("#catalogo-cesta");
+  const form = document.querySelector<HTMLFormElement>("#cesta");
+  const lista = document.querySelector<HTMLElement>("#cesta-lineas");
+  const vacia = document.querySelector<HTMLElement>("#cesta-vacia");
+  const total = document.querySelector<HTMLElement>("#cesta-total");
+  const error = document.querySelector<HTMLElement>("#cesta-error");
+
+  interface Item {
+    id: string;
+    name: string;
+    size: string;
+    cents: number;
+    img?: string;
+  }
+  const datos = JSON.parse(nodo?.textContent || "{}") as { envio?: number; max?: number; items?: Item[] };
+  const envio = datos.envio ?? 0;
+  const max = datos.max ?? 10;
+  const catalogo = new Map((datos.items ?? []).map((item) => [item.id, item]));
+
+  function euros(centimos: number): string {
+    const enteros = Math.floor(centimos / 100);
+    const cents = Math.abs(centimos % 100);
+    return `${enteros},${String(cents).padStart(2, "0")} €`;
+  }
+
+  function importes() {
+    let productos = 0;
+    for (const [id, qty] of Object.entries(leerCesta())) {
+      const item = catalogo.get(id);
+      if (!item) continue;
+      productos += item.cents * qty;
+      const linea = lista?.querySelector<HTMLElement>(`[data-importe="${id}"]`);
+      if (linea) linea.textContent = euros(item.cents * qty);
+    }
+    if (total) total.textContent = `Total ${euros(productos + envio)}`;
+  }
+
+  function pintar() {
+    if (!form || !lista || !vacia) return;
+    const lineas = leerCesta();
+    const validas = Object.entries(lineas).filter(([id]) => catalogo.has(id));
+    if (validas.length !== Object.keys(lineas).length) {
+      guardarCesta(Object.fromEntries(validas));
+    }
+    lista.replaceChildren();
+    for (const [id, qty] of validas) {
+      const item = catalogo.get(id);
+      if (!item) continue;
+      const li = document.createElement("li");
+      li.className = "menu-item";
+
+      const producto = document.createElement("div");
+      producto.className = "menu-product";
+
+      if (item.img) {
+        const foto = document.createElement("img");
+        foto.className = "packshot";
+        foto.src = item.img;
+        foto.alt = `Envase de ${item.name} STMNT, ${item.size}`;
+        foto.width = 76;
+        foto.height = 76;
+        producto.append(foto);
+      }
+
+      const cuerpo = document.createElement("div");
+      const fila = document.createElement("div");
+      fila.className = "menu-row";
+
+      const nombre = document.createElement("p");
+      nombre.className = "menu-name";
+      nombre.textContent = item.name;
+
+      const puntos = document.createElement("span");
+      puntos.className = "menu-leader";
+      puntos.setAttribute("aria-hidden", "true");
+
+      const importe = document.createElement("p");
+      importe.className = "menu-price";
+      importe.dataset.importe = id;
+
+      fila.append(nombre, puntos, importe);
+
+      const meta = document.createElement("p");
+      meta.className = "menu-meta muted";
+      meta.textContent = `${item.size}. ${euros(item.cents)} cada uno.`;
+
+      const acciones = document.createElement("div");
+      acciones.className = "cesta-acciones";
+
+      const etiqueta = document.createElement("label");
+      etiqueta.className = "qty";
+      const texto = document.createElement("span");
+      texto.textContent = "Cantidad";
+      const oculto = document.createElement("span");
+      oculto.className = "sr-only";
+      oculto.textContent = ` de ${item.name}`;
+      texto.append(oculto);
+      const input = document.createElement("input");
+      input.type = "number";
+      input.name = `qty_${id}`;
+      input.min = "1";
+      input.max = String(max);
+      input.value = String(qty);
+      input.inputMode = "numeric";
+      input.addEventListener("change", () => {
+        const n = Number(input.value);
+        const todas = leerCesta();
+        if (!Number.isInteger(n) || n < 1) delete todas[id];
+        else todas[id] = Math.min(max, n);
+        guardarCesta(todas);
+        if (!todas[id]) pintar();
+        else importes();
+      });
+      etiqueta.append(texto, input);
+
+      const quitar = document.createElement("button");
+      quitar.type = "button";
+      quitar.className = "btn";
+      quitar.textContent = "Quitar";
+      const de = document.createElement("span");
+      de.className = "sr-only";
+      de.textContent = ` ${item.name}`;
+      quitar.append(de);
+      quitar.addEventListener("click", () => {
+        const todas = leerCesta();
+        delete todas[id];
+        guardarCesta(todas);
+        pintar();
+      });
+
+      acciones.append(etiqueta, quitar);
+      cuerpo.append(fila, meta, acciones);
+      producto.append(cuerpo);
+      li.append(producto);
+      lista.append(li);
+    }
+    const hay = validas.length > 0;
+    form.hidden = !hay;
+    vacia.hidden = hay;
+    importes();
+  }
+
+  pintar();
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (!form || !error) return;
+    const boton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (form.dataset.enviando === "1") return;
+    form.dataset.enviando = "1";
+    if (boton) boton.disabled = true;
+    error.hidden = true;
+    try {
+      const respuesta = await fetch(form.action, {
+        method: "POST",
+        headers: { accept: "application/json", "idempotency-key": crypto.randomUUID() },
+        body: new FormData(form),
+      });
+      const cuerpo = (await respuesta.json()) as { url?: string; error?: string };
+      if (cuerpo.url) {
+        window.location.assign(cuerpo.url);
+        return;
+      }
+      error.textContent = cuerpo.error ?? "No se ha podido abrir el pago.";
+      error.hidden = false;
+    } catch {
+      error.textContent = "No se ha podido abrir el pago. Puedes llamar al 915 15 28 44.";
+      error.hidden = false;
+    }
+    form.dataset.enviando = "";
+    if (boton) boton.disabled = false;
+  });
+</script>

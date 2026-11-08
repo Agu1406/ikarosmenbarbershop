@@ -28,8 +28,12 @@ import { ADDRESS, LEGAL, RETENTION } from "../lib/data";
 
   <h2>2. Qué datos recogemos en esta web</h2>
   <p>
-    Ninguno de forma directa. Esta web no tiene formularios, registro de usuarios, comentarios ni
-    boletín. No usamos cookies de analítica ni de publicidad, y no hacemos perfiles.
+    Si compras productos, el formulario de envío recoge el nombre, el correo, el teléfono, la calle
+    y el código postal, además de los productos y las cantidades. Hasta pulsar pagar, el producto y
+    la cantidad se quedan en esta pestaña y no se envían. Hacen falta para cobrar el pedido y
+    entregarlo. La base jurídica es el contrato de compra (art. 6.1.b RGPD). No hay registro de
+    usuarios, comentarios ni boletín. No usamos cookies de analítica ni de publicidad, y no hacemos
+    perfiles.
   </p>
   <p>
     Como cualquier servidor web, el servicio de alojamiento registra de forma técnica y temporal
@@ -42,8 +46,9 @@ import { ADDRESS, LEGAL, RETENTION } from "../lib/data";
   <p>
     Si llamas por teléfono o reservas en Booksy, los datos que facilites (nombre, teléfono,
     servicio y hora) se usan solo para atender tu consulta o gestionar tu cita. La base jurídica
-    es la ejecución de la cita que solicitas o tus medidas precontractuales (art. 6.1.b RGPD). No
-    los cedemos a terceros salvo obligación legal.
+    es la ejecución de la cita que solicitas o tus medidas precontractuales (art. 6.1.b RGPD). Un
+    pedido pagado en la web se avisa por correo al local, con los datos de entrega. No los cedemos
+    a terceros salvo obligación legal o el encargo de cobro y de aviso descrito más abajo.
   </p>
 
   <h2>4. Baja, conservación y supresión</h2>
@@ -97,6 +102,20 @@ import { ADDRESS, LEGAL, RETENTION } from "../lib/data";
       un vídeo, solo se carga cuando pulsas reproducir.
     </li>
     <li>
+      <strong>Stripe</strong> (Stripe Payments Europe, Limited, Irlanda): encargado del cobro.
+      Solo recibe los datos del pedido cuando pulsas pagar y sales a su página. Cobra con tarjeta
+      o Bizum y puede enviar el recibo al correo que hayas escrito. Si trata datos fuera del
+      Espacio Económico Europeo, lo hace con las garantías que publica.
+      <a href="https://stripe.com/es/privacy" target="_blank" rel="noopener noreferrer"
+        >Privacidad de Stripe<span class="sr-only"> (se abre en nueva pestaña)</span></a
+      >.
+    </li>
+    <li>
+      <strong>Resend</strong> (Resend, Inc.): encargado del correo que avisa al local de un pedido
+      pagado. Trata el nombre, el teléfono, el correo y la dirección solo para ese aviso. Está en
+      Estados Unidos. La transferencia se ampara en las cláusulas contractuales tipo.
+    </li>
+    <li>
       <strong>Cloudflare</strong> (alojamiento y red de distribución): procesa las conexiones
       técnicas descritas en el apartado 2.
     </li>
@@ -129,7 +148,6 @@ import { ADDRESS, LEGAL, RETENTION } from "../lib/data";
 
   <h2>8. Cambios</h2>
   <p>
-    Si en el futuro añadimos algo que trate datos (por ejemplo, un formulario o analítica),
-    actualizaremos esta política antes de activarlo.
+    Si más adelante tratamos datos de otra forma, actualizaremos esta política antes de hacerlo.
   </p>
 </Legal>

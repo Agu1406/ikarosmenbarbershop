@@ -10,9 +10,7 @@ import Gallery from "../components/Gallery.astro";
 import Jose from "../components/Jose.astro";
 import Reviews from "../components/Reviews.astro";
 import Faq from "../components/Faq.astro";
-import Products from "../components/Products.astro";
 import Contact from "../components/Contact.astro";
-import StickyCta from "../components/StickyCta.astro";
 import { getPhoto } from "../lib/photos";
 
 // Imagen para compartir: la foto del hero si existe (1200x630).
@@ -28,12 +26,21 @@ const ogImage = og ? new URL(og.src, Astro.site).href : undefined;
   <TrustStrip />
   <Services />
   <Tour />
-  <Products />
+  <section class="section on-charcoal" id="productos" aria-labelledby="productos-title">
+    <div class="wrap section-head">
+      <p class="eyebrow">STMNT</p>
+      <h2 id="productos-title" class="display">Productos para casa</h2>
+      <p class="lead">
+        Champú, barba y peinado STMNT. Se compran en la barbería o se envían a la ciudad de Madrid.
+        Los precios llevan el IVA incluido.
+      </p>
+      <p><a class="btn btn-primary" href="/productos">Ver productos</a></p>
+    </div>
+  </section>
   <About />
   <Gallery />
   <Jose />
   <Reviews />
   <Faq />
   <Contact />
-  <StickyCta slot="after" />
 </Base>

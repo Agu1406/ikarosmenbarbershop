@@ -1,8 +1,14 @@
 {
   "name": "ikarosmenbarbershop",
   "compatibility_date": "2026-10-29",
+  "main": "src/worker/index.ts",
+  // Secretos, fuera de git: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, RESEND_API_KEY.
+  // El aviso al local usa Resend y un dominio verificado. PEDIDOS_FROM lo cambia si hace falta.
+  // Webhook de Stripe: https://ikaromenbarbershop.es/api/stripe
   "assets": {
     "directory": "./dist",
-    "not_found_handling": "404-page"
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/api/*"]
   }
 }

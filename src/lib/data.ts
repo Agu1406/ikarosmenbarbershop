@@ -286,9 +286,9 @@ export const legalComplete = Boolean(legal.titular && legal.nif && legal.email);
  */
 export const RETENTION = [
   {
-    data: "Citas, consultas y datos de contacto",
+    data: "Citas, consultas, pedidos y datos de contacto",
     years: 5,
-    after: "el fin de la cita o de la última comunicación",
+    after: "el fin de la cita, del pedido o de la última comunicación",
     basis: "posible reclamación contractual (artículo 1964 del Código Civil)",
   },
   {
@@ -311,14 +311,14 @@ export const RETENTION = [
   },
 ] as const;
 
-/** Catálogo STMNT en el local. Precios: PVPR del Excel tal cual (scripts/import-stmnt.mjs). No es tienda online. */
+/** Catálogo STMNT. Precios: PVPR del Excel tal cual (scripts/import-stmnt.mjs). El cobro lee estos importes en el servidor. */
 export const STMNT = stmntCatalog;
 export const PRODUCT_GROUPS = STMNT.groups;
 
 export const NAV = [
   { href: "#servicios", label: "Servicios" },
   { href: "#recorrido", label: "Recorrido 3D" },
-  { href: "#productos", label: "Productos" },
+  { href: "productos", label: "Productos" },
   { href: "#sobre-nosotros", label: "La barbería" },
   { href: "#trayectoria", label: "José" },
   { href: "#opiniones", label: "Opiniones" },

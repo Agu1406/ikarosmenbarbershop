@@ -15,7 +15,7 @@ const year = new Date().getFullYear();
           {ADDRESS.street}<br />
           {ADDRESS.postalCode} {ADDRESS.city}
         </address>
-        <p><a href="/#productos">Productos STMNT</a></p>
+        <p><a href="/productos">Productos STMNT</a></p>
       </div>
 
       <div>
@@ -32,13 +32,13 @@ const year = new Date().getFullYear();
           <li><a href="/aviso-legal">Aviso legal</a></li>
           <li><a href="/privacidad">Política de privacidad</a></li>
           <li><a href="/cookies">Política de cookies</a></li>
+          <li><a href="/devoluciones">Devoluciones</a></li>
         </ul>
       </div>
     </div>
 
     <p class="footer-legal muted">
-      © {year}
-      {LEGAL.titular ?? SITE.name}{LEGAL.nif ? `, NIF ${LEGAL.nif}` : ""}. Todos los derechos reservados.
+      © {year} {LEGAL.titular ?? SITE.name}{LEGAL.nif ? `, NIF ${LEGAL.nif}` : ""}. Todos los derechos reservados.
     </p>
   </div>
 </footer>

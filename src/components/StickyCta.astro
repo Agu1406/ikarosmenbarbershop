@@ -3,21 +3,7 @@ import { CONTACT } from "../lib/data";
 import BookButton from "./BookButton.astro";
 ---
 
-<div class="sticky-cta" data-sticky-cta>
+<div class="sticky-cta" data-sticky-cta data-visible="true">
   <BookButton class="btn btn-primary">Reservar</BookButton>
   <a href={CONTACT.phoneHref} class="btn">Llamar</a>
 </div>
-
-<script>
-  const bar = document.querySelector<HTMLElement>("[data-sticky-cta]");
-  const hero = document.querySelector("#inicio");
-
-  if (bar && hero) {
-    document.body.classList.add("has-sticky");
-    // Visible solo cuando el hero ya no está en pantalla
-    const observer = new IntersectionObserver(([entry]) => {
-      bar.dataset.visible = String(!entry.isIntersecting);
-    });
-    observer.observe(hero);
-  }
-</script>

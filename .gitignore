@@ -6,3 +6,8 @@ dist/
 playwright-report/
 test-results/
 .DS_Store
+
+# Datos personales / KYC (nunca en un repo público)
+datos-jose.md
+datos-jose*.md
+**/datos-jose.md

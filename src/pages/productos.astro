@@ -1,0 +1,12 @@
+---
+import Base from "../layouts/Base.astro";
+import Products from "../components/Products.astro";
+import { SITE } from "../lib/data";
+---
+
+<Base
+  title={`Productos STMNT | ${SITE.name}`}
+  description="Champú, barba y peinado STMNT. Se compran en la barbería o se envían a la ciudad de Madrid."
+>
+  <Products heading="h1" />
+</Base>

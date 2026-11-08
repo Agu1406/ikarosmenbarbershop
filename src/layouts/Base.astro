@@ -5,6 +5,7 @@ import cormorantLatin from "@fontsource-variable/cormorant-garamond/files/cormor
 import { ADDRESS, CONTACT, HOURS, SITE } from "../lib/data";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import StickyCta from "../components/StickyCta.astro";
 
 interface Props {
   title?: string;
@@ -97,10 +98,12 @@ const structuredData = {
       <slot />
     </main>
     <Footer />
+    <StickyCta />
     <slot name="after" />
     <script>
       import "../scripts/reveal";
       import "../scripts/booksy";
+      import "../scripts/cesta";
     </script>
   </body>
 </html>
