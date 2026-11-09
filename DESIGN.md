@@ -38,6 +38,15 @@ Ritmo de fondos: hero azul, carta en crema, barbería azul, José y opiniones en
 - Espaciado: solo la escala `--s1` a `--s8`.
 - Radio de borde: 2 px.
 
+## CTAs móviles (estándar)
+
+Patrón compartido entre webs (copiar-pegar esta sección). Aquí el primario es **Reservar** (Booksy) y el secundario **Llamar**.
+
+1. Cabecera móvil: CTA primario + botón texto «Menú» (borde, 44 px; no icono ☰). El drawer solo lista enlaces; no duplica los CTAs.
+2. Barra inferior 50/50 (`.sticky-cta`): primario + secundario. Siempre visible en móvil desde el primer pintado. Oculta en escritorio.
+3. Si hay banner de cookies: ambos viven en un `.bottom-dock` en columna. La barra CTA queda **por encima del banner en el eje vertical** (no solapada por z-index). Al aceptar o rechazar cookies, el banner sale del flujo (`display: none`) y el CTA baja al borde inferior. Altura del dock → `--bottom-dock-h` para el `padding-bottom` del body.
+4. Sin FABs circulares. Reservar / `tel:` usable sin depender de un FAB.
+
 ## Referencias (Design DNA)
 
 El perfil medido de Premium Barbershop, Heritage, Barber & Co y Louivver está en `design/references.dna.json`. Se usó para estructura, escala y composición. No se adoptan sus colores (tres de cuatro son negro con dorado) ni su dimensión de efectos. Para repetir la captura: `node scripts/dna-capture.mjs <carpeta> <urls>`. Las capturas de terceros no se guardan en el repo.
