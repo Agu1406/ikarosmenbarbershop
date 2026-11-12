@@ -2,7 +2,7 @@
  * Única fuente de verdad del negocio. Ver CONTEXT.md para el origen de cada dato.
  * Cualquier cambio de precios, horario o contacto se hace solo aquí.
  */
-import legal from "../data/legal.json";
+import { legal } from "./legal";
 import stmntCatalog from "../data/stmnt.json";
 
 export const SITE = {

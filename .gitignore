@@ -11,3 +11,7 @@ test-results/
 datos-jose.md
 datos-jose*.md
 **/datos-jose.md
+
+# datos legales del titular y contexto de negocio con datos personales (nunca en un repo público)
+src/data/legal.local.json
+CONTEXT.md

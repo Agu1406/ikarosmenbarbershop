@@ -8,7 +8,7 @@ alwaysApply: true
 Antes de inventar un dato, un precio, un horario o una afirmación, leer `CONTEXT.md`. Las notas de diseño, legal y arquitectura están en `IGNORAR.md`. Las reglas de Cursor las aplican; si hay conflicto, gana la ley española, luego `IGNORAR.md` y `DESIGN.md`, luego el código.
 
 - Datos de negocio: solo `src/lib/data.ts` (origen: `CONTEXT.md`).
-- Titular, NIF, email: `src/data/legal.json`.
+- Titular, NIF, email: `LEGAL_JSON` (hosting) o `src/data/legal.local.json` (local, fuera de git).
 - Visual: `DESIGN.md` y `design/references.dna.json`.
 - Marca: isotipo SVG en `public/favicon.svg`; proceso común, colores de **este** `DESIGN.md` (no copiar otra web).
 - CTAs móviles: bloque «CTAs móviles (estándar)» en `DESIGN.md` (Reservar + Menú en cabecera; barra Reservar/Llamar; si hay cookies, dock con CTA encima del banner).
