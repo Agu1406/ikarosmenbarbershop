@@ -169,6 +169,12 @@ Por favor, evita todos estos patrones en el diseño. Si ya están, quítalos.
 
 ---
 
+## Marca y favicon (proceso común, estilo por web)
+
+El detalle vive en `DESIGN.md` («Marca y favicon»). Mismo **proceso** entre webs (SVG 64×64 → `public/favicon.svg` → layout + cabecera). Cada web usa **su** paleta y monograma desde **su** `DESIGN.md`; no reutilizar colores ni la «I»/«C» de otro proyecto. Sin cohete de Astro, sin Lucide/emoji como logo, sin raster genérico salvo marca oficial del cliente.
+
+---
+
 ## Webs de las que te pido que te inspires
 
 Las webs buenas no esconden nada. Si encajan con esta app, por favor toma inspiración de ellas (estructura, ritmo, movimiento), sin copiar código, fotos ni marca:

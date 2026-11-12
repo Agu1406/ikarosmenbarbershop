@@ -10,6 +10,7 @@ Antes de inventar un dato, un precio, un horario o una afirmación, leer `CONTEX
 - Datos de negocio: solo `src/lib/data.ts` (origen: `CONTEXT.md`).
 - Titular, NIF, email: `src/data/legal.json`.
 - Visual: `DESIGN.md` y `design/references.dna.json`.
+- Marca: isotipo SVG en `public/favicon.svg`; proceso común, colores de **este** `DESIGN.md` (no copiar otra web).
 - CTAs móviles: bloque «CTAs móviles (estándar)» en `DESIGN.md` (Reservar + Menú en cabecera; barra Reservar/Llamar; si hay cookies, dock con CTA encima del banner).
 - No reseñas, cifras ni fotos de IA presentadas como el local.
 - Medios provisionales: `MEDIA.provisional` hasta confirmar local y permisos de imagen.

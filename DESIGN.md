@@ -76,6 +76,16 @@ Los vídeos de `public/media/` y su póster (`src/assets/media/hero-poster.webp`
 - Skip link, `lang="es"`, un solo `h1`, enlaces externos con aviso "se abre en nueva pestaña".
 - Todo contenido tiene alternativa por teclado.
 
+## Marca y favicon (proceso estándar, estilo de esta web)
+
+El **proceso** (SVG 64×64 → `public/favicon.svg` → layout/cabecera) es el mismo entre webs. Los **colores, la letra y la forma** salen solo de **este** `DESIGN.md`; no copiar la paleta ni el monograma de otra web.
+
+1. Tomar 2 colores de **esta** paleta (fondo de marca + acento). Aquí: `--ink` `#182c48` + `--brass` `#c5a059`.
+2. Dibujar monograma o marca geométrica en SVG 64×64 (una letra o símbolo; sin foto, sin IA como logo). Aquí: «I» en `public/favicon.svg`.
+3. Enlazar el SVG en el layout (`rel="icon" type="image/svg+xml"`).
+4. Cabecera: tipografía de marca ± el mismo SVG. No raster de terceros salvo marca oficial del cliente.
+5. No Lucide ni emoji como logo.
+
 ## Fotos
 
 Dejar las fotos reales en `src/assets/photos/` con estos nombres (jpg, png o webp). Se optimizan solas y aparecen sin tocar código. Revisar el texto alternativo en `PHOTO_ALT` de `src/lib/data.ts`.
