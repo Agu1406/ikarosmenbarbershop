@@ -1,6 +1,6 @@
 // Evita publicar la web con el aviso legal incompleto.
 // Los datos NO están en git: vienen de LEGAL_JSON (Cloudflare) o de src/data/legal.local.json (local).
-// En local solo avisa; en Cloudflare Pages (CF_PAGES=1) o con STRICT_LEGAL=1 falla el build.
+// En local solo avisa; en Cloudflare (Pages con CF_PAGES=1, Workers Builds con WORKERS_CI=1) o con STRICT_LEGAL=1 falla el build.
 import { existsSync, readFileSync } from "node:fs";
 
 function cargarLegal() {
@@ -24,7 +24,8 @@ const missing = required.filter((key) => !legal[key]);
 if (missing.length === 0) process.exit(0);
 
 const message = `Aviso legal incompleto (LEGAL_JSON o src/data/legal.local.json): faltan ${missing.join(", ")}.`;
-const strict = process.env.CF_PAGES === "1" || process.env.STRICT_LEGAL === "1";
+const strict =
+  process.env.CF_PAGES === "1" || process.env.WORKERS_CI === "1" || process.env.STRICT_LEGAL === "1";
 
 if (strict) {
   console.error(`ERROR: ${message}`);
