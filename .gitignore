@@ -15,3 +15,7 @@ datos-jose*.md
 # datos legales del titular y contexto de negocio con datos personales (nunca en un repo público)
 src/data/legal.local.json
 CONTEXT.md
+
+# material de terceros (hoja de precios y fotos de campana de STMNT): solo local
+src/data/stmnt-origen/
+src/data/*.xlsx
