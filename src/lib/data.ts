@@ -16,9 +16,9 @@ export const SITE = {
 } as const;
 
 export const CONTACT = {
-  phoneDisplay: "915 15 28 44",
-  phoneHref: "tel:+34915152844",
-  phoneE164: "+34915152844",
+  phoneDisplay: "697 27 04 34",
+  phoneHref: "tel:+34697270434",
+  phoneE164: "+34697270434",
   booksy:
     "https://booksy.com/es-es/169010_ikaro-men-s-barber_barberia_39013_las-rozas-de-madrid",
   /** Calendario de la ficha 169010. Se carga al pulsar Reservar, no al abrir la web. */
