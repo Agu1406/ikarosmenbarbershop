@@ -921,6 +921,16 @@ h3 {
 .photo-wide {
   aspect-ratio: 3 / 2;
 }
+.tour-preview {
+  margin-top: var(--s6);
+  max-width: 56rem;
+}
+.tour-preview-link {
+  display: block;
+}
+.tour-preview-link .photo {
+  display: block;
+}
 
 .stack {
   display: grid;
