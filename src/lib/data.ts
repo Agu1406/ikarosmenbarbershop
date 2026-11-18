@@ -224,23 +224,6 @@ export const ABOUT = {
   ],
 } as const;
 
-export const JOSE = {
-  eyebrow: "Trayectoria",
-  title: "José Sotelo, campeón del mundo",
-  // VERIFICAR: conseguir la fuente del título (año, campeonato, federación) y citarla aquí.
-  paragraphs: [
-    "José empezó joven en la barbería. Con 18 años se proclamó campeón del mundo, representando a España en corte de pelo y barba.",
-    "En la cita se nota. Escucha, cuida el detalle y deja el resultado a tu medida.",
-    "Hoy, en Las Rozas, él y el equipo siguen con ese mismo criterio.",
-  ],
-  highlights: ["Campeón del mundo", "Representando a España", "Desde los 18 años"],
-  /**
-   * ID de YouTube del vídeo definitivo. Dejar en null hasta tenerlo:
-   * el vídeo provisional (p7mfUclgdm4) muestra el local antiguo y no debe publicarse.
-   */
-  youtubeId: null as string | null,
-} as const;
-
 /**
  * Medios del hero y de "La barbería".
  * PROVISIONALES hasta confirmar dos cosas (poner `provisional: false` cuando estén resueltas):
@@ -262,7 +245,6 @@ export const MEDIA = {
 export const PHOTO_ALT = {
   hero: "Interior de Ikaro Men's Barber en Las Rozas de Madrid",
   about: "Sillones y puestos de trabajo de Ikaro Men's Barber",
-  jose: "José Sotelo, fundador de Ikaro Men's Barber",
   stmntGama: "Gama STMNT de champú, barba y peinado. Foto de la marca.",
   stmntAfeitado:
     "La rutina de afeitado. Gel y loción aftershave STMNT. Foto de campaña. La persona no trabaja en Ikaro.",
@@ -318,7 +300,6 @@ export const NAV = [
   { href: "#recorrido", label: "Recorrido 3D" },
   { href: "#productos", label: "Productos" },
   { href: "#sobre-nosotros", label: "La barbería" },
-  { href: "#trayectoria", label: "José" },
   { href: "#opiniones", label: "Opiniones" },
   { href: "#contacto", label: "Contacto" },
 ] as const;
