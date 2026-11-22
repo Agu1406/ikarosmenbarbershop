@@ -57,6 +57,10 @@ Degradados decorativos (también en texto), glassmorphism, sombras difusas, emoj
 
 Excepción acordada: el único degradado permitido es la capa de legibilidad del hero en móvil (`.hero-scrim`), que es funcional.
 
+## Temporada de fiestas
+
+Del 1 de diciembre al 6 de enero (Europe/Madrid) la web pone `data-season="navidad"`: paleta pino + oro + acento granate (no rojo dominante), rail, estrella, copos SVG (ocultos con `prefers-reduced-motion`), franja «Felices fiestas: reserva con tiempo» (Booksy; se puede cerrar en la sesión), sobretítulo del hero y nota de regalo en productos. Textos en `SEASON_COPY`. Sin orbes, luces, ofertas inventadas ni cierres inventados. Vista previa: `?season=navidad` / `?season=off`.
+
 ## Movimiento (nivel medio)
 
 Permitido, y nada más:

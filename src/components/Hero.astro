@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import posterProvisional from "../assets/media/hero-poster.webp";
-import { CONTACT, MEDIA, PHOTO_ALT, SITE } from "../lib/data";
+import { CONTACT, MEDIA, PHOTO_ALT, SEASON_COPY, SITE } from "../lib/data";
 import { getPhoto } from "../lib/photos";
 import BookButton from "./BookButton.astro";
 import Icon from "./Icon.astro";
@@ -47,13 +47,15 @@ if (MEDIA.provisional && !realPhoto) {
 
   <div class="wrap">
     <div class="hero-content">
-      <p class="eyebrow">Las Rozas de Madrid</p>
+      <p class="eyebrow season-hide">Las Rozas de Madrid</p>
+      <p class="eyebrow season-only">{SEASON_COPY.heroEyebrow}</p>
       <h1 id="hero-title" class="display">
         <span class="line">Ikaro</span>
         <span class="line">Men<span class="apos">’</span>s Barber</span>
       </h1>
       <hr class="rule rule-grow" />
       <p class="lead">{SITE.claim}</p>
+      <p class="muted season-only">Las Rozas de Madrid</p>
       <div class="hero-ctas">
         <BookButton class="btn btn-primary"
           >Reservar cita <Icon name="arrow-up-right" size={18} class="btn-icon" /></BookButton

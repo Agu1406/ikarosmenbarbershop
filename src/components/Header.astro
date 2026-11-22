@@ -1,11 +1,15 @@
 ---
 import { NAV, SITE } from "../lib/data";
 import BookButton from "./BookButton.astro";
+import SeasonBanner from "./SeasonBanner.astro";
+import SeasonMark from "./SeasonMark.astro";
 ---
 
 <header class="site-header">
+  <div class="season-rail" aria-hidden="true"></div>
   <div class="wrap">
     <a class="brand" href="/" aria-label={`${SITE.name}, inicio`}>
+      <SeasonMark />
       Ikaro <span>Men’s Barber</span>
     </a>
 
@@ -24,6 +28,8 @@ import BookButton from "./BookButton.astro";
       >
     </div>
   </div>
+
+  <SeasonBanner />
 
   <nav id="nav-mobile" class="nav-mobile" aria-label="Principal" hidden data-menu>
     <ul>

@@ -34,6 +34,172 @@
   --radius: 2px;
 }
 
+/* Temporada 1 dic–6 ene (Madrid): paleta pino + oro + filete granate. Ver DESIGN.md. */
+:root[data-season="navidad"] {
+  --ink: #143028;
+  --ink-soft: #0e221c;
+  --ink-elevated: #1a3830;
+  --brass: #d4af57;
+  --brass-bright: #e4c56e;
+  --brass-dim: #9a7a35;
+  --brass-ink: #6b5220;
+  --cream: #f2eadc;
+  --cream-muted: #c4b8a4;
+  --line: rgba(212, 175, 87, 0.42);
+  --line-ink: rgba(20, 48, 40, 0.28);
+  --season-berry: #9c3b3b;
+}
+.season-mark,
+.season-rail {
+  display: none;
+}
+:root[data-season="navidad"] .season-mark {
+  display: inline-flex;
+  align-items: center;
+  margin-right: var(--s2);
+  color: var(--brass);
+  vertical-align: middle;
+}
+:root[data-season="navidad"] .season-mark-icon {
+  display: block;
+}
+:root[data-season="navidad"] .season-rail {
+  display: block;
+  height: 0.5rem;
+  background:
+    linear-gradient(90deg, var(--season-berry) 0 0.35rem, transparent 0.35rem 0.7rem) 0 0 / 1.4rem
+      2px repeat-x,
+    repeating-linear-gradient(
+      90deg,
+      var(--brass) 0 0.35rem,
+      transparent 0.35rem 0.7rem,
+      var(--brass) 0.7rem 1.05rem,
+      transparent 1.05rem 1.4rem
+    );
+  background-color: var(--ink-soft);
+  border-block: 1px solid var(--brass);
+}
+:root[data-season="navidad"] .site-header {
+  border-bottom: 2px solid var(--brass);
+}
+:root[data-season="navidad"] .site-footer {
+  border-top: 2px solid var(--brass);
+}
+:root[data-season="navidad"] .site-footer .season-rail {
+  order: -1;
+}
+:root[data-season="navidad"] .section-head .eyebrow::before {
+  width: 3rem;
+  height: 2px;
+  background: var(--brass);
+}
+:root[data-season="navidad"] .btn-primary {
+  border-color: var(--brass-bright);
+}
+.season-banner {
+  display: none;
+}
+:root[data-season="navidad"] .season-banner:not([hidden]) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2) var(--s3);
+  padding: var(--s2) var(--gutter);
+  background: var(--ink-soft);
+  border-bottom: 2px solid var(--season-berry);
+  border-left: 3px solid var(--season-berry);
+  color: var(--cream);
+  font-size: 0.9375rem;
+}
+.season-banner-text {
+  margin: 0;
+  font-weight: 600;
+}
+.season-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+}
+.season-banner-cta {
+  min-height: 2.5rem;
+  padding-inline: var(--s3);
+  font-size: 0.875rem;
+}
+.season-banner-dismiss {
+  min-height: 2.5rem;
+  min-width: 2.75rem;
+  padding: 0 var(--s3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--cream);
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+.season-banner-dismiss:hover {
+  border-color: var(--brass);
+  color: var(--brass-bright);
+}
+.season-only {
+  display: none;
+}
+:root[data-season="navidad"] .season-only {
+  display: block;
+}
+:root[data-season="navidad"] .season-hide {
+  display: none;
+}
+:root[data-season="navidad"] .eyebrow.season-only {
+  display: flex;
+}
+.season-snow {
+  display: none;
+}
+:root[data-season="navidad"] .season-snow {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  overflow: hidden;
+}
+.season-flake {
+  position: absolute;
+  top: -2rem;
+  left: var(--flake-x);
+  width: calc(1.15rem * var(--flake-s, 1));
+  height: calc(1.15rem * var(--flake-s, 1));
+  color: var(--cream);
+  opacity: 0.72;
+  filter: drop-shadow(0 0 1px rgb(20 48 40 / 0.35));
+  will-change: transform;
+  animation: season-flake-fall var(--flake-d, 16s) linear var(--flake-delay, 0s) infinite;
+}
+@keyframes season-flake-fall {
+  0% {
+    transform: translate3d(0, -2vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 0.72;
+  }
+  88% {
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate3d(var(--flake-drift, 1rem), 105vh, 0) rotate(220deg);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root[data-season="navidad"] .season-snow {
+    display: none;
+  }
+}
+
 /* ---------- Base ---------- */
 *,
 *::before,

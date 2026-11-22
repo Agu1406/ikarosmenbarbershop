@@ -1,0 +1,45 @@
+---
+/**
+ * Copos de temporada. Solo visibles con html[data-season="navidad"].
+ * Decorativos: aria-hidden, sin interacción.
+ */
+const flakes = [
+  { x: "5%", d: "12s", delay: "0s", s: "0.85", drift: "-1.2rem" },
+  { x: "12%", d: "15s", delay: "1.2s", s: "0.55", drift: "1.5rem" },
+  { x: "20%", d: "13s", delay: "3.5s", s: "1", drift: "-0.8rem" },
+  { x: "28%", d: "16s", delay: "0.4s", s: "0.65", drift: "1.1rem" },
+  { x: "37%", d: "11s", delay: "5s", s: "0.9", drift: "-1.6rem" },
+  { x: "46%", d: "14s", delay: "2s", s: "0.5", drift: "0.9rem" },
+  { x: "55%", d: "13s", delay: "4.2s", s: "0.95", drift: "-1rem" },
+  { x: "64%", d: "17s", delay: "0.8s", s: "0.7", drift: "1.4rem" },
+  { x: "72%", d: "12s", delay: "2.8s", s: "1.05", drift: "-0.6rem" },
+  { x: "80%", d: "15s", delay: "6s", s: "0.6", drift: "1.2rem" },
+  { x: "88%", d: "13s", delay: "1.6s", s: "0.8", drift: "-1.3rem" },
+  { x: "95%", d: "16s", delay: "4.8s", s: "0.7", drift: "0.7rem" },
+];
+---
+
+<div class="season-snow" aria-hidden="true">
+  {
+    flakes.map((f) => (
+      <span
+        class="season-flake"
+        style={`--flake-x:${f.x};--flake-d:${f.d};--flake-delay:${f.delay};--flake-s:${f.s};--flake-drift:${f.drift}`}
+      >
+        <svg viewBox="0 0 24 24" width="100%" height="100%" focusable="false">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.25"
+            stroke-linecap="round"
+          >
+            <path d="M12 2v20M4.9 6.5l14.2 11M4.9 17.5l14.2-11"></path>
+            <path d="M12 5.5l1.2 1.2M12 5.5l-1.2 1.2M12 18.5l1.2-1.2M12 18.5l-1.2-1.2"></path>
+            <path d="M7.2 8.2l1.6.2M7.2 8.2l.2 1.6M16.8 15.8l-1.6-.2M16.8 15.8l-.2-1.6"></path>
+            <path d="M7.2 15.8l1.6-.2M7.2 15.8l.2-1.6M16.8 8.2l-1.6.2M16.8 8.2l-.2 1.6"></path>
+          </g>
+        </svg>
+      </span>
+    ))
+  }
+</div>

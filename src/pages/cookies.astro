@@ -10,9 +10,14 @@ import Legal from "../layouts/Legal.astro";
   <h2>1. Qué usamos</h2>
   <p>
     Esta web no instala cookies propias ni de analítica, publicidad o redes al abrirla. Tampoco
-    guarda datos en el navegador (ni cookies ni <code>localStorage</code>). Por eso no hay banner.
-    El artículo 22.2 de la LSSI-CE pide consentimiento solo para las cookies que no hacen falta
-    para que la página funcione.
+    usa <code>localStorage</code>. Por eso no hay banner de cookies. El artículo 22.2 de la
+    LSSI-CE pide consentimiento solo para las cookies que no hacen falta para que la página
+    funcione.
+  </p>
+  <p>
+    En temporada de fiestas, si cierras el aviso «Felices fiestas: reserva con tiempo», guardamos
+    una marca en <code>sessionStorage</code> solo para no volver a mostrarlo en esa pestaña. No
+    es analítica ni publicidad; se borra al cerrar la pestaña.
   </p>
 
   <h2>2. Contenido de terceros que se carga solo si lo pides</h2>

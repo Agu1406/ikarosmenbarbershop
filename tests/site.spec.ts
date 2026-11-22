@@ -67,6 +67,42 @@ test.describe("privacidad", () => {
   });
 });
 
+test.describe("temporada", () => {
+  test("?season=navidad marca data-season en html", async ({ page }) => {
+    await page.goto("/?season=navidad");
+    await expect(page.locator("html")).toHaveAttribute("data-season", "navidad");
+    await expect(page.locator(".season-snow")).toBeVisible();
+    await expect(page.getByText("Felices fiestas: reserva con tiempo")).toBeVisible();
+    await expect(page.getByText("Cita para fiestas")).toBeVisible();
+    await expect(page.getByText("Idea de regalo en el local")).toBeVisible();
+  });
+
+  test("?season=off quita data-season aunque la fecha esté en ventana", async ({ page }) => {
+    await page.clock.install({ time: new Date("2026-12-15T12:00:00Z") });
+    await page.goto("/?season=off");
+    await expect(page.locator("html")).not.toHaveAttribute("data-season");
+    await expect(page.locator(".season-snow")).toBeHidden();
+    await expect(page.getByText("Felices fiestas: reserva con tiempo")).toBeHidden();
+  });
+
+  test("con reduced-motion no se animan los copos", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/?season=navidad");
+    await expect(page.locator("html")).toHaveAttribute("data-season", "navidad");
+    await expect(page.locator(".season-snow")).toBeHidden();
+  });
+
+  test("cerrar la franja la oculta en la sesión", async ({ page }) => {
+    await page.goto("/?season=navidad");
+    const banner = page.locator("[data-season-banner]");
+    await expect(banner).toBeVisible();
+    await page.getByRole("button", { name: "Cerrar" }).click();
+    await expect(banner).toBeHidden();
+    await page.reload();
+    await expect(banner).toBeHidden();
+  });
+});
+
 test.describe("contenido", () => {
   test("estructura básica y CTAs", async ({ page }) => {
     await page.goto("/");

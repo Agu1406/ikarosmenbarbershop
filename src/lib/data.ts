@@ -15,6 +15,18 @@ export const SITE = {
   claim: "Cortes, barba y el trato de siempre.",
 } as const;
 
+/**
+ * Copy de temporada (1 dic–6 ene). Sin ofertas ni cierres inventados.
+ * Clave de sessionStorage solo al cerrar la franja (no es tracking).
+ */
+export const SEASON_COPY = {
+  bannerText: "Felices fiestas: reserva con tiempo",
+  bannerCta: "Reservar",
+  heroEyebrow: "Cita para fiestas",
+  productsNote: "Idea de regalo en el local",
+  dismissKey: "ikaro-season-banner-dismissed",
+} as const;
+
 export const CONTACT = {
   phoneDisplay: "697 27 04 34",
   phoneHref: "tel:+34697270434",
