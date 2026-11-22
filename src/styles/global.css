@@ -65,18 +65,12 @@
 }
 :root[data-season="navidad"] .season-rail {
   display: block;
-  height: 0.5rem;
-  background:
-    linear-gradient(90deg, var(--season-berry) 0 0.35rem, transparent 0.35rem 0.7rem) 0 0 / 1.4rem
-      2px repeat-x,
-    repeating-linear-gradient(
-      90deg,
-      var(--brass) 0 0.35rem,
-      transparent 0.35rem 0.7rem,
-      var(--brass) 0.7rem 1.05rem,
-      transparent 1.05rem 1.4rem
-    );
-  background-color: var(--ink-soft);
+  height: 0.55rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--season-berry) 0 0.35rem,
+    var(--brass) 0.35rem 0.7rem
+  );
   border-block: 1px solid var(--brass);
 }
 :root[data-season="navidad"] .site-header {
