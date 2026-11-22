@@ -1,15 +1,17 @@
 ---
 import { ADDRESS, CONTACT, LEGAL, SITE } from "../lib/data";
 import BookButton from "./BookButton.astro";
+import SeasonMark from "./SeasonMark.astro";
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
+  <div class="season-rail" aria-hidden="true"></div>
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <p class="brand">Ikaro <span>Men’s Barber</span></p>
+        <p class="brand"><SeasonMark />Ikaro <span>Men’s Barber</span></p>
         <p class="muted">{SITE.tagline}</p>
         <address class="muted">
           {ADDRESS.street}<br />

@@ -38,6 +38,15 @@ Ritmo de fondos: hero azul, carta en crema, barbería azul, José y opiniones en
 - Espaciado: solo la escala `--s1` a `--s8`.
 - Radio de borde: 2 px.
 
+## CTAs móviles (estándar)
+
+Patrón compartido entre webs (copiar-pegar esta sección). Aquí el primario es **Reservar** (Booksy) y el secundario **Llamar**.
+
+1. Cabecera móvil: CTA primario + botón texto «Menú» (borde, 44 px; no icono ☰). El drawer solo lista enlaces; no duplica los CTAs.
+2. Barra inferior 50/50 (`.sticky-cta`): primario + secundario. Siempre visible en móvil desde el primer pintado. Oculta en escritorio.
+3. Si hay banner de cookies: ambos viven en un `.bottom-dock` en columna. La barra CTA queda **por encima del banner en el eje vertical** (no solapada por z-index). Al aceptar o rechazar cookies, el banner sale del flujo (`display: none`) y el CTA baja al borde inferior. Altura del dock → `--bottom-dock-h` para el `padding-bottom` del body.
+4. Sin FABs circulares. Reservar / `tel:` usable sin depender de un FAB.
+
 ## Referencias (Design DNA)
 
 El perfil medido de Premium Barbershop, Heritage, Barber & Co y Louivver está en `design/references.dna.json`. Se usó para estructura, escala y composición. No se adoptan sus colores (tres de cuatro son negro con dorado) ni su dimensión de efectos. Para repetir la captura: `node scripts/dna-capture.mjs <carpeta> <urls>`. Las capturas de terceros no se guardan en el repo.
@@ -47,6 +56,10 @@ El perfil medido de Premium Barbershop, Heritage, Barber & Co y Louivver está e
 Degradados decorativos (también en texto), glassmorphism, sombras difusas, emojis, iconos genéricos en cajas, bento, badges sobre el titular, haz de luz que sigue al cursor, orbes, rejillas de puntos, destellos, grano sobre degradado, guiones largos en el copy, fórmulas "no es X, es Y", reseñas o cifras inventadas, imágenes generadas por IA presentadas como el local.
 
 Excepción acordada: el único degradado permitido es la capa de legibilidad del hero en móvil (`.hero-scrim`), que es funcional.
+
+## Temporada de fiestas
+
+Del 1 de diciembre al 6 de enero (Europe/Madrid) la web pone `data-season="navidad"`: paleta pino + oro + acento granate (no rojo dominante), cinta diagonal granate/oro en cabecera y pie, estrella, copos SVG (ocultos con `prefers-reduced-motion`), franja «Felices fiestas: reserva con tiempo» (Booksy; se puede cerrar en la sesión), sobretítulo del hero y nota de regalo en productos. Textos en `SEASON_COPY`. Sin orbes, luces, ofertas inventadas ni cierres inventados. Vista previa: `?season=navidad` / `?season=off`.
 
 ## Movimiento (nivel medio)
 
@@ -66,6 +79,16 @@ Los vídeos de `public/media/` y su póster (`src/assets/media/hero-poster.webp`
 - Contraste AA como mínimo; objetivos táctiles de 44 px; foco visible de 3 px.
 - Skip link, `lang="es"`, un solo `h1`, enlaces externos con aviso "se abre en nueva pestaña".
 - Todo contenido tiene alternativa por teclado.
+
+## Marca y favicon (proceso estándar, estilo de esta web)
+
+El **proceso** (SVG 64×64 → `public/favicon.svg` → layout/cabecera) es el mismo entre webs. Los **colores, la letra y la forma** salen solo de **este** `DESIGN.md`; no copiar la paleta ni el monograma de otra web.
+
+1. Tomar 2 colores de **esta** paleta (fondo de marca + acento). Aquí: `--ink` `#182c48` + `--brass` `#c5a059`.
+2. Dibujar monograma o marca geométrica en SVG 64×64 (una letra o símbolo; sin foto, sin IA como logo). Aquí: «I» en `public/favicon.svg`.
+3. Enlazar el SVG en el layout (`rel="icon" type="image/svg+xml"`).
+4. Cabecera: tipografía de marca ± el mismo SVG. No raster de terceros salvo marca oficial del cliente.
+5. No Lucide ni emoji como logo.
 
 ## Fotos
 

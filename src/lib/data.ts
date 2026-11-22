@@ -2,7 +2,7 @@
  * Única fuente de verdad del negocio. Ver CONTEXT.md para el origen de cada dato.
  * Cualquier cambio de precios, horario o contacto se hace solo aquí.
  */
-import legal from "../data/legal.json";
+import { legal } from "./legal";
 import stmntCatalog from "../data/stmnt.json";
 
 export const SITE = {
@@ -15,10 +15,22 @@ export const SITE = {
   claim: "Cortes, barba y el trato de siempre.",
 } as const;
 
+/**
+ * Copy de temporada (1 dic–6 ene). Sin ofertas ni cierres inventados.
+ * Clave de sessionStorage solo al cerrar la franja (no es tracking).
+ */
+export const SEASON_COPY = {
+  bannerText: "Felices fiestas: reserva con tiempo",
+  bannerCta: "Reservar",
+  heroEyebrow: "Cita para fiestas",
+  productsNote: "Idea de regalo en el local",
+  dismissKey: "ikaro-season-banner-dismissed",
+} as const;
+
 export const CONTACT = {
-  phoneDisplay: "915 15 28 44",
-  phoneHref: "tel:+34915152844",
-  phoneE164: "+34915152844",
+  phoneDisplay: "697 27 04 34",
+  phoneHref: "tel:+34697270434",
+  phoneE164: "+34697270434",
   booksy:
     "https://booksy.com/es-es/169010_ikaro-men-s-barber_barberia_39013_las-rozas-de-madrid",
   /** Calendario de la ficha 169010. Se carga al pulsar Reservar, no al abrir la web. */
@@ -54,14 +66,14 @@ export const ADDRESS = {
 export const RATINGS = [
   {
     source: "Google",
-    score: "4,9",
-    count: 47,
+    score: "5,0",
+    count: 141,
     url: CONTACT.googleReviews,
   },
   {
     source: "Booksy",
     score: "5,0",
-    count: 43,
+    count: 67,
     url: CONTACT.booksy,
   },
 ] as const;
@@ -182,38 +194,36 @@ export interface Review {
 /** Reseñas reales copiadas de las fichas públicas de Google y Booksy. No inventar ni editar. */
 export const REVIEWS: readonly Review[] = [
   {
+    author: "blazkko",
+    text: "Desde mi inicio la experiencia ha sido magnífica, una atención y cuidadad del cliente de 10. Me atendió José y no puedo quedarme más contento con el corte de pelo y arreglo de barba. Cada vez que vuelvo por Madrid pasaré por aquí sin duda. Muchas gracias por la atención, tienen un equipo excelente.",
+    source: "Google",
+  },
+  {
+    author: "Manuel Serrano",
+    text: "Excelente servicio y trato de diez! Calidad profesional de primera con el calor y la atención de las peluquerías de toda la vida. José ofrece un trato muy familiar, cercano y con un cuidadoo por el detalle que da gusto. Da confianza ponerse en sus manos. ¡Muy satisfecho con el resultado!",
+    source: "Google",
+  },
+  {
+    author: "Jorge Crespo",
+    text: "Muy buenos profesionales, sobre todo Jose. Excelente atención, profesionalidad, servicios, instalaciones y acabados. Estoy muy satisfecho con mi corte de pelo y de cómo me han tratado, sin duda lo recomiendo y volveré pronto",
+    source: "Google",
+  },
+  {
+    author: "patricia martín rodríguez",
+    text: "Excelente peluquería abierta desde el 23 de febrero. Trato inmejorable desde que entras, muy cercanos.Nos atendió José Carlos Sotelo y no puede ser mejor profesional. Corte para mi marido y mi hijo de 4 años. Trabaja con excelentes productos y eso se nota a la hora del acabado. Los años de trabajo le avalan. Recomendable 💯.",
+    source: "Google",
+  },
+  {
     author: "Cristian",
     text: "¡José es un crack! Corte y barba impecables, se nota que sabe lo que hace y le pone ganas de verdad. Te escucha y cuida cada detalle.",
     source: "Booksy",
     service: "Lavar, cortar y arreglo de barba",
   },
   {
-    author: "Javi Porteiro",
-    text: "Llevo años confiando en José para cortarme el pelo a mí y a mis hijos. Es un auténtico crack.",
-    source: "Google",
-  },
-  {
     author: "Oscar",
     text: "Me corto el pelo y la barba con Álex, muy profesional y educado. Me he sentido como en casa, con muy buenos consejos.",
     source: "Booksy",
     service: "Lavar, cortar y arreglo de barba",
-  },
-  {
-    author: "Patricia",
-    text: "Excelente peluquería. Trato inmejorable desde que entras, muy cercanos. Nos atendió José Carlos Sotelo y no puede ser mejor.",
-    source: "Google",
-  },
-  {
-    author: "Alejandro",
-    text: "¡José es el mejor! Siempre me encantan los cortes de pelo que me hace y la aproximación que tiene conmigo.",
-    source: "Booksy",
-    service: "Lavar, cortar y peinar",
-  },
-  {
-    author: "Edgar",
-    text: "Todo genial, muy buen trato y profesional.",
-    source: "Booksy",
-    service: "Lavar, cortar y peinar",
   },
 ];
 
@@ -224,23 +234,6 @@ export const ABOUT = {
     "Cortes clásicos y de ahora, arreglo de barba y productos STMNT para el día a día.",
     "José Sotelo y el equipo escuchan lo que buscas y lo trabajan con calma, del corte al afeitado.",
   ],
-} as const;
-
-export const JOSE = {
-  eyebrow: "Trayectoria",
-  title: "José Sotelo, campeón del mundo",
-  // VERIFICAR: conseguir la fuente del título (año, campeonato, federación) y citarla aquí.
-  paragraphs: [
-    "José empezó joven en la barbería. Con 18 años se proclamó campeón del mundo, representando a España en corte de pelo y barba.",
-    "En la cita se nota. Escucha, cuida el detalle y deja el resultado a tu medida.",
-    "Hoy, en Las Rozas, él y el equipo siguen con ese mismo criterio.",
-  ],
-  highlights: ["Campeón del mundo", "Representando a España", "Desde los 18 años"],
-  /**
-   * ID de YouTube del vídeo definitivo. Dejar en null hasta tenerlo:
-   * el vídeo provisional (p7mfUclgdm4) muestra el local antiguo y no debe publicarse.
-   */
-  youtubeId: null as string | null,
 } as const;
 
 /**
@@ -264,7 +257,6 @@ export const MEDIA = {
 export const PHOTO_ALT = {
   hero: "Interior de Ikaro Men's Barber en Las Rozas de Madrid",
   about: "Sillones y puestos de trabajo de Ikaro Men's Barber",
-  jose: "José Sotelo, fundador de Ikaro Men's Barber",
   stmntGama: "Gama STMNT de champú, barba y peinado. Foto de la marca.",
   stmntAfeitado:
     "La rutina de afeitado. Gel y loción aftershave STMNT. Foto de campaña. La persona no trabaja en Ikaro.",
@@ -320,7 +312,6 @@ export const NAV = [
   { href: "#recorrido", label: "Recorrido 3D" },
   { href: "productos", label: "Productos" },
   { href: "#sobre-nosotros", label: "La barbería" },
-  { href: "#trayectoria", label: "José" },
   { href: "#opiniones", label: "Opiniones" },
   { href: "#contacto", label: "Contacto" },
 ] as const;

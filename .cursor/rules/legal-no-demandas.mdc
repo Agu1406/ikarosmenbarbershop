@@ -22,7 +22,7 @@ Fuente: `IGNORAR.md`. En España mandan RGPD, LOPDGDD y LSSI-CE. Si un punto cho
 13. Accesibilidad: todo el texto.
 14. Corregir el contraste de color.
 15. Navegación por teclado.
-16. Añadir los datos de la empresa (`src/data/legal.json`: titular, NIF, email).
+16. Añadir los datos de la empresa (`LEGAL_JSON` o `src/data/legal.local.json`, fuera de git: titular, NIF, email).
 17. Consentimiento de edad para datos de menores.
 18. Enlace para darse de baja en los correos.
 19. Licenciar las fuentes e imágenes que se usen.

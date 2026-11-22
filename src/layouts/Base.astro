@@ -3,8 +3,10 @@ import "../styles/global.css";
 import manropeLatin from "@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url";
 import cormorantLatin from "@fontsource-variable/cormorant-garamond/files/cormorant-garamond-latin-wght-normal.woff2?url";
 import { ADDRESS, CONTACT, HOURS, SITE } from "../lib/data";
+import { SEASON_BOOT_SCRIPT } from "../lib/season";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import SeasonSnow from "../components/SeasonSnow.astro";
 import StickyCta from "../components/StickyCta.astro";
 
 interface Props {
@@ -90,8 +92,10 @@ const structuredData = {
     <meta name="twitter:card" content={ogImage ? "summary_large_image" : "summary"} />
 
     {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
+    <script is:inline set:html={SEASON_BOOT_SCRIPT} />
   </head>
   <body>
+    <SeasonSnow />
     <a class="skip-link" href="#contenido-principal">Saltar al contenido</a>
     <Header />
     <main id="contenido-principal" tabindex="-1">

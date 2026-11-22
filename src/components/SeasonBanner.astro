@@ -1,0 +1,28 @@
+---
+import { SEASON_COPY } from "../lib/data";
+import BookButton from "./BookButton.astro";
+---
+
+<div class="season-banner" data-season-banner>
+  <p class="season-banner-text">{SEASON_COPY.bannerText}</p>
+  <div class="season-banner-actions">
+    <BookButton class="btn btn-primary season-banner-cta">{SEASON_COPY.bannerCta}</BookButton>
+    <button type="button" class="season-banner-dismiss" data-season-banner-dismiss>
+      Cerrar
+    </button>
+  </div>
+</div>
+
+<script is:inline define:vars={{ dismissKey: SEASON_COPY.dismissKey }}>
+  (function () {
+    var banner = document.querySelector("[data-season-banner]");
+    if (!banner) return;
+    if (sessionStorage.getItem(dismissKey) === "1") banner.hidden = true;
+    var btn = banner.querySelector("[data-season-banner-dismiss]");
+    btn &&
+      btn.addEventListener("click", function () {
+        sessionStorage.setItem(dismissKey, "1");
+        banner.hidden = true;
+      });
+  })();
+</script>

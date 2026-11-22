@@ -45,18 +45,61 @@ test.describe("privacidad", () => {
     await page.goto("/");
     await expect(page.locator("iframe")).toHaveCount(0);
     await page.getByRole("button", { name: "Cargar mapa" }).click();
-    await expect(page.locator("iframe")).toHaveCount(1);
-    await expect(page.locator("iframe")).toHaveAttribute("src", /maps\.google\.com/);
+    const map = page.locator("[data-map] iframe");
+    await expect(map).toHaveCount(1);
+    await expect(map).toHaveAttribute("src", /maps\.google\.com/);
+    await expect(map).toBeFocused();
   });
 
   test("el calendario de Booksy solo se abre al pulsar Reservar", async ({ page }) => {
     await page.goto("/");
     await expect(page.locator("#reserva")).toHaveCount(0);
-    await page.getByRole("link", { name: "Reservar" }).first().click();
+    const reservar = page.getByRole("link", { name: /Reservar/ }).first();
+    await reservar.click();
+    const dialog = page.getByRole("dialog", { name: "Reservar cita" });
+    await expect(dialog).toBeVisible();
     const frame = page.locator("#reserva iframe");
     await expect(frame).toHaveAttribute("src", /booksy\.com\/widget\/index\.html\?id=169010/);
+    await expect(page.getByRole("button", { name: "Cerrar" })).toBeFocused();
     await page.getByRole("button", { name: "Cerrar" }).click();
-    await expect(page.locator("#reserva")).not.toBeVisible();
+    await expect(dialog).not.toBeVisible();
+    await expect(reservar).toBeFocused();
+  });
+});
+
+test.describe("temporada", () => {
+  test("?season=navidad marca data-season en html", async ({ page }) => {
+    await page.goto("/?season=navidad");
+    await expect(page.locator("html")).toHaveAttribute("data-season", "navidad");
+    await expect(page.locator(".season-snow")).toBeVisible();
+    await expect(page.getByText("Felices fiestas: reserva con tiempo")).toBeVisible();
+    await expect(page.getByText("Cita para fiestas")).toBeVisible();
+    await expect(page.getByText("Idea de regalo en el local")).toBeVisible();
+  });
+
+  test("?season=off quita data-season aunque la fecha esté en ventana", async ({ page }) => {
+    await page.clock.install({ time: new Date("2026-12-15T12:00:00Z") });
+    await page.goto("/?season=off");
+    await expect(page.locator("html")).not.toHaveAttribute("data-season");
+    await expect(page.locator(".season-snow")).toBeHidden();
+    await expect(page.getByText("Felices fiestas: reserva con tiempo")).toBeHidden();
+  });
+
+  test("con reduced-motion no se animan los copos", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/?season=navidad");
+    await expect(page.locator("html")).toHaveAttribute("data-season", "navidad");
+    await expect(page.locator(".season-snow")).toBeHidden();
+  });
+
+  test("cerrar la franja la oculta en la sesión", async ({ page }) => {
+    await page.goto("/?season=navidad");
+    const banner = page.locator("[data-season-banner]");
+    await expect(banner).toBeVisible();
+    await page.getByRole("button", { name: "Cerrar" }).click();
+    await expect(banner).toBeHidden();
+    await page.reload();
+    await expect(banner).toBeHidden();
   });
 });
 
@@ -65,13 +108,13 @@ test.describe("contenido", () => {
     await page.goto("/");
     await expect(page.locator("html")).toHaveAttribute("lang", "es");
     await expect(page.getByRole("heading", { level: 1 })).toHaveCount(1);
-    for (const id of ["servicios", "recorrido", "productos", "sobre-nosotros", "trayectoria", "opiniones", "contacto"]) {
+    for (const id of ["servicios", "recorrido", "productos", "sobre-nosotros", "opiniones", "contacto"]) {
       await expect(page.locator(`#${id}`)).toBeAttached();
     }
     const booksy = page.locator('a[href*="booksy.com"]').first();
     await expect(booksy).toHaveAttribute("target", "_blank");
     await expect(booksy).toHaveAttribute("rel", /noopener/);
-    await expect(page.locator('a[href^="tel:+34915152844"]').first()).toBeAttached();
+    await expect(page.locator('a[href^="tel:+34697270434"]').first()).toBeAttached();
   });
 
   test("no hay guiones largos en el texto visible", async ({ page }) => {
@@ -163,9 +206,20 @@ test.describe("teclado", () => {
     await toggle.focus();
     await page.keyboard.press("Enter");
     await expect(toggle).toHaveAttribute("aria-expanded", "true");
-    await expect(page.getByRole("navigation", { name: "Principal" }).last()).toBeVisible();
+    const mobileNav = page.getByRole("navigation", { name: "Principal" }).last();
+    await expect(mobileNav).toBeVisible();
+    await expect(mobileNav.getByRole("link").first()).toBeFocused();
     await page.keyboard.press("Escape");
     await expect(toggle).toHaveAttribute("aria-expanded", "false");
     await expect(toggle).toBeFocused();
+  });
+
+  test("con el hero a la vista la barra sticky no es tabulable", async ({ page }, testInfo) => {
+    test.skip(testInfo.project.name !== "movil", "Solo móvil");
+    await page.goto("/");
+    await page.locator("#inicio").scrollIntoViewIfNeeded();
+    const sticky = page.locator("[data-sticky-cta]");
+    await expect(sticky).not.toHaveAttribute("data-visible", "true");
+    await expect(sticky).toHaveAttribute("inert", "");
   });
 });

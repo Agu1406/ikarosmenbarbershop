@@ -12,7 +12,7 @@ Valen en este repo y en casi cualquier proyecto. Fuente: `IGNORAR.md`.
 - **KISS.** La solución más simple que cumple. Si un Singleton o una abstracción no ahorra trabajo, no está.
 - **YAGNI.** No construir cuentas, pagos, 3D o analítica «por si acaso». Se añade cuando hace falta, con la legalidad delante.
 - **Separación de datos y presentación.** Una fuente de verdad (`src/lib/data.ts`, un CMS, una API) y pantallas que solo leen.
-- **Fallar en voz alta.** Dato legal vacío, precio mal puesto o secreto en el repo: el build o el test fallan. No publicar en silencio (`legal.json`, `scripts/check-legal.mjs`).
+- **Fallar en voz alta.** Dato legal vacío, precio mal puesto o secreto en el repo: el build o el test fallan. No publicar en silencio (`src/lib/legal.ts`, `scripts/check-legal.mjs`).
 - **Composición antes que herencia.** Piezas pequeñas (botón, enlace externo, fachada del mapa), no una clase base gigante.
 - **Idempotencia.** Un mismo clic, webhook o reintento no crea dos citas, dos cobros ni dos bajas.
 

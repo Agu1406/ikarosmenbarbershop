@@ -12,7 +12,7 @@ import pastaMate from "../assets/stmnt/pasta-mate.jpg";
 import pastaMateMovil from "../assets/stmnt/pasta-mate-movil.jpg";
 import coleccion from "../assets/stmnt/coleccion.jpg";
 import coleccionMovil from "../assets/stmnt/coleccion-movil.jpg";
-import { CONTACT, PHOTO_ALT, STMNT } from "../lib/data";
+import { CONTACT, PHOTO_ALT, SEASON_COPY, STMNT } from "../lib/data";
 import Icon from "./Icon.astro";
 import ProductShot from "./ProductShot.astro";
 
@@ -72,6 +72,7 @@ const Title = heading;
         Champú, barba y peinado STMNT. Se compran en la barbería o se envían a la ciudad de Madrid.
         Los precios llevan el IVA incluido.
       </p>
+      <p class="muted season-only">{SEASON_COPY.productsNote}</p>
     </div>
     <div class="cta-row" data-reveal>
       <a href="/cesta" class="btn btn-primary">Ver la cesta</a>

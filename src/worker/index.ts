@@ -159,7 +159,7 @@ async function checkout(request: Request, env: Env): Promise<Response> {
   if (!resultado.ok) return fallo(request, resultado.error, 400);
 
   if (!env.STRIPE_SECRET_KEY) {
-    return fallo(request, "El pago en la web todavía no está activo. Puedes llamar al 915 15 28 44.", 503);
+    return fallo(request, "El pago en la web todavía no está activo. Puedes llamar al 697 27 04 34.", 503);
   }
 
   const origin = new URL(request.url).origin;
@@ -265,7 +265,7 @@ async function crearSesion(
   if (!creada.ok && /bizum/i.test(creada.error)) creada = await intentar(["card"], "tarjeta");
   if (!creada.ok) {
     console.error(creada.error);
-    return { ok: false, error: "No se ha podido abrir el pago. Llama al 915 15 28 44." };
+    return { ok: false, error: "No se ha podido abrir el pago. Llama al 697 27 04 34." };
   }
 
   const url = creada.data.url;
