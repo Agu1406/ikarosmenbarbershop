@@ -3,6 +3,7 @@ dist/
 .astro/
 .env
 .env.*
+.dev.vars
 playwright-report/
 test-results/
 .DS_Store

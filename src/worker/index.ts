@@ -1,14 +1,17 @@
 /**
  * Cobro en el mismo Worker que publica la web.
- * Secretos (nunca en git): STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, RESEND_API_KEY.
+ * Secretos (nunca en git): STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, RESEND_API_KEY,
+ * UBER_CUSTOMER_ID, UBER_CLIENT_ID, UBER_CLIENT_SECRET.
  * El correo sale de un dominio verificado en Resend. PEDIDOS_FROM lo cambia si hace falta.
- * El mensajero no se llama desde aquí: el local lo pide en el panel, y solo en horario.
+ * Tras el pago, si hay claves Uber Direct, el Worker pide el repartidor solo (o lo programa
+ * para la próxima apertura).
  */
 import { LEGAL } from "../lib/data";
-import { getOpenStatus } from "../lib/hours";
+import { getOpenStatus, nextPickupAt } from "../lib/hours";
 import { euro, validarPedido, type DatosCompra, type PedidoValido } from "../lib/shop";
+import { crearReparto, uberConfigurado, type UberEnv } from "../lib/uber";
 
-interface Env {
+interface Env extends UberEnv {
   ASSETS: { fetch(request: Request): Promise<Response> };
   STRIPE_SECRET_KEY?: string;
   STRIPE_WEBHOOK_SECRET?: string;
@@ -359,19 +362,46 @@ async function avisarUnaVez(env: Env, sesionId: string): Promise<{ ok: true } | 
   });
   if (!sesion.ok) return { ok: false, error: "No se ha podido leer el pago." };
 
-  const pago = sesion.data.payment_intent as { id?: string; metadata?: Record<string, string> } | string | null;
+  const pago = sesion.data.payment_intent as
+    | { id?: string; metadata?: Record<string, string>; shipping?: { phone?: string } }
+    | string
+    | null;
   const pagoId = typeof pago === "string" ? pago : pago?.id;
   const meta = typeof pago === "object" && pago ? (pago.metadata ?? {}) : {};
   if (meta.pedido_avisado === "1") return { ok: true };
   if (!pagoId) return { ok: false, error: "El pago no tiene identificador." };
 
-  const texto = textoPedido(sesion.data);
+  const sessionMeta = (sesion.data.metadata ?? {}) as Record<string, string>;
+  const telefono =
+    (typeof pago === "object" && pago && pago.shipping?.phone) ||
+    sessionMeta.telefono ||
+    meta.telefono ||
+    "";
+  const uberNota = await pedirUberSiToca(env, {
+    pagoId,
+    yaPedido: Boolean(meta.uber_delivery_id),
+    nombre: sessionMeta.nombre || meta.nombre || "",
+    telefono,
+    direccion: sessionMeta.direccion || meta.direccion || "",
+    cp: sessionMeta.cp || meta.cp || "",
+    lineas: lineasDe(sesion.data)
+      .filter((linea) => !(linea.description ?? "").startsWith("Envío"))
+      .map((linea) => ({
+        name: linea.description ?? "Producto STMNT",
+        quantity: linea.quantity ?? 1,
+      })),
+  });
+
+  const texto = textoPedido(sesion.data, telefono, uberNota.texto);
   const enviado = await enviarCorreo(env, `Pedido STMNT ${sesionId}`, texto);
   if (!enviado.ok) return enviado;
 
   const marca = new URLSearchParams();
   marca.set("metadata[pedido_avisado]", "1");
   marca.set("metadata[pedido_sesion]", sesionId);
+  if (uberNota.deliveryId) marca.set("metadata[uber_delivery_id]", uberNota.deliveryId);
+  if (uberNota.trackingUrl) marca.set("metadata[uber_tracking]", uberNota.trackingUrl.slice(0, 500));
+  if (uberNota.error) marca.set("metadata[uber_error]", uberNota.error.slice(0, 500));
   const guardado = await stripe(env.STRIPE_SECRET_KEY!, `payment_intents/${pagoId}`, {
     method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded" },
@@ -381,18 +411,73 @@ async function avisarUnaVez(env: Env, sesionId: string): Promise<{ ok: true } | 
   return { ok: true };
 }
 
-function textoPedido(data: Record<string, unknown>): string {
+async function pedirUberSiToca(
+  env: Env,
+  datos: {
+    pagoId: string;
+    yaPedido: boolean;
+    nombre: string;
+    telefono: string;
+    direccion: string;
+    cp: string;
+    lineas: { name: string; quantity: number }[];
+  },
+): Promise<{ texto: string; deliveryId?: string; trackingUrl?: string; error?: string }> {
+  if (datos.yaPedido) {
+    return { texto: "Uber Direct ya estaba pedido para este pago (no se ha duplicado)." };
+  }
+  if (!uberConfigurado(env)) {
+    return {
+      texto:
+        "Uber Direct aún no tiene UBER_CUSTOMER_ID / UBER_CLIENT_ID / UBER_CLIENT_SECRET en Cloudflare. Pide el mensajero a mano en el panel.",
+    };
+  }
+  if (!datos.nombre || !datos.telefono || !datos.direccion || !datos.cp) {
+    return {
+      texto: "Faltan datos de envío para Uber. Pide el mensajero a mano en el panel.",
+      error: "datos_envio",
+    };
+  }
+
+  const { at, scheduled } = nextPickupAt();
+  const estado = getOpenStatus();
+  const reparto = await crearReparto(
+    env,
+    {
+      nombre: datos.nombre,
+      telefono: datos.telefono,
+      direccion: datos.direccion,
+      cp: datos.cp,
+    },
+    datos.lineas.length > 0 ? datos.lineas : [{ name: "Pedido STMNT", quantity: 1 }],
+    { externalId: datos.pagoId, pickupReady: at, scheduled },
+  );
+
+  if (!reparto.ok) {
+    console.error("uber", reparto.error);
+    return {
+      texto: `Uber Direct no se ha podido pedir (${reparto.error}). Pídelo a mano en el panel. ${estado.label}.`,
+      error: reparto.error,
+    };
+  }
+
+  const cuando = scheduled
+    ? `Recogida programada para la apertura (${at.toISOString()}). ${estado.label}.`
+    : `Recogida en cuanto el local prepare la bolsa. ${estado.label}.`;
+  const track = reparto.trackingUrl ? `Seguimiento: ${reparto.trackingUrl}` : `Id Uber: ${reparto.deliveryId}`;
+  return {
+    texto: `Uber Direct pedido solo. Coste Uber aprox. ${euro(reparto.feeCentimos)}. ${cuando} ${track}`,
+    deliveryId: reparto.deliveryId,
+    trackingUrl: reparto.trackingUrl,
+  };
+}
+
+function textoPedido(data: Record<string, unknown>, telefono: string, mensajero: string): string {
   const meta = (data.metadata ?? {}) as Record<string, string>;
-  const pago = data.payment_intent as { shipping?: { phone?: string } } | string | null;
-  const telefono = (typeof pago === "object" && pago?.shipping?.phone) || meta.telefono || "";
   const lineas =
     lineasDe(data)
       .map((linea) => `${linea.quantity ?? 1} × ${linea.description ?? "Producto"} (${euro(linea.amount_total ?? 0)})`)
       .join("\n") || [meta.resumen, meta.resumen2].filter(Boolean).join("");
-  const estado = getOpenStatus();
-  const mensajero = estado.open
-    ? `La barbería está abierta. Pide el mensajero ahora en el panel de Uber Direct o Glovo On-Demand. ${estado.label}.`
-    : `No pidas el mensajero ahora. ${estado.label}. El reparto espera a la apertura.`;
 
   return [
     "Hay un pedido pagado en la web.",
@@ -406,8 +491,8 @@ function textoPedido(data: Record<string, unknown>): string {
     `Dirección: ${meta.direccion ?? ""}, ${meta.cp ?? ""} Madrid`,
     "",
     mensajero,
-    "El mensajero no sale solo. Hasta tener el contrato, se pide a mano. José no hace el trayecto.",
-    "Si no hay stock, devuelve el dinero desde Stripe.",
+    "José no hace el trayecto: prepara la bolsa y se la entrega al courier en el local.",
+    "Si no hay stock, cancela el reparto en Uber y devuelve el dinero desde Stripe.",
   ].join("\n");
 }
 

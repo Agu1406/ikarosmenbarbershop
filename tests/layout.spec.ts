@@ -74,7 +74,7 @@ test.describe("maquetación y preguntas frecuentes", () => {
     await page.goto("/cesta");
     const form = page.locator("#cesta");
     await expect(form).toHaveAttribute("action", "/api/checkout");
-    await expect(form).toContainText("5,99 €");
+    await expect(form).toContainText("8,99 €");
     await expect(form).toContainText("16,90 €");
     await expect(form.getByRole("button", { name: "Pagar con Bizum o tarjeta" })).toBeVisible();
     await expect(page.locator('script[src*="stripe"]')).toHaveCount(0);

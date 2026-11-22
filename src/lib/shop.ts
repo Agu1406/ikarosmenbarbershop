@@ -4,9 +4,12 @@
  */
 import catalog from "../data/stmnt.json";
 
-/** Tarifa única en la ciudad de Madrid, visible antes de pagar.
- *  Cubre el suelo publicado de Uber Direct (unos 5,20 €) hasta el contrato del mensajero. */
-export const ENVIO_MADRID_CENTIMOS = 599;
+/**
+ * Tarifa única de envío a CP de Madrid ciudad, visible antes de pagar.
+ * Recogida en Las Rozas: el suelo público de Uber Direct (~5,20 €) no basta para ese trayecto.
+ * Ajustar con `node --env-file=.dev.vars scripts/uber-quote-check.mjs` cuando haya claves.
+ */
+export const ENVIO_MADRID_CENTIMOS = 899;
 
 export const CANTIDAD_MAX = 10;
 

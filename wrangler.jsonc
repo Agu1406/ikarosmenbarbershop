@@ -2,7 +2,11 @@
   "name": "ikarosmenbarbershop",
   "compatibility_date": "2026-10-29",
   "main": "src/worker/index.ts",
-  // Secretos, fuera de git: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, RESEND_API_KEY.
+  // Secretos, fuera de git (npx wrangler secret put NOMBRE):
+  //   STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, RESEND_API_KEY,
+  //   UBER_CUSTOMER_ID, UBER_CLIENT_ID, UBER_CLIENT_SECRET
+  //   (panel Uber Direct → Developer; sandbox primero).
+  // Local: copia .dev.vars.example a .dev.vars (gitignored).
   // El aviso al local usa Resend y un dominio verificado. PEDIDOS_FROM lo cambia si hace falta.
   // Webhook de Stripe: https://ikaromenbarbershop.es/api/stripe
   "assets": {
