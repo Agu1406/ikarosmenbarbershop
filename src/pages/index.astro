@@ -10,6 +10,7 @@ import Gallery from "../components/Gallery.astro";
 import Reviews from "../components/Reviews.astro";
 import Faq from "../components/Faq.astro";
 import Contact from "../components/Contact.astro";
+import { SEASON_COPY } from "../lib/data";
 import { getPhoto } from "../lib/photos";
 
 // Imagen para compartir: la foto del hero si existe (1200x630).
@@ -33,6 +34,7 @@ const ogImage = og ? new URL(og.src, Astro.site).href : undefined;
         Champú, barba y peinado STMNT. Se compran en la barbería o se envían a la ciudad de Madrid.
         Los precios llevan el IVA incluido.
       </p>
+      <p class="muted season-only">{SEASON_COPY.productsNote}</p>
       <p><a class="btn btn-primary" href="/productos">Ver productos</a></p>
     </div>
   </section>

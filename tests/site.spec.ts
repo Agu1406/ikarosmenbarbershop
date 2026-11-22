@@ -214,12 +214,12 @@ test.describe("teclado", () => {
     await expect(toggle).toBeFocused();
   });
 
-  test("con el hero a la vista la barra sticky no es tabulable", async ({ page }, testInfo) => {
+  test("en móvil la barra sticky sigue visible con el hero a la vista", async ({ page }, testInfo) => {
     test.skip(testInfo.project.name !== "movil", "Solo móvil");
     await page.goto("/");
     await page.locator("#inicio").scrollIntoViewIfNeeded();
     const sticky = page.locator("[data-sticky-cta]");
-    await expect(sticky).not.toHaveAttribute("data-visible", "true");
-    await expect(sticky).toHaveAttribute("inert", "");
+    await expect(sticky).toHaveAttribute("data-visible", "true");
+    await expect(sticky).toBeVisible();
   });
 });

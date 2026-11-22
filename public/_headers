@@ -3,7 +3,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), interest-cohort=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-src https://booksy.com https://maps.google.com https://www.google.com https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-Y5Mka7g5J4KnYZ4h3Wcjwc25v14Bf9xBkMPqZq1UwcM=' 'sha256-9Bo16BDI7ncaGlKb1RZsYMQKUnOc2SHYyvj33/EbDdc='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-src https://booksy.com https://maps.google.com https://www.google.com https://www.youtube-nocookie.com; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
