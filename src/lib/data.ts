@@ -20,8 +20,9 @@ export const SITE = {
  * Clave de sessionStorage solo al cerrar la franja (no es tracking).
  */
 export const SEASON_COPY = {
-  bannerText: "Felices fiestas: reserva con tiempo",
-  bannerCta: "Reservar",
+  /** Franja bajo la cabecera: lead + enlace Booksy (sin segundo botón Reservar). */
+  bannerLead: "Felices fiestas · ",
+  bannerLink: "reserva con tiempo",
   heroEyebrow: "Cita para fiestas",
   productsNote: "Idea de regalo en el local",
   dismissKey: "ikaro-season-banner-dismissed",

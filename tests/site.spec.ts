@@ -72,7 +72,8 @@ test.describe("temporada", () => {
     await page.goto("/?season=navidad");
     await expect(page.locator("html")).toHaveAttribute("data-season", "navidad");
     await expect(page.locator(".season-snow")).toBeVisible();
-    await expect(page.getByText("Felices fiestas: reserva con tiempo")).toBeVisible();
+    await expect(page.locator("[data-season-banner]")).toContainText("Felices fiestas");
+    await expect(page.locator("[data-season-banner] a[data-booksy]")).toContainText("reserva con tiempo");
     await expect(page.getByText("Cita para fiestas")).toBeVisible();
     await expect(page.getByText("Idea de regalo en el local")).toBeVisible();
   });
@@ -82,7 +83,7 @@ test.describe("temporada", () => {
     await page.goto("/?season=off");
     await expect(page.locator("html")).not.toHaveAttribute("data-season");
     await expect(page.locator(".season-snow")).toBeHidden();
-    await expect(page.getByText("Felices fiestas: reserva con tiempo")).toBeHidden();
+    await expect(page.locator("[data-season-banner]")).toBeHidden();
   });
 
   test("con reduced-motion no se animan los copos", async ({ page }) => {
@@ -96,7 +97,7 @@ test.describe("temporada", () => {
     await page.goto("/?season=navidad");
     const banner = page.locator("[data-season-banner]");
     await expect(banner).toBeVisible();
-    await page.getByRole("button", { name: "Cerrar" }).click();
+    await banner.getByRole("button", { name: "Cerrar" }).click();
     await expect(banner).toBeHidden();
     await page.reload();
     await expect(banner).toBeHidden();

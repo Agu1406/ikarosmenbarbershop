@@ -96,46 +96,49 @@
 :root[data-season="navidad"] .season-banner:not([hidden]) {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
-  gap: var(--s2) var(--s3);
+  gap: var(--s2) var(--s4);
   padding: var(--s2) var(--gutter);
   background: var(--ink-soft);
-  border-bottom: 2px solid var(--season-berry);
-  border-left: 3px solid var(--season-berry);
+  border-bottom: 1px solid var(--line);
   color: var(--cream);
   font-size: 0.9375rem;
 }
 .season-banner-text {
   margin: 0;
+  flex: 1 1 12rem;
+  color: var(--cream-muted);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.season-banner-link {
+  color: var(--brass-bright);
   font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
-.season-banner-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--s2);
-}
-.season-banner-cta {
-  min-height: 2.5rem;
-  padding-inline: var(--s3);
-  font-size: 0.875rem;
+.season-banner-link:hover {
+  color: var(--cream);
 }
 .season-banner-dismiss {
+  flex: 0 0 auto;
   min-height: 2.5rem;
   min-width: 2.75rem;
-  padding: 0 var(--s3);
-  border: 1px solid var(--line);
+  padding: 0;
+  border: 0;
   border-radius: var(--radius);
   background: transparent;
-  color: var(--cream);
+  color: var(--cream-muted);
   font: inherit;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
   cursor: pointer;
 }
 .season-banner-dismiss:hover {
-  border-color: var(--brass);
-  color: var(--brass-bright);
+  color: var(--cream);
 }
 .season-only {
   display: none;
